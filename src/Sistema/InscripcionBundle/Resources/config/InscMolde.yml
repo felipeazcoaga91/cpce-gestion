@@ -1,0 +1,66 @@
+entityName: 'Molde'
+entity: 'Sistema\InscripcionBundle\Entity\InscMolde'
+repository: 'SistemaInscripcionBundle:InscMolde'
+index: 'admin_inscripciones_moldes'
+new: 'admin_inscripciones_moldes_new'
+edit: 'admin_inscripciones_moldes_edit'
+show: 'admin_inscripciones_moldes_show'
+create: 'admin_inscripciones_moldes_create'
+update: 'admin_inscripciones_moldes_update'
+delete: 'admin_inscripciones_moldes_delete'
+export: 'admin_inscripciones_moldes_export'
+sessionFilter: 'InscMoldeControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        export: true
+    a.importeTotal:
+        label: 'Importe'
+        name: 'ImporteTotal'
+        type: 'float'
+        export: true
+    a.importeSubTotal:
+        label: 'SubTotal'
+        name: 'ImporteSubTotal'
+        type: 'float'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+fieldsshow:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.descripcion:
+        label: 'Descripcion'
+        name: 'Descripcion'
+        type: 'string'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.importeTotal:
+        label: 'Importe'
+        name: 'ImporteTotal'
+        type: 'float'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.importeSubTotal:
+        label: 'SubTotal'
+        name: 'importeSubTotal'
+        type: 'float'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        #class: 'col-lg-12'
+        #closerow: true

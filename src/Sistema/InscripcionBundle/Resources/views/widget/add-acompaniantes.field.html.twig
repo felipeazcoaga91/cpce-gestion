@@ -1,0 +1,54 @@
+{% macro personaInscripcion(form) %}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-4 col-md-7 col-sm-7">    
+                {{ form_errors(form.apellido) }}
+                <h6>{{ form_label(form.apellido) }} <span class="label label-danger">(*)</h6></span>    
+                {{ form_widget(form.apellido) }}
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-3">
+                {{ form_errors(form.nombre) }}
+                <h6>{{ form_label(form.nombre) }} <span class="label label-danger">(*)</h6></span>    
+                {{ form_widget(form.nombre) }}
+            </div>
+            <div class="col-lg-4 col-md-7 col-sm-7">
+                {{ form_errors(form.fechaNac) }}
+                <h6>{{ form_label(form.fechaNac) }} <span class="label label-danger">(*)</h6></span>    
+                {{ form_widget(form.fechaNac) }}
+            </div>
+            <div class="col-lg-4 col-md-7 col-sm-7">
+                {{ form_errors(form.dni) }}
+                <h6>{{ form_label(form.dni) }} <span class="label label-danger">(*)</h6></span>    
+                {{ form_widget(form.dni) }}
+            </div>
+            <div class="col-lg-4 col-md-7 col-sm-7">
+                {{ form_errors(form.nacionalidad) }}
+                <h6>{{ form_label(form.nacionalidad) }} <span class="label label-danger">(*)</h6></span>    
+                {{ form_widget(form.nacionalidad) }}
+            </div>
+            <div class="col-lg-6 col-md-7 col-sm-7">    
+                <br>
+                {{ form_row(form.hotel) }}
+            </div>
+            <div class="col-lg-6 col-md-7 col-sm-7">    
+                <br>
+                {{ form_row(form.transporte) }}
+            </div>
+            <div class="col-lg-offset-10 col-md-2 col-sm-2">
+                <br>
+                <a href='javascript:;' class='delete-form btn btn-mini btn-danger' id="remove-acomp">
+                    <i class='glyphicon glyphicon-trash'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+<div data-prototype="{{ _self.personaInscripcion(form.personas.vars.prototype)|e }}" class="row acompaniantes-inscripcion">
+    {% for persona in form.personas %}
+        {{ _self.personaInscripcion(persona) }}
+    {% endfor %}
+</div>
+<a href='javascript:;' class='btn btn-info add-persona-form' id="add-acomp">
+    <i class='glyphicon glyphicon-plus'></i><i class=" glyphicon glyphicon-user"></i> Agregar Acompañante
+</a>
+

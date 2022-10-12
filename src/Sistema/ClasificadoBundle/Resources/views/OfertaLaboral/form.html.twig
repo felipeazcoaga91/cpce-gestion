@@ -1,0 +1,23 @@
+{{ form_start(form) }}
+    <div class="panel panel-success">
+        <div class="panel-heading">Datos Publicos</div>
+        <div class="panel-body">
+        {{ form_row(form.activo) }}
+        {{ form_row(form.titulo) }}
+        {{ form_row(form.puesto) }}
+        {{ form_row(form.requiere) }}
+        {{ form_row(form.requisito) }}
+        {{ form_row(form.tarea) }}
+        {{ form_row(form.delegacion) }}
+        {{ form_row(form.fechaFin) }}
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Datos Privados</div>
+        <div class="panel-body">
+        {{ form_row(form.solicitante) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.telefono) }}
+        </div>
+    </div>
+{{ form_end(form) }}

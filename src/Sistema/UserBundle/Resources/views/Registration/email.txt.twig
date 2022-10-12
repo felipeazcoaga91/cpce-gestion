@@ -1,0 +1,17 @@
+{% block subject %}
+{% autoescape false %}
+{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}, 'FOSUserBundle') }}
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}{% autoescape false %}{% endautoescape %}{% endblock %}
+{% block body_html %}
+<img src="{{ cpce_logo }}" alt="CPCE Chaco">
+<br>
+<p>Hola {{ user.username }}</p>
+<br>
+<p>Para completar la validación de tu cuenta - por favor visita:</p>
+<a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+<br><br>
+<p>Atentamente,</p>
+<p>CPCE Chaco.</p>
+{% endblock %}

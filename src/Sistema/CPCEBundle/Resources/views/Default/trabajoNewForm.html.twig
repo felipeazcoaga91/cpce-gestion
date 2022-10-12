@@ -1,0 +1,119 @@
+<div class="form-group col-lg-12 col-md-12 col-sm-12 text-center"><h4>BASE DE CALCULO SEGUN LEY 3.111</h4></div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.servicio) }}
+        {{ form_errors(form.servicio) }}
+        <div class="col-lg-8 col-md-8 col-sm-12 pull-right">
+            {{ form_widget(form.servicio) }}
+        </div>
+    </div>
+    {% if tareaCodigo == 1 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.auditoriaTipo) }}
+            {{ form_errors(form.auditoriaTipo) }}
+            <div class="col-lg-7 col-md-7 col-sm-12 pull-right">
+                {{ form_widget(form.auditoriaTipo) }}
+            </div>
+        </div>
+    {% endif %}
+    {% if tareaCodigo == 3 or tareaCodigo == 6 or tareaCodigo == 9 or tareaCodigo == 11 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.esAuditor) }}
+            {{ form_errors(form.esAuditor) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.esAuditor) }}
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.porcentajeSindico) }}
+            {{ form_errors(form.porcentajeSindico) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.porcentajeSindico) }}
+            </div>
+        </div>
+    {% endif %}
+    {% if tareaCodigo == 6 or tareaCodigo == 7 or tareaCodigo == 9 or tareaCodigo == 10 or tareaCodigo == 11 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.meses) }}
+            {{ form_errors(form.meses) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.meses) }}
+            </div>
+        </div>
+    {% endif %}
+    <div class="form-group col-lg-12 col-md-12 alert alert-info" role="alert">Los campos de montos ($) permiten únicamente un (1) separador decimal y debe ser coma (,) por ejemplo: 10800,50</div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.activo) }}
+        {{ form_errors(form.activo) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.activo) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.pasivo) }}
+        {{ form_errors(form.pasivo) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.pasivo) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.importe1) }}
+        {{ form_errors(form.importe1) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.importe1) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.importe2) }}
+        {{ form_errors(form.importe2) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.importe2) }}
+        </div>
+    </div>
+    {% if tareaCodigo == 6 or tareaCodigo == 9 or tareaCodigo == 11 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.importePeriodo) }}
+            {{ form_errors(form.importePeriodo) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.importePeriodo) }}
+            </div>
+        </div>
+    {% endif %}
+</div>
+<br>
+<div class="form-group col-lg-12 col-md-12">
+    {{ form_row(form.save) }}
+</div>
+
+<script>
+
+    var total = 0;
+
+    function calculos() {
+
+        total = 0;
+
+        activos = $('#cpce_trabajo_front_activo').val().replace(",", ".");
+        activos = parseFloat(activos).toFixed(2);
+
+        pasivos = $('#cpce_trabajo_front_pasivo').val().replace(",", ".");
+        pasivos = parseFloat(pasivos).toFixed(2);
+
+        total = parseFloat(activos) + parseFloat(pasivos);
+        total = parseFloat(total).toFixed(2);
+        total = total.toString().replace(".", ",");
+
+        $('#cpce_trabajo_front_importe1').val(total);
+    }
+
+    $("#cpce_trabajo_front_activo").change(function() {
+        calculos();
+    });
+
+    $("#cpce_trabajo_front_pasivo").change(function() {
+        calculos();
+    });
+
+</script>
+
+{% include 'SistemaCPCEBundle:Default:trabajoPieForm.html.twig' %}

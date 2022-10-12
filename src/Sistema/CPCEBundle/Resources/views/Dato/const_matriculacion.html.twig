@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            p {
+                margin-top: 10px;
+                height: 0px;
+                font-size: 20px;
+            }
+            th p {
+                float: left;
+            }
+            .content {
+                background-color: #fff;
+                margin: 0 1em;
+                padding-left: 1em;
+            }
+            .right {
+                float: right;
+                font-size: 20px;    
+            }
+            .centrar {
+                text-align: center !important;
+                float: none !important;
+            }
+            .text-right {
+                text-align: right;
+            }
+            .text-long {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body class="focusedform">
+        <div class="right">{{ fecha|localizeddate('full', 'none') }}</div>
+        <br>
+        <div class="content">
+            <img src="{{ asset('bundles/sistemacpce/images/logo_grande.png', absolute=true) }}" alt="" width="180px;" />
+            <div class="centrar">
+                <h1>CONSTANCIA DE MATRICULACIÓN</h1>
+                {# <div style="width: 15em; margin: 0 auto;">
+                    {{ barcode({code: '' ~ entity.afiTitulo ~ entity.afiMatricula, type: 'qrcode', format: 'html', width: 11, height: 11}) }}
+                </div> #}
+                <br>
+            </div>
+            <div>
+                <p>A SOLICITUD DEL <strong>{{ entity.afiTitulo }}. {{ entity.afiNombre }}, D.N.I. Nº {{ entity.afiNrodoc }}</strong>, DEJAMOS CONSTANCIA QUE:</p>
+                <br>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr>
+                        <td colspan="4"><p>ESTÁ INSCRIPTO EN ESTE CONSEJO PROFESIONAL COMO <strong>{{ entity.afiTitulo }}</strong> BAJO <strong>MATRÍCULA Nº {{ entity.afiMatricula }}</strong>, TOMO </p></td>
+                    </tr>
+                    {# <tr>
+                        <td colspan="4"><p><strong>{{ entity.afiTitulo }}</strong>{{ entity.afiMatricula }} Delegación: {{ entity.getAfiZonaDelegacion }}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><p>{{ entity.afiDireccion }}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><p>{{ entity.Afilocalidad ~ ', ' ~ entity.Afiprovincia ~ ' (' ~ entity.Aficodpos ~ ')' }}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><p><strong>Correo:</strong> {{ entity.afiMail }}</p></td>
+                    </tr> #}
+                </table>  
+            </div>
+            <hr>
+            <h2 class="centrar">Honorarios regulados y sugeridos por el Consejo Profesional de Ciencias Económicas</h2>
+        </div>    
+    </body>
+</html>

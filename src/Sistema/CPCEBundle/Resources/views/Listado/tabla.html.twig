@@ -1,0 +1,11 @@
+{% for key, entity in entities %}
+    <tr>
+        <td>{{ entity.servicio }}</td>
+        <td style={% if entity.saldo > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>
+            ${{ entity.saldo|abs|number_format(2, ',', '.') }}
+        </td>
+        <td style={% if saldosTotales[key].saldo > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>
+            ${{ saldosTotales[key].saldo|abs|number_format(2, ',', '.') }}
+        </td>
+    </tr>
+{% endfor %}

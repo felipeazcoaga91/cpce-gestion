@@ -1,0 +1,218 @@
+entityName: 'Trabajo'
+entity: 'Sistema\CPCEBundle\Entity\Trabajo'
+repository: 'SistemaCPCEBundle:Trabajo'
+index: 'front_trabajo'
+#continuar: 'front_trabajo_continuar'
+confirmar: 'front_trabajo_confirmar'
+new: 'front_trabajo_new'
+#edit: 'front_trabajo_edit'
+show: 'front_trabajo_show'
+create: 'front_trabajo_create'
+#update: 'front_trabajo_update'
+#delete: 'front_trabajo_delete'
+export: 'front_trabajo_export'
+revisar: 'admin_trabajo_revisar'
+pdf: 'front_trabajo_pdf'
+sessionFilter: 'FrontTrabajoControllerFilter'
+validator: false
+fieldsindex:
+    a.id:
+        label: 'Número'
+        name: 'Id'
+        type: 'integer'
+        export: true
+    a.servicio:
+        label: 'Servicio'
+        name: 'Servicio'
+        type: 'MANY_TO_ONE'
+    a.estado:
+        label: 'Estado'
+        name: 'Estado'
+        type: 'MANY_TO_ONE'
+        export: true
+    a.fechaInforme:
+        label: 'Fecha del informe o certificación'
+        name: 'FechaInforme'
+        type: 'date'
+        date: 'd/m/Y'
+        export: true
+    a.fechaCierre:
+        label: 'Fecha de cierre'
+        name: 'FechaCierre'
+        type: 'date'
+        date: 'd/m/Y'
+        export: true
+        class: 'hidden-xs hidden-sm'
+    a.comitenteCuit:
+        label: 'CUIT'
+        name: 'Comitentecuit'
+        type: 'string'
+        export: true
+        class: 'hidden-xs hidden-sm'
+    a.clienteComitente:
+        label: 'Comitente'
+        name: 'Clientecomitente'
+        type: 'string'
+        export: true
+    a.certificado:
+        label: 'Revisión'
+        name: 'CertificadoString'
+        type: 'string'
+        export: true
+        class: 'hidden-xs hidden-sm'
+    # a.comitenteDomicilio:
+    #     label: 'Domicilio real/social'
+    #     name: 'ComitenteDomicilio'
+    #     type: 'string'
+    #     export: true
+    # a.profesional:
+    #     label: 'Profesional'
+    #     name: 'Profesional'
+    #     type: 'string'
+    #     export: true    
+    # a.matricula:
+    #     label: 'Matricula'
+    #     name: 'Matricula'
+    #     type: 'string'
+    #     export: true    
+    # a.domicilio:
+    #     label: 'Domicilio'
+    #     name: 'Domicilio'
+    #     type: 'string'
+    #     export: true    
+    # a.telefono:
+    #     label: 'Telefono'
+    #     name: 'Telefono'
+    #     type: 'string'
+    #     export: true    
+    # a.celular:
+    #     label: 'Celular'
+    #     name: 'Celular'
+    #     type: 'string'
+    #     export: true    
+    # a.correo:
+    #     label: 'Correo'
+    #     name: 'Correo'
+    #     type: 'string'
+    #     export: true    
+    # a.activoPasivo:
+    #     label: 'Activopasivo'
+    #     name: 'Activopasivo'
+    #     type: 'float'
+    #     export: true    
+    # a.ingresoVentaServicio:
+    #     label: 'Ingresoventaservicio'
+    #     name: 'Ingresoventaservicio'
+    #     type: 'float'
+    #     export: true    
+    # a.arancelMinimo:
+    #     label: 'Arancelminimo'
+    #     name: 'Arancelminimo'
+    #     type: 'float'
+    #     export: true    
+    # a.arancel:
+    #     label: 'Arancel'
+    #     name: 'Arancel'
+    #     type: 'float'
+    #     export: true    
+    # a.condicionIva:
+    #     label: 'Condicioniva'
+    #     name: 'Condicioniva'
+    #     type: 'string'
+    #     export: true    
+    # a.cuit:
+    #     label: 'Cuit'
+    #     name: 'Cuit'
+    #     type: 'string'
+    #     export: true
+    # a.user:
+    #     label: 'User'
+    #     name: 'User'
+    #     type: 'MANY_TO_ONE'
+fieldsshow:
+    a.id:
+        label: 'Número'
+        name: 'Id'
+        type: 'integer'
+    a.clienteComitente:
+        label: 'Comitente'
+        name: 'Clientecomitente'
+        type: 'string'
+    a.comitenteCuit:
+        label: 'CUIT'
+        name: 'Comitentecuit'
+        type: 'string'
+    a.comitenteDomicilio:
+        label: 'Domicilio real/social'
+        name: 'ComitenteDomicilio'
+        type: 'string'
+    a.cantidad:
+        label: 'Cantidad de trabajos'
+        name: 'Cantidad'
+        type: 'integer'
+    a.fechaInforme:
+        label: 'Fecha de informe'
+        name: 'FechaInforme'
+        type: 'date'
+        date: 'd/m/Y'
+    a.fechaCierre:
+        label: 'Fecha de cierre'
+        name: 'FechaCierre'
+        type: 'date'
+        date: 'd/m/Y'
+    a.profesional:
+        label: 'Profesional'
+        name: 'Profesional'
+        type: 'string'
+    a.matricula:
+        label: 'Matricula'
+        name: 'Matricula'
+        type: 'string'
+    a.domicilio:
+        label: 'Domicilio'
+        name: 'Domicilio'
+        type: 'string'
+    a.telefono:
+        label: 'Telefono'
+        name: 'Telefono'
+        type: 'string'
+    a.celular:
+        label: 'Celular'
+        name: 'Celular'
+        type: 'string'
+    a.correo:
+        label: 'Correo'
+        name: 'Correo'
+        type: 'string'
+    a.servicio:
+        label: 'Servicio'
+        name: 'Servicio'
+        type: 'MANY_TO_ONE'
+    a.importe1:
+        label: 'ACTIVO + PASIVO HACIA TERCEROS'
+        name: 'Importe1'
+        type: 'float'
+    a.importe2:
+        label: 'INGRESOS POR VENTAS Y/O SERVICIOS'
+        name: 'Importe2'
+        type: 'float'
+    a.honorarioMinimo:
+        label: 'Honorarios monto mínimo'
+        name: 'Honorariominimo'
+        type: 'float'
+    a.monto:
+        label: 'Monto a depositar'
+        name: 'Monto'
+        type: 'float'
+    a.condicionIva:
+        label: 'Condicion Iva'
+        name: 'Condicioniva'
+        type: 'string'
+    a.cuit:
+        label: 'CUIT'
+        name: 'Cuit'
+        type: 'string'
+    # a.user:
+    #     label: 'User'
+    #     name: 'User'
+    #     type: 'MANY_TO_ONE'

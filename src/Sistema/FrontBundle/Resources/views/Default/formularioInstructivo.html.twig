@@ -1,0 +1,17 @@
+<style type="text/css">
+    .panel-alto {
+        min-height: 120px;
+    }
+    .list-group-item {
+        margin: 10px;
+    }
+</style>
+<img src="{{ asset('bundles/sistemacpce/images/header_logo.png', absolute=true) }}" alt="" />
+<div class="panel-heading">
+    <div class="panel-title"><h2>Sistema Web de Gesti&oacute;n para Matriculados.</h2></div>
+</div>
+<div style="padding-top:10px" class="panel-body">
+    <div class="row">
+        {% include "SistemaFrontBundle:Default:instructivo.html.twig" with {'descargar': false} %}
+    </div>
+</div>

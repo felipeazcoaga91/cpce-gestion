@@ -1,0 +1,17 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="panel-heading">
+        <div class="panel-title">{{ 'registration.check_email'|trans({'%email%': user.email}) }}</div>
+    </div>     
+    <div style="padding-top:30px" class="panel-body" >
+        <form>
+            <h4 class="text-danger">*Si no logras visualizar el correo, verifica la casilla de mensajes no deseados o spam.</h4>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <a href="{{ path('homepage') }}" class="btn btn-default">Cerrar</a>
+    </div>
+{% endblock fos_user_content %}

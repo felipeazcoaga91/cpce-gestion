@@ -1,0 +1,21 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="panel-heading">
+        <div class="panel-title">{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</div>
+    </div>     
+    <div style="padding-top:30px" class="panel-body" >
+        <form>
+            {% if app.session is not empty %}
+                {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+                {#% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %#}
+                <h5 class="text-danger"><a href="{{ path('homepage') }}" class="btn btn-danger">*Es necesario habilitar su usuario, Click aqu&iacute;</a></h5>
+            {% endif %}
+        </form>
+    </div>
+    <div class="panel-footer">
+        <a href="{{ path('homepage') }}" class="btn btn-default">Cerrar</a>
+    </div>
+{% endblock fos_user_content %}

@@ -1,0 +1,82 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+            <style type="text/css">
+        .borde {
+            border-style: solid;
+            width: 320px;
+            height: 25px;
+        }
+        .insertar {
+            border-style: solid;
+            width: 290px;
+            height: 25px;
+        }
+        .margen{
+                    margin: 5px;
+                    }
+        .firma{
+             border-style: solid;
+                    width: 200px;
+                    height: 120px;
+        }   
+          .m{
+             border-style: solid;
+                   
+        }           
+      </style>
+    </head>
+        <body>
+            <br>
+            <dd>
+                <p>ANEXO IV AUDITORÍA DE ESTADOS CONTABLES CON SINDICATURA SOCIETARIA.</p><br>
+                <center> <p>MEMBRETE DEL CONSEJO.<br></p>   </center>    
+                <p align="center"> FORMULARIO DE LEGALIZACIÓN DE ACTUACIÓN PROFESIONAL CON FIRMA DIGITAL <br></p> 
+                <p><b>CUIT:</b> {{ entity.cliente.afiCuit }} <br></p> 
+                <p><b>COMITENTE:</b> {{ entity.cliente.afiNombre }}<br></p> 
+                <p><b>DOMICILIO LEGAL:</b> {{ entity.cliente.afiDireccion }}. <b>CIUDAD:</b> {{ entity.cliente.afiLocalidad }}. – Provincia del Chaco.<br></pre>
+                <p>Trabajo profesional: AUDITORÍA DE ESTADOS CONTABLES<br></p> 
+                <p><b>FECHA DE CIERRE / CORTE:</b> {{ entity.fechaCierre | date('d/m/Y') }}<br></p>
+                <p class="insertar">Adjuntar trabajo objeto del encargo<br></p>
+                <p>“En mi carácter de <a class="insertar">LISTA DESPLEGABLE 2 </a>del ente arriba mencionado, declaro que los estados contables adjuntos, aprobados por su administración, pertenecen a mi representado, que dicha representación se encuentra vigente conforme las normas legales y firmo digitalmente el presente formulario a efecto de su vinculación”<br></p> 
+                <p class="insertar">Adjuntar informe auditor<br></p>
+                <p>Fecha de informe: dd/mm/aaaa</p>
+                <p>“En carácter de auditor externo, declaro que he desarrollado mi tarea profesional con el alcance expresado en el informe adjunto, y que en virtud de dicha tarea firmo digitalmente el presente formulario. En relación a los documentos adjuntados por el representante del ente arriba mencionado, mi firma digital abarca a éstos sólo con propósitos de vinculación con el informe antes citado."<br></p>
+                <br>
+                <div class="borde">
+                    <p class="margen">El CONSEJO PROFESIONAL DE CIENCIAS ECONÓMICAS DE LA PROVINCIA DEL CHACO, de acuerdo con las facultades otorgadas por la ley N° 347-C (art. 31° inc. 9) legaliza la actuación profesional adjunta de {{ entity[0].Afinombre }}, M.P. N° {{ entity[0].Afimatricula }} {% if entity[0].Afititulo  == "CP" %} {% if entity[0].AfiSexo == "M" %} Contador Publico {% else %} Contadora Publica {% endif %}{% elseif entity[0].Afititulo  == "LA" %} {% if entity[0].AfiSexo == "M" %} Licenciado en administración {% else %} Licenciada en administración {% endif %}{% elseif entity[0].Afititulo  == "LE" %} {% if entity[0].AfiSexo == "M" %} Licenciado en Economía {% else %} Licenciada en Economía {% endif %}{% else %} Titulo no identificado{% endif %}, a quien la autoridad de registro le ha expedido el certificado de firma digital, con el cual se ha firmado la actuación profesional, se encuentra{% if entity[0].AfiSexo == "M" %} matriculado {% else %} matriculada {% endif %} en este Consejo, que se han efectuado los controles de matrícula y formal de dicha actuación profesional conforme con las normas vigentes, no implicando estos controles la emisión de un juicio técnico sobre la tarea profesional.</p>     
+                    <p class="margen">Registro de legalización N°: __ __________ - __<br></p>    
+                </div> 
+                <p class="insertar">Adjuntar informe del síndico<br></p>     
+                <p>Fecha de informe del síndico: dd/mm/aaaa<br></p>     
+                <p>“En carácter de síndico societario, declaro que he desarrollado mi tarea profesional con el alcance expresado en el informe adjunto, y que en virtud de dicha tarea firmo digitalmente el presente formulario. En relación a los documentos adjuntados por el representante del ente arriba mencionado, mi firma digital abarca a éstos solo con propósitos de vinculación con el informe antes citado."<br></p>     
+                <!-- Este boton se tiene que ocultar cuando se imprime, con este boton de tiene que cargar los datos del sindigo en el cuadro de abajo -->
+                <p class="insertar">Insertar matricula sindico<br></p>   
+                <div class="borde">
+                    <p class="margen">El CONSEJO PROFESIONAL DE CIENCIAS ECONÓMICAS DE LA PROVINCIA DEL CHACO, de acuerdo con las facultades otorgadas por la ley N° 347-C (art. 31° inc. 9) legaliza la actuación profesional de {{ entity[0].Afinombre }}, M.P. N° {{ entity[0].Afimatricula }} {% if entity[0].Afititulo  == "CP" %} {% if entity[0].AfiSexo == "M" %} Contador Publico {% else %} Contadora Publica {% endif %}{% elseif entity[0].Afititulo  == "LA" %} {% if entity[0].AfiSexo == "M" %} Licenciado en administración {% else %} Licenciada en administración {% endif %}{% elseif entity[0].Afititulo  == "LE" %} {% if entity[0].AfiSexo == "M" %} Licenciado en Economía {% else %} Licenciada en Economía {% endif %}{% else %} Titulo no identificado{% endif %}, a quien la autoridad de registro le ha expedido el certificado de firma digital, con el cual se ha firmado la actuación profesional, se encuentra{% if entity[0].AfiSexo == "M" %} matriculado {% else %} matriculada {% endif %} en este Consejo, que se han efectuado los controles de matrícula y formal de dicha actuación profesional conforme con las normas vigentes, no implicando estos controles la emisión de un juicio técnico sobre la tarea profesional.<br></p>  
+                    <p class="margen">Registro de legalización N°: __ ______<br></p> 
+                </div>
+                <br>
+                <p>Fecha: {{ fecha }}         <br></p>  
+                <div>
+                    <div id="div1" style="float:left; width:25%;">
+                        <p class="firma">FIRMA DIGITAL DEL REPRESENTANTE DEL ENTE</p>
+                    </div>
+                    <div id="div2" style="float:left; width:25%;">
+                        <p class="firma">FIRMA DIGITAL DEL AUDITOR </p> 
+                    </div>
+                    <div id="div3" style="float:left; width:25%;">
+                        <p class="firma">FIRMA DIGITAL DEL SÍNDICO SOCIETARIO</p> 
+                    </div>
+                    <div id="div3" style="float:left; width:25%;">
+                        <p class="firma">FIRMA DIGITAL DEL CONSEJERO DIRECTIVO</p>
+                    </div>
+                    <!-- Esto solo se tiene que mostrar cuando se imprime el pdf -->
+                    <!-- <p>AL IMPRIMIR EN PAPEL INCORPORAR AUTOMÁTICAMENTE LA LEYENDA: “EL PRESENTE DOCUMENTO CARECE DE VALIDEZ LEGAL”.<br></p> -->  
+                </div> 
+            </dd>
+        </body>
+</html>                                    
+                                                                                                

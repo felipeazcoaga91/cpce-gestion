@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            .content {
+                background-color: #fff;
+                margin: 0 1em;
+                padding-left: 1em;
+            }
+            .centrar {
+                text-align: center !important;
+                float: none !important;
+            }
+            .text-right {
+                text-align: right;
+            }
+            .text-long {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            table {
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
+    <body class="focusedform">
+        <div align="right">{{ fecha|localizeddate('full', 'none') }}</div>
+        <br>
+        <div class="content">
+            <div class="centrar">
+                <h1 style="color: #4285F4; font-size: 18px">22 Congreso Nacional de Profesionales en Ciencias Económicas <br> - San Juan, 27 y 28 de septiembre de 2018 -</h1>
+                <h1 style="font-size: 20px">SOLICITUD DE PRE-INSCRIPCION</h1>
+                <div style="width: 12em; margin: 0 auto;">
+                    <strong>{{ 'INSC#' ~ entity.id ~ '_2018'}}</strong>
+                </div>
+            </div>
+            <div>
+                <h4>DATOS PERSONALES:</h4>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr><td colspan="3"><strong>Apellido y Nombres:</strong> {{ afiliado.afiNombre }}</td></tr>
+                    <tr>
+                        <td><strong>DNI. Nº:</strong> {{ afiliado.afiNroDoc }}</td>
+                        <td><strong>TE:</strong> {{ afiliado.afiTelefono1 }}</td>
+                        <td><strong>CEL:</strong> {{ afiliado.afiCelular }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><strong>E-mail:</strong> {{ afiliado.afiMail }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><strong>Domicilio Particular:</strong> {{ afiliado.afiDireccion }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Localidad:</strong> {{ afiliado.Afilocalidad }}</td>
+                        <td><strong>Provincia:</strong> {{ afiliado.Afiprovincia }}</td>
+                        <td><strong>CP:</strong> {{ afiliado.Aficodpos }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Titulo Profesional:</strong> {{ afiliado.afiTitulo }}</td>
+                        <td><strong>M.P. Nº:</strong> {{ afiliado.afiMatricula }}</td>
+                    </tr>
+                </table>  
+            </div>
+            <br>
+            {% if entity.areas is not empty %}
+            <div>
+                <h4>AREAS SELECCIONADAS:</h4>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr><th align="left">Area Preferencial:</th></tr>
+                    <tr><td><li>{{ entity.areas[0] }}</li></td></tr>
+                    <tr><th align="left">Area Optativa:</th></tr>
+                    <tr><td><li>{{ entity.areas[1] }}</li></td></tr>
+                </table>  
+            </div>
+            <br>
+            {% endif %}
+            {% if entity.hotel is not empty %}
+            <div>
+                <h4>ALOJAMIENTO:</h4>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr><th align="left">Hotel:</th></tr>
+                    <tr><td><li>{{ entity.Hotel }}</li></td></tr>
+                </table>
+            </div>
+            <br>
+            {% endif %}
+            {% if entity.extra is not empty %}
+            <div>
+                <h4>EXTRAS:</h4>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr><th align="left">Costo de Gala Solidaria $500</th></tr>
+                    <tr><td><li>Teatro del Bicentenario</li></td></tr>
+                    <tr><td><li>Compañia Francesa PIXEL DANCE - cupo limitado</li></td></tr>
+                </table>  
+            </div>
+            <br>
+            {% endif %}
+            {% if entity.personas is not empty %}
+            <div>
+                <h4>ACOMPAÑANTES: #{{ entity.personas|length }}</h4>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr align="center">
+                        <th>#</th>
+                        <th>Apellido y Nombres</th>
+                        <th>Edad</th>
+                        <th>Documento</th>
+                    </tr>
+                    {% for key, persona in entity.personas %}
+                        <tr align="center">
+                            <td>{{ key+1 }}</td>
+                            <td>{{ persona.apellido }}, {{ persona.nombre }}</td>
+                            <td>{{ persona.edad }}</td>
+                            <td>{{ persona.dni }}</td>
+                        </tr>
+                        {% if persona.hotel %}
+                            <tr align="center">
+                                <td></td>
+                                <td colspan="3"><strong>Hotel:</strong> {{ persona.Hotel }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table> 
+            </div>
+            <br>
+            {% endif %}
+            
+            <div align="right">
+                <p><strong>IMPORTE TOTAL:</strong> ${{ entity.importe }}</p></td>
+            </div>
+            
+            <div style="page-break-before: always;">
+                <div>
+                    <h3>Clausula Especial de Responsabilidad Personal:</h3>
+                    <hr>
+                    <p>Al inscribirse para participar en el acontecimiento, el participante, en su nombre, libera al <strong>CPCE-CHACO</strong> y a la <strong>FACPCE</strong> de toda responsabilidad respecto de reclamaciones y/o demandas que intente hacer por perjuicios materiales y/o físicos sufridos por tomar parte en el evento, renunciando a todo tipo de indemnización por daños, dando fe expresa de su participación voluntaria y asumiendo responsabilidad personal por consecuencias sobrevinientes. El <strong>CPCE CHACO</strong>, en particular solo cumple el rol administrativo que permita la participación de los matriculados en el 22º Congreso Nacional, no posee capacidad de control ni decisión sobre los medios de traslado, las modalidades sobre las cuales se participa de las mismas, la dispensa de responsabilidad por ende no hace más que reconocer que se encuentra absolutamente fuera del ámbito de custodia y/o de responsabilidad del CPCE CHACO.</p>
+                </div>
+                <div>
+                    <ul>
+                        <li><b>FINANCIACIÓN: </b>Anticipo %20 del total de la ficha y 5 (cinco) cuotas iguales y consecutivas con vencimiento el 10 de cada mes (mayo a septiembre).</li>
+                    </ul>
+                    <ul>
+                        <li><b>Cancelación, antes del 10/09.</b></li>
+                    </ul>
+                    <ul>
+                        <li>El costo de asistencia de cada participante debe estar CANCELADO a la fecha del Congreso, como así también <b><i>no tener deudas en concepto de Congresos anteriores y con matrícula al día.</i></b>.</li>
+                    </ul>
+                    <ul>
+                        <li><b>Recuerde que la pre-inscripción se hará efectiva una vez abonada la seña de $2500 (en concepto de anticipo), y este formulario deberá ir acompañado con el respectivo recibo y firma del profesional</b></li>
+                    </ul>
+                </div>
+                <div style="padding-top: 50px;" align="right">
+                    <table style="width:100%" border="0">
+                        <tr align="right"><td>.................................</td></tr>
+                        <tr align="right"><th>Firma y Aclaración</td></tr>
+                    </table>  
+                </div>
+            </div>
+
+        </div>  
+    </body>
+</html>

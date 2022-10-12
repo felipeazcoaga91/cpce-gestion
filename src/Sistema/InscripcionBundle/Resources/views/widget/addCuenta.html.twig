@@ -1,0 +1,77 @@
+{% macro moldes(form) %}
+    <div class='row'>
+        <div class='col-lg-5 col-md-5 col-sm-5'>
+            {{ form_widget(form.cuentas.vars.prototype.controlCuenta) }}
+        </div>
+        <div class='col-lg-2 col-md-2 col-sm-2'>
+            {{ form_widget(form.cuentas.vars.prototype.importe) }}
+        </div>
+        <div class='col-lg-2 col-md-2 col-sm-2' style='vertical-align: middle'>
+            <a class='btnRemoveCuenta btn btn-mini btn-danger' href='javascript:;'>
+                <i class='glyphicon glyphicon-trash'></i>  
+            </a>
+        </div> 
+    </div>
+{% endmacro %}
+
+{% macro molde(cuenta, key) %}
+    <div class='row'>
+        <div class='col-lg-5 col-md-5 col-sm-5'>
+            {{ form_widget(cuenta.controlCuenta) }}
+        </div>
+        <div class='col-lg-2 col-md-2 col-sm-2'>
+            {{ form_widget(cuenta.importe) }}
+
+        </div>
+        <div class='col-lg-2 col-md-2 col-sm-2 ' style='vertical-align: middle'>
+            <a class='btnRemoveCuenta btn btn-mini btn-danger' href='javascript:;'>
+                <i class='glyphicon glyphicon-trash'></i> 
+            </a>
+        </div>
+    </div>
+{% endmacro %}
+
+<div class="row">
+    <div class="col-lg-5 col-md-5 col-sm-5">
+        Cuenta
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        Importe
+    </div>
+</div>
+
+<div data-prototype="{{ _self.moldes(form)|e }}" class="cuentas">
+    {% for key, cuenta in form.cuentas %}
+        {{_self.molde(cuenta, key)}}
+    {% endfor %}
+</div>
+<br>
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+        <div id="buttonAgregarCuentaAction" class="add_cuenta btn-default">
+            <a href="javascript:;" class="btn btn-primary add_cuenta_link">Agregar Cuenta <i class="glyphicon glyphicon-plus"></i></a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        ocultarCuentas($("#sistema_inscripcionbundle_inscmolde_controlCuentas:checked").prop('checked'));
+    });
+
+    $("#sistema_inscripcionbundle_inscmolde_controlCuentas").click(function () {
+        if ($(this).prop('checked')) {
+            ocultarCuentas(true);
+        } else {
+            ocultarCuentas(false);
+        }
+    });
+
+    function ocultarCuentas($ocultarC) {
+        if ($ocultarC) {
+            $("#ControlCuentas").show();
+        } else {
+            $("#ControlCuentas").hide();
+        }
+    }
+</script>

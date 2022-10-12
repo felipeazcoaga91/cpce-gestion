@@ -1,0 +1,69 @@
+entityName: 'Usuario'
+entity: 'Sistema\UserBundle\Entity\User'
+repository: 'SistemaUserBundle:User'
+index: 'admin_user'
+new: 'admin_user_new'
+edit: 'admin_user_edit'
+show: 'admin_user_show'
+create: 'admin_user_create'
+update: 'admin_user_update'
+delete: 'admin_user_delete'
+export: 'admin_user_export'
+sessionFilter: 'UserControllerFilter'
+fieldsindex:
+    # a.id:
+    #     name: 'Id'
+    #     type: 'integer'
+    a.tipdoc:
+        label: 'Tipo'
+        name: 'tipdoc'
+        type: 'string'
+    a.nrodoc:
+        label: 'Documento'
+        name: 'nrodoc'
+        type: 'integer'
+    a.username:
+        label: 'Nombre de usuario'
+        name: 'username'
+        type: 'string'
+    a.email:
+        label: 'Email'
+        name: 'email'
+        type: 'string'
+    a.enabled:
+        label: 'Activo'
+        name: 'enabled'
+        type: 'boolean'
+    a.user_roles:
+        label: 'Roles'
+        name: 'userRoles'
+        type: 'ONE_TO_MANY'
+fieldsshow:
+    a.id:
+        label: 'Id'
+        name: 'Id'
+        type: 'integer'
+    a.tipdoc:
+        label: 'Tipo'
+        name: 'tipdoc'
+        type: 'string'
+    a.nrodoc:
+        label: 'Documento'
+        name: 'nrodoc'
+        type: 'integer'
+    a.username:
+        label: 'Nombre de usuario'
+        name: 'username'
+        type: 'string'
+    a.email:
+        label: 'Email'
+        name: 'email'
+        type: 'string'
+    a.enabled:
+        label: 'Activo'
+        name: 'enabled'
+        type: 'boolean'
+    a.user_roles:
+        label: 'Roles'
+        name: 'userRoles'
+        type: 'ONE_TO_MANY'

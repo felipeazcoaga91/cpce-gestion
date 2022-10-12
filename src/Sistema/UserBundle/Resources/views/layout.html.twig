@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{{ 'views.layout.bannersadmin'|trans({}, 'MWSimpleAdminCrudBundle') }}{% endblock %}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="description" content="CPCE Chaco Sistema Web de Gesti&oacute;n para Matriculados.">
+        <meta name="author" content="gonzaloalonsod@gmail.com">
+
+        <!-- Le styles -->
+        <link href="{{ asset('bundles/mwsimpleadmincrud/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/mwsimpleadmincrud/css/bootstrap-checkbox.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/mwsimpleadmincrud/js/bootstrap-fileupload/bootstrap-fileupload.min.css') }}" rel="stylesheet" id="bootstrap-style">
+        <link rel="stylesheet" href="{{ asset('bundles/mwsimpleadmincrud/select2/select2.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/mwsimpleadmincrud/css/bootstrapValidator.min.css') }}">
+        <link href="{{ asset('bundles/mwsimpleadmincrud/datetime/css/bootstrap-datetimepicker.css') }}" rel="stylesheet">
+        
+        <link href="{{ asset('bundles/mwsimpleadmincrud/css/crud.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/sistemacpce/css/crud.css') }}" rel="stylesheet">
+
+        <script src="{{ asset('bundles/mwsimpleadmincrud/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/mwsimpleadmincrud/js/bootstrap.min.js') }}"></script>
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {# JS #}
+        <script src="{{ asset('bundles/mwsimpleadmincrud/datetime/js/bootstrap-datetimepicker.js') }}"></script>
+        <script src="{{ asset('bundles/mwsimpleadmincrud/datetime/js/locales/bootstrap-datetimepicker.es.js') }}"></script>
+        <script src="{{ asset('bundles/mwsimpleadmincrud/select2/select2.min.js') }}"></script>
+        {% block stylesheets %}{% endblock %}
+        <!-- Le fav and touch icons -->
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    </head>
+
+    <body class="focusedform">
+        {% block body %}
+            {% block user_lateral %}
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand iconCel" href="#"><img src="{{ asset('bundles/sistemacpce/images/new_logo2.png') }}" alt="" style= "height: 70px;"/></a>
+                    </div>
+                    {% block menu %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <div class="sidebar" role="navigation">
+                                <div class="sidebar-nav navbar-collapse collapse">
+                                    <ul class="nav">
+                                        <li><a class="bg-info">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></li>
+                                    </ul>
+                                    {{ knp_menu_render('SistemaCPCEBundle:Builder:AfiliadoMenu') }}
+                                </div>
+                            </div>
+                            <script>
+                                smartsupp('email', '{{ app.user.email }}');
+                                smartsupp('name', '{{ app.user.username }}');
+                            </script>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </nav>
+            {% endblock user_lateral %}
+            {% block wrapper %}
+            <div id="page-wrapper">
+                <div class="content">
+                    <div class="row row-cel">
+                        <div class="col-md-12 col-sm-12 col-cel">
+                            {% block messages_error %}
+                                {% for type, messages in app.session.flashbag.all() %}
+                                    {% for message in messages %}
+                                        <div class="alert
+                                        {% if type == "fos_user_success" %} alert-success {% else %} alert-danger {% endif %}
+                                        ">
+                                            {{ message|trans({}, 'FOSUserBundle') }}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endblock messages_error %}
+
+                            <div id="loginbox" class="mainbox">
+                                {% block fos_user_panel %}
+                                    <div class="panel panel-default">
+                                        {% block fos_user_content %}{% endblock fos_user_content %}
+                                    </div>
+                                {% endblock fos_user_panel %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock wrapper %}
+        {% endblock body %}
+        {% block footer %}
+            <footer>
+                <div id="page-wrapper">
+                    <div class="content" style="background-color: transparent;">
+                        <div class="footer">
+                            <p style="float: right;">Desarrollo <a href="mailto:sistemas@cpcechaco.org.ar">Gonzalo Alonso</a> &copy; Sistemas CPCE</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        {% endblock footer %}
+        <script src="{{ asset('bundles/mwsimpleadmincrud/js/bootstrap-checkbox.js') }}"></script>
+        <script src="{{ asset('bundles/mwsimpleadmincrud/js/bootstrap-fileupload/bootstrap-fileupload.min.js') }}"></script>
+        <script src="{{ asset('bundles/mwsimpleadmincrud/js/validator/bootstrapValidator.min.js') }}"></script>
+        <script src="{{ asset('bundles/mwsimpleadmincrud/js/validator/language/es_ES.js') }}"></script>
+       {% block javascript %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,65 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Firma
+{% endblock %}
+
+{% block paneltitle %}
+    
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        body {
+            background:#e9ecef;
+        }
+        .content {
+            background: inherit;
+            box-shadow: none;
+        }
+        .footer {
+            display: none;
+        }
+        .panel-footer {
+            height: 4em;
+        }
+    </style>
+{% endblock %}
+
+{% block fos_user_content %}
+    {{ form_start(form) }}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Firma Digital - Datos del Profesional</h3>
+        </div>
+        <div class="panel-body">   
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ form_row(form.nombre, {'value' : entity.afiNombre }) }}
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        {{ form_row(form.cuit, {'value' : entity.afiCuit }) }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ form_row(form.domicilio, {'value' : entity.afiDireccion }) }}
+                    </div>
+                    <div class="col-sm-3">
+                        {{ form_row(form.ciudad, {'value' : entity.afiLocalidad }) }}
+                    </div>
+                    <div class="col-sm-2">
+                        {{ form_row(form.provincia, {'value' : entity.afiProvincia }) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            {{ form_row(form.siguiente) }}
+        </div>
+        {{ form_rest(form) }}
+    </div>      
+    {{ form_end(form) }}
+{% endblock %}

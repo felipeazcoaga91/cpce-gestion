@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            p {
+                margin-top: 30px;
+                height: 0px;
+                font-size: 20px;
+                text-align: justify;
+            }
+            th p {
+                float: left;
+            }
+            .content {
+                background-color: #fff;
+                margin: 0 1em;
+                padding-left: 1em;
+            }
+            .right {
+                float: right;
+                font-size: 20px;    
+            }
+            .centrar {
+                text-align: center !important;
+                float: none !important;
+            }
+            .text-right {
+                text-align: right;
+            }
+            .text-long {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            campo {
+                font-size: 18px;
+                border-bottom-style: dashed;
+                border-bottom-width: 1.5px;
+            }
+            sangria {
+                padding-left: 5em;
+            }
+        </style>
+    </head>
+    <body class="focusedform">
+        <div class="right">{{ fecha|localizeddate('full', 'none') }}</div>
+        <br>
+        <div class="content">
+            <div class="left">
+                <img src="{{ asset('bundles/sistemacpce/images/logo_black.png', absolute=true) }}" alt="" />
+            </div>
+            <div class="centrar">
+                <h2>ASAMBLEA GENERAL ORDINARIA</h2>
+            </div>
+            <div class="centrar">
+                <h3>SU INCRIPCIÓN A FINALIZADO CORRECTAMENTE.</h3>
+                <h4>Que tenga un buen día!!<br>ya puede cerrar esta pestaña.</h4>
+            </div>
+        </div>  
+    </body>
+</html>

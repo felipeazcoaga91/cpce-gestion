@@ -1,0 +1,120 @@
+{% extends 'MWSimpleAdminCrudBundle:Default:index.html.twig' %}
+
+{% block title %}
+    Listados
+{% endblock %}
+
+{% block page %}
+<div class="row">
+    <div class="col-lg-10 col-md-12 col-sm-12">
+        <div class="filters-right">
+            {% block buttons %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        Filtro <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('listado_inscripciones', {'criteria' : '1'}) }}">Olimpiadas</a></li>
+                        <li><a href="{{ path('listado_inscripciones', {'criteria' : '2'}) }}">Congreso</a></li>
+                    </ul>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Listado de Inscriptos:</h3>
+        </div>
+
+        <table class="table table-striped table-bordered table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <th><a href="{{ path('listado_inscripciones', {'criteria' : 'matricula'}) }}">Nro. Matricula</a></th>
+                    <th><a href="{{ path('listado_inscripciones', {'criteria' : 'nombre'}) }}">Apellido, Nombre</a></th>
+                    <th><a href="{{ path('listado_inscripciones', {'criteria' : 'dni'}) }}">Dni</a></th>
+                    <th><a href="{{ path('listado_inscripciones', {'criteria' : 'o.fecha'}) }}">Fecha Generado</a></th>
+                    <th><a href="{{ path('listado_inscripciones', {'criteria' : 'o.importeTotal'}) }}">Importe</a></th>
+                    <th><a href="{{ path('listado_inscripciones', {'criteria' : 'o.estado'}) }}">Estado</a></th>
+                    <th><a href="{{ path('listado_inscripciones', {'criteria' : 'o.moldeId'}) }}">Tipo</a></th>
+                    <th><a>Acciones</a></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% set total = 0 %}
+            {% set generados = 0 %}
+            {% set seniados = 0 %}
+            {% set pagados = 0 %}
+                
+                {% for entity in entities %}
+
+                    {% if entity.estado == 1 %}
+                        {% set seniados = seniados + 1 %}
+                        <tr class="warning"> 
+                    {% elseif entity.estado == 2 %}
+                        {% set pagados = pagados + 1 %}
+                        <tr class="success"> 
+                    {% else %}
+                        {% set generados = generados + 1 %}
+                        <tr>    
+                    {% endif %}
+
+                        <td>{{ entity.matricula }}</td>
+                        <td>{{ entity.nombre }}</td>
+                        <td>{{ entity.dni }}</td>
+                        <tD>{{ entity.fecha|localizeddate('full', 'none') }}</td>
+                        <td>${{ entity.importeTotal }}</td>
+                        {% set total = total + entity.importeTotal %}
+                        {% if entity.estado == 0 %}
+                            <td>Generado</td>
+                        {% elseif entity.estado == 1 %}
+                            <td>Señado</td>
+                        {% else %}
+                            <td>Pagado</td>
+                        {% endif %}
+                        {% if entity.moldeId == 1 %}
+                            <td>Olimpiada</td>
+                        {% else %}
+                            <td>Congreso</td>
+                        {% endif %}
+                        <th>
+                            <a class="glyphicon glyphicon-search tooltips"  href="{{ path('listado_pdf', {'id': entity.id } ) }}" title="" rel="tooltip" data-original-title="Ver Detalles"></a>
+                        </th>
+                    </tr>
+                {% endfor %}
+
+                <tr class="active">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align: right">SubTOTAL:</th>
+                    <th>${{ total }}</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <table class="table table-striped table-bordered table-condensed table-responsive">
+    	<thead>
+            <tr>
+                <th>Generados: #{{ generados }}</th>
+                <th>Señados: #{{ seniados }}</th>
+                <th>Pagados: #{{ pagados }}</th>
+            </tr>
+        </thead>
+    </table>
+    {% block buttonsbelow %}
+        {#
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <a class="btn btn-danger likepaginator" href="#">
+                Exportar Listado
+            </a>
+        </div>
+        #}
+    {% endblock %}
+</div>
+{% endblock %}

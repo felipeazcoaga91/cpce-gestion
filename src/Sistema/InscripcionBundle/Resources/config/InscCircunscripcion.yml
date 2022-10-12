@@ -1,0 +1,38 @@
+entityName: 'Circunscripcion'
+entity: 'Sistema\InscripcionBundle\Entity\InscCircunscripcion'
+repository: 'SistemaInscripcionBundle:InscCircunscripcion'
+index: 'admin_inscripciones_circunscripciones'
+new: 'admin_inscripciones_circunscripciones_new'
+edit: 'admin_inscripciones_circunscripciones_edit'
+show: 'admin_inscripciones_circunscripciones_show'
+create: 'admin_inscripciones_circunscripciones_create'
+update: 'admin_inscripciones_circunscripciones_update'
+delete: 'admin_inscripciones_circunscripciones_delete'
+export: 'admin_inscripciones_circunscripciones_export'
+sessionFilter: 'InscCircunscripcionControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+fieldsshow:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        class: 'col-lg-4'
+        #closerow: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        class: 'col-lg-4'
+        #closerow: true

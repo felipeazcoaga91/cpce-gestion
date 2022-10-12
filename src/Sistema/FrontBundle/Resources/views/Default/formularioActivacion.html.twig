@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            .content {
+                background-color: #fff;
+                margin: 0 1em;
+                padding-left: 1em;
+            }
+            .right {
+                float: right;
+            }
+        </style>
+    </head>
+    <body class="focusedform">
+        <div class="content">
+            <img src="{{ asset('bundles/sistemacpce/images/header_logo_agua.png', absolute=true) }}" alt="" />
+            <div class="right">{{ fecha }}</div>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div id="loginbox" class="mainbox">
+                    <div class="panel panel-default">
+                        <p>A quien corresponda:</p>
+                        <br>
+                        <p>Por la presente solicito la activaci&oacute;n de mi usuario web con los siguientes datos:</p>
+                        <br>
+                        <table style="width:100%">
+                          <tr>
+                            <td>Constancia n&uacute;mero:</td>
+                            <td>{{ id }}</td>
+                          </tr>
+                          <tr>
+                            <td>DNI:</td>
+                            <td>{{ dni }}</td>
+                          </tr>
+                          <tr>
+                            <td>Correo:</td>
+                            <td>{{ email }}</td>
+                          </tr>
+                          <tr>
+                            <td>T&iacute;tulo:</td>
+                            <td>____________________</td>
+                          </tr>
+                          <tr>
+                            <td>N&uacute;mero de matr&iacute;cula:</td>
+                            <td>____________________</td>
+                          </tr>
+                        </table>
+
+                        <br><br><br><br><br>
+
+                        <table style="width:100%">
+                          <tr>
+                            <td>------------------------------------------------------------</td>
+                            <td>------------------------------</td>
+                            <td>------------------------------</td>
+                          </tr>
+                          <tr>
+                            <td>Aclaraci&oacute;n</td>
+                            <td>DNI</td>
+                            <td>Firma</td>
+                          </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

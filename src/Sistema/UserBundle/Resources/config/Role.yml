@@ -1,0 +1,53 @@
+entityName: 'Role'
+entity: 'Sistema\UserBundle\Entity\Role'
+repository: 'SistemaUserBundle:Role'
+index: 'admin_role'
+new: 'admin_role_new'
+edit: 'admin_role_edit'
+show: 'admin_role_show'
+create: 'admin_role_create'
+update: 'admin_role_update'
+delete: 'admin_role_delete'
+export: 'admin_role_export'
+sessionFilter: 'RoleControllerFilter'
+fieldsindex:
+    # a.id:
+    #     name: 'Id'
+    #     type: 'integer'
+    a.name:
+        label: 'Name'
+        name: 'Name'
+        type: 'string'
+    a.url:
+        label: 'Url'
+        name: 'Url'
+        type: 'string'
+    a.acceso:
+        label: 'Acceso'
+        name: 'Acceso'
+        type: 'boolean'
+    a.role_name:
+        label: 'RoleName'
+        name: 'RoleName'
+        type: 'string'
+fieldsshow:
+    a.id:
+        label: 'Id'
+        name: 'Id'
+        type: 'integer'
+    a.name:
+        label: 'Name'
+        name: 'Name'
+        type: 'string'
+    a.url:
+        label: 'Url'
+        name: 'Url'
+        type: 'string'
+    a.acceso:
+        label: 'Acceso'
+        name: 'Acceso'
+        type: 'boolean'
+    a.role_name:
+        label: 'RoleName'
+        name: 'RoleName'
+        type: 'string'

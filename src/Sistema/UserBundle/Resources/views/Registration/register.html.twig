@@ -1,0 +1,7 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% block fos_user_panel %}
+	<div class="panel panel-danger">
+		{% include "SistemaUserBundle:Registration:register_content.html.twig" %}
+	</div>
+{% endblock fos_user_panel %}

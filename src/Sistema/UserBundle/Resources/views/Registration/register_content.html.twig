@@ -1,0 +1,85 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<style type="text/css">
+    .form-group ul {
+        padding: 0;
+    }
+    .form-group ul li {
+        list-style-type: none;
+        border-radius: 4px;
+        margin-bottom: 0;
+        padding: 15px;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+        color: #a94442;
+    }
+</style>
+
+<div class="panel-heading">
+    <div class="panel-title">{{ 'layout.register'|trans }}me | <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></div>
+</div>
+<div style="padding-top:30px" class="panel-body">
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-4">
+                    <i class="glyphicon glyphicon-user"></i>
+                    {{ form_label(form.tipdoc) }}
+                    {{ form_errors(form.tipdoc) }}
+                    {{ form_widget(form.tipdoc) }}
+                </div>
+                <div class="col-lg-4">
+                    <i class="glyphicon glyphicon-user"></i>
+                    {{ form_label(form.nrodoc) }}
+                    {{ form_errors(form.nrodoc) }}
+                    {{ form_widget(form.nrodoc) }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-4">
+                    <i class="glyphicon glyphicon-user"></i>
+                    {{ form_label(form.username) }}
+                    {{ form_errors(form.username) }}
+                    {{ form_widget(form.username) }}
+                </div>
+                <div class="col-lg-6">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                    {{ form_label(form.email) }}
+                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.email) }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-4">
+                    <i class="glyphicon glyphicon-lock"></i>
+                    {{ form_label(form.plainPassword.first) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first) }}
+                </div>
+                <div class="col-lg-4">
+                    <i class="glyphicon glyphicon-lock"></i>
+                    {{ form_label(form.plainPassword.second) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second) }}
+                </div>
+            </div>
+        </div>
+        {#<div class="block" style="text-align:center">
+            <input type="checkbox" style="margin-right:5px">
+            <span>
+                Acepto <a href="#">Acuerdo de usuario</a>
+            </span>
+        </div>#}
+        {{ form_rest(form) }}
+        <div style="margin-top:10px" class="form-group">
+            <!-- Button -->
+            <div class="col-sm-12 controls">
+                <input type="submit" value="{{ 'registration.submit'|trans }}me" class="btn btn-danger" />
+            </div>
+        </div>
+    </form>
+</div>

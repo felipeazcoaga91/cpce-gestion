@@ -1,0 +1,82 @@
+entityName: 'Transporte'
+entity: 'Sistema\InscripcionBundle\Entity\InscTransporte'
+repository: 'SistemaInscripcionBundle:InscTransporte'
+index: 'admin_inscripciones_transportes'
+new: 'admin_inscripciones_transportes_new'
+edit: 'admin_inscripciones_transportes_edit'
+show: 'admin_inscripciones_transportes_show'
+create: 'admin_inscripciones_transportes_create'
+update: 'admin_inscripciones_transportes_update'
+delete: 'admin_inscripciones_transportes_delete'
+export: 'admin_inscripciones_transportes_export'
+sessionFilter: 'InscTransporteControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        export: true
+    a.descripcion:
+        label: 'Descripcion'
+        name: 'Descripcion'
+        type: 'string'
+        export: true
+    a.cupo:
+        label: 'Cupo'
+        name: 'Cupo'
+        type: 'integer'
+        export: true
+    a.reservado:
+        label: 'Reservado'
+        name: 'Reservado'
+        type: 'integer'
+        export: true
+    a.precio:
+        label: 'Precio'
+        name: 'Precio'
+        type: 'float'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+fieldsshow:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.descripcion:
+        label: 'Descripcion'
+        name: 'Descripcion'
+        type: 'string'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.cupo:
+        label: 'Cupo'
+        name: 'Cupo'
+        type: 'integer'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.reservado:
+        label: 'Reservado'
+        name: 'Reservado'
+        type: 'integer'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.precio:
+        label: 'Precio'
+        name: 'Precio'
+        type: 'float'
+        #class: 'col-lg-12'
+        #closerow: true

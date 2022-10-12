@@ -1,0 +1,68 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+            <style type="text/css">
+        .borde{
+                    border-style: solid;
+                    width: 320px;
+                    height: 25px;
+                }
+        .insertar{
+                    border-style: solid;
+                    width: 290px;
+                    height: 25px;
+                }
+        .firma{
+                    border-style: solid;
+                    width: 290px;
+                    height: 120px;
+        }
+        .margen{
+                    margin: 5px;
+                }
+        .resaltado{
+                    background-color: rgb(153,153,153);
+                  }        
+      </style>
+    </head>
+        <body>
+            <br>
+            <dd>
+                <p>ANEXO III FORMULARIO CLIENTE PERSONA JURÍDICA</p><br>
+                <center> <p>MEMBRETE DEL CONSEJO.<br></p>   </center>    
+                <p align="center"> FORMULARIO DE LEGALIZACIÓN DE ACTUACIÓN PROFESIONAL CON FIRMA DIGITAL <br></p> 
+                <p><b>ENTE:</b> {{ entity.cliente }}<br></p> 
+                <p><b>CUIT:</b> {{ entity.cliente.afiCuit }}<br></p> 
+                <p><b>DOMICILIO LEGAL:</b> {{ entity.cliente.afiDireccion }}. <b>CIUDAD:</b> {{ entity.cliente.afiLocalidad }}. – Provincia del Chaco.<br></pre>
+                <p><b>TRABAJO PROFESIONAL:</b> {{ entity.trabajo.tarDescrip }}.<br></p>
+                <p class="insertar">Adjuntar trabajo objeto del encargo<br></p>
+                <p>“En mi carácter de LISTA DESPLEGABLE 2 del ente arriba mencionado, declaro que <mark class="resaltado">el flujo de fondos proyectados preparados como pronóstico</mark>, aprobados por su administración, pertenecen a mi representado, que dicha representación se encuentra vigente conforme las normas legales y firmo digitalmente el presente formulario a efecto de su vinculación”<br></p> 
+                <p><b>FECHA DE INFORME / CERTIFICACIÓN:</b> {{ entity.fechaInforme | date('d/m/Y') }}</p>
+                <p class="insertar">Adjuntar informe/certificación</p>
+                <p>“Declaro que he desarrollado mi tarea profesional con el alcance expresado en el informe/certificación adjunto, y que en virtud de dicha tarea firmo digitalmente el presente formulario. En relación a los documentos adjuntados por el representante legal/apoderado del ente arriba mencionada, mi firma digital abarca a éstos sólo con propósitos de vinculación con el informe/certificación antes citado/a.”<br></p>
+                <p class="borde">Registro de legalización N°: __ __________ - __</p>     
+                <p>Fecha: {{ "now" |localizeddate('full', 'none', 'es') }}.<br></p>  
+                <div>
+                    <div id="div1" style="float:left; width:33.3%;">
+                        <p class="firma">FIRMA DIGITAL DEL REPRESENTANTE DEL ENTE</p>
+                    </div>
+                    <div id="div2" style="float:left; width:33.3%;">
+                        <p class="firma">FIRMA DIGITAL DEL PROFESIONAL</p> 
+                    </div>
+                    <div id="div3" style="float:left; width:33.3%;">
+                       <p class="firma">FIRMA DIGITAL DEL CONSEJERO DIRECTIVO</p>    
+                    </div>
+                    <!-- Esto solo se tiene que mostrar cuando se imprime el pdf -->
+                    <!-- <p>AL IMPRIMIR EN PAPEL INCORPORAR AUTOMÁTICAMENTE LA LEYENDA: “EL PRESENTE DOCUMENTO CARECE DE VALIDEZ LEGAL”.<br></p> -->  
+                </div> 
+            </dd>
+        </body>
+</html>
+
+           
+                                                                                                
+                                                                                                        
+                                    
+                                                                                                

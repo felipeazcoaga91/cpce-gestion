@@ -1,0 +1,60 @@
+entityName: 'Hotel'
+entity: 'Sistema\InscripcionBundle\Entity\InscHotel'
+repository: 'SistemaInscripcionBundle:InscHotel'
+index: 'admin_inscripciones_hoteles'
+new: 'admin_inscripciones_hoteles_new'
+edit: 'admin_inscripciones_hoteles_edit'
+show: 'admin_inscripciones_hoteles_show'
+create: 'admin_inscripciones_hoteles_create'
+update: 'admin_inscripciones_hoteles_update'
+delete: 'admin_inscripciones_hoteles_delete'
+export: 'admin_inscripciones_hoteles_export'
+sessionFilter: 'InscHotelControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        export: true
+    a.importeTotal:
+        label: 'Importe'
+        name: 'ImporteTotal'
+        type: 'float'
+        export: true
+    a.importeOtro:
+        label: 'Otro Importe'
+        name: 'ImporteOtro'
+        type: 'float'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+fieldsshow:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.cupo:
+        label: 'Cupo'
+        name: 'Cupo'
+        type: 'integer'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.reservado:
+        label: 'Reservado'
+        name: 'Reservado'
+        type: 'integer'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        #class: 'col-lg-12'
+        #closerow: true

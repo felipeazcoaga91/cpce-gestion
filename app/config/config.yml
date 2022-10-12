@@ -1,0 +1,238 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@MWSimpleAdminCrudBundle/Resources/config/services.yml" }
+    # ForoBundle services
+    - { resource: "@MWSimpleForoBundle/Resources/config/services.yml" }
+    - { resource: "@SistemaUserBundle/Resources/config/services.yml" }
+    - { resource: "@SistemaCPCEBundle/Resources/config/services.yml" }
+    - { resource: "@SistemaInscripcionBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: es
+    # entity referenced to FosUserSubjectInterface
+    subjectInterface: Sistema\UserBundle\Entity\User
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+    assets:
+        version: 'v9'
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form:
+#php7 new twig
+#        form_themes:
+        resources:
+            - 'LexikFormFilterBundle:Form:form_div_layout.html.twig'
+    date:
+        format: d/m/Y, H:i:s
+        interval_format: '%%d days'
+        timezone: America/Buenos_Aires
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
+        #yui_css:
+        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
+        mapping_types:
+            bit: boolean
+            enum: string
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        dql:
+            string_functions:
+                YEAR: DoctrineExtensions\Query\Mysql\Year
+                SUBSTRING_INDEX: DoctrineExtensions\Query\Mysql\SubstringIndex
+        # resolve_target attach to the subject entity for other thirds entities 
+        resolve_target_entities:
+            # configuration of the parameters attach fos
+            MWSimple\Bundle\ForoBundle\Model\FosUserSubjectInterface: "%subjectInterface%"
+
+# Swiftmailer Configuration
+swiftmailer:
+    default_mailer: first_mailer
+    mailers:
+        first_mailer:
+            transport: "%mailer_transport%"
+            host:      "%mailer_host%"
+            username:  "%mailer_user%"
+            password:  "%mailer_password%"
+            spool:     { type: memory }
+        second_mailer:    
+            transport: "%mailer_transport_test%"
+            host:      "%mailer_host_test%"
+            username:  "%mailer_user_test%"
+            password:  "%mailer_password_test%"
+            spool:     { type: memory }
+        reset_mailer:    
+            transport: "%mailer_transport_reset%"
+            host:      "%mailer_host_reset%"
+            username:  "%mailer_user_reset%"
+            password:  "%mailer_password_reset%"
+            spool:     { type: memory }
+        cc_mailer:
+            username:  "%mailer_user_cc%"
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     xvfb-run wkhtmltopdf
+        # binary: '"C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"'
+#        options:    []
+    image:
+        enabled:    false
+#        binary:     /usr/local/bin/wkhtmltoimage
+#        options:    []
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Sistema\UserBundle\Entity\User
+    registration:
+        form:
+            type: sistema_fos_user_registration
+            handler: sistema_user.form.handler.registration
+        confirmation:
+            enabled:    true
+    from_email:
+        address:        info@cpcechaco.org.ar
+        sender_name:    CPCE CHACO
+    service:
+        mailer: sistema_user.custom_mailer
+
+knp_paginator:
+    page_range: 50                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        # pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig # bootstrap 3 sliding pagination controls template
+        pagination: MWSimpleAdminCrudBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig # bootstrap 3 sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+knp_menu:
+    twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
+        template: MWSimpleAdminCrudBundle:Menu:knp_menu.html.twig
+    templating: false # if true, enables the helper for PHP templates
+    default_renderer: twig # The renderer to use, list is also available by default
+
+mw_simple_admin_crud:
+    acl:
+        use: true #default false
+        exclude_role: ROLE_SUPERADMIN #exclude role the control, default false
+#entities use
+        entities:
+            - Sistema\CPCEBundle\Entity\Trabajo
+    menu_setting: { class: nav } # use nav sidebar
+    menu:
+        inicio: { name: Inicio, url: homepage, id: homepage, roles: ['ROLE_ADMIN'], icon: glyphicon glyphicon-home }
+        admin: { name: Admin, url: mws_admin_crud_menu, id: admin, roles: ['ROLE_SUPERADMIN'], icon: glyphicon glyphicon-cog }
+        afiliado: { name: Matriculados, url: admin_afiliado, id: afiliado, roles: ['ROLE_SUPERADMIN'], icon: glyphicon glyphicon-user }
+        inscripciones: { name: Gestion Inscripciones, url: admin_inscripciones, id: inscripciones, roles: ['ROLE_ADMIN'], icon: glyphicon glyphicon-file }
+        trabajo: { name: Trabajos, url: admin_trabajo, id: trabajo, roles: ['ROLE_SECTECNICA'], icon: glyphicon glyphicon-wrench }
+        cuenta: { name: Cuentas, url: admin_cuenta, id: cuenta, roles: ['ROLE_CONSULTA'], icon: glyphicon glyphicon-th-list }
+        usuario: { name: Usuarios, url: admin_user, id: usuario, roles: ['ROLE_SUPERADMIN'], icon: glyphicon glyphicon-user }
+        ofertalaboral: { name: Oferta Laboral, url: admin_ofertalaboral, id: ofertalaboral, roles: ['ROLE_SERVICIO'], icon: glyphicon glyphicon-bullhorn }
+        archivos: { name: Archivos, url: admin_archivo, id: archivo, roles: ['ROLE_ADMIN'], icon: glyphicon glyphicon-floppy-disk }
+        foro: { name: Foro Listado, url: mws_foro_grupo, id: foro_grupo, roles: ['ROLE_ADMIN'], icon: glyphicon glyphicon-comment }
+        salir: { name: Salir, url: fos_user_security_logout, id: salir, roles: ['ROLE_USER'], icon: glyphicon glyphicon-log-out }
+#        child2: { name: seccion, url: admin_seccion }
+#        child3:
+#            name: help
+#            url: null
+#            subMenu:
+#                 indice: { name: indice , url: admin_indice }
+sistema_cpce:
+    menu_setting: { class: nav } # use nav sidebar
+    menu:
+        inicio: { name: Inicio, url: afiliado, id: inicio, icon: glyphicon glyphicon-home }
+        admin: { name: Admin, url: mws_admin_crud_menu, id: admin, roles: ['ROLE_ADMIN'], icon: glyphicon glyphicon-cog }
+        dato: { name: Datos, url: front_dato, id: dato, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-user }
+        trabajo:
+            name: Trabajos
+            url: null
+            id: trabajo
+            roles: ['ROLE_MATRICULADO']
+            icon: glyphicon glyphicon-wrench
+            subMenu:
+                tra_listado: { name: Listado , url: front_trabajo, id: tra_listado, icon: glyphicon glyphicon-th-list }
+                tra_confeccionar: { name: Confeccionar , url: front_trabajo_new, id: tra_confeccionar, icon: glyphicon glyphicon-plus }
+        honorarios: { name: Honorarios Minimos, url: honorarios_index, id: honorario, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-folder-open }
+        cpce: { name: Información CPCE, url: cpce_index, id: cpce, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-folder-open }
+        sipres: { name: Información SIPRES, url: sipres_index, id: sipres, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-folder-open }
+        cuenta: { name: Estado de Cuenta, url: front_cuenta, id: cuenta, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-th-list }
+        novedad: { name: Novedades, url: ayuda_novedad_index, id: novedad, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-bullhorn }
+        inscripciones: { name: Pre Inscripciones, url: front_inscripcion, id: inscripciones, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-file }
+        biblioteca: { name: Biblioteca Digital, url: redirect_biblioteca_index, id: biblioteca, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-book }
+        calendario: { name: Calendario de Capacitaciones, url: redirect_calendario_index, id: calendario, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-calendar }
+        consultas: { name: Consultas Gratuitas, url: redirect_consultas_index, id: consultas, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-bullhorn }
+        st_trabajo: { name: Trabajos ST, url: admin_trabajo, id: st_trabajo, roles: ['ROLE_SECTECNICA'], icon: glyphicon glyphicon-wrench }
+#        afiliado: { name: Datos, url: afiliado, roles: ['ROLE_MATRICULADO', 'ROLE_SUPERADMIN'] }
+        ofertalaboral: { name: Oferta Laboral, url: admin_ofertalaboral, id: ofertalaboral, roles: ['ROLE_SERVICIO'], icon: glyphicon glyphicon-bullhorn }
+#        trabajo: { name: Trabajos, url: front_trabajo, id: trabajo, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-wrench }        
+#        servicios: { name: Servicios, url: ayuda_servicios_index, id: servicios, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-bullhorn }
+#        ayuda: { name: Ayuda, url: ayuda_index, id: ayuda, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-question-sign }
+#        foros: { name: Foros, url: mws_foro_front, id: foro_front, roles: ['ROLE_MATRICULADO'], icon: glyphicon glyphicon-comment }
+        salir: { name: Salir, url: fos_user_security_logout, id: salir, roles: ['ROLE_USER'], icon: glyphicon glyphicon-log-out }
+
+# StofDoctrineExtensionsBundle
+stof_doctrine_extensions:
+    default_locale: es_AR
+    orm:
+        default:
+            #tree: true
+            timestampable: true
+            #loggable: true

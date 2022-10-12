@@ -1,0 +1,14 @@
+{% block form %}
+    <fieldset>
+        <legend>
+            <h4>Transporte:</h4>
+        </legend>
+        <div class="row">
+            {% if form.transporte is defined %}
+                <div class="col-lg-6 col-md-12 col-sm-12" id="transporte">
+                    {{ form_row(form.transporte) }}
+                </div>
+            {% endif %}
+        </div>
+    </fieldset>
+{% endblock %}

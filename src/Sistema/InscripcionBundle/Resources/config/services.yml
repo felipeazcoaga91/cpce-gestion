@@ -1,0 +1,11 @@
+services:
+    formtype.inscmoldeperitostype:
+        class: Sistema\InscripcionBundle\Form\InscMoldePeritosType
+        arguments: ["@security.context"]
+        tags:
+            - { name: form.type, alias: sistema_inscripcionbundle_inscmoldeperitos }
+    formtype.inscolimpiadatype:
+        class: Sistema\InscripcionBundle\Form\InscOlimpiadaType
+        arguments: ["@security.context"]
+        tags:
+            - { name: form.type, alias: sistema_inscripcionbundle_inscolimpiada }

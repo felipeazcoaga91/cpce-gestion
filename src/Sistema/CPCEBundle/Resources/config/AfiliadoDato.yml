@@ -1,0 +1,295 @@
+entityName: 'Datos'
+entity: 'Sistema\CPCEBundle\Entity\Afiliado'
+repository: 'SistemaCPCEBundle:Afiliado'
+show: 'front_dato'
+edit: 'front_dato_editar'
+fieldsshow:
+    # a.afiNombre:
+    #     label: 'Afinombre'
+    #     name: 'Afinombre'
+    #     type: 'string'
+    # a.afiFecnac:
+    #     label: 'Afifecnac'
+    #     name: 'Afifecnac'
+    #     type: 'date'
+    #     date: 'Y-m-d'
+    a.afiTipo:
+        label: 'Afitipo'
+        name: 'Afitipo'
+        type: 'string'
+    # a.afiTitulo:
+    #     label: 'Afititulo'
+    #     name: 'Afititulo'
+    #     type: 'string'
+    # a.afiMatricula:
+    #     label: 'Afimatricula'
+    #     name: 'Afimatricula'
+    #     type: 'integer'
+    # a.afiDireccion:
+    #     label: 'Afidireccion'
+    #     name: 'Afidireccion'
+    #     type: 'string'
+    # a.afiLocalidad:
+    #     label: 'Afilocalidad'
+    #     name: 'Afilocalidad'
+    #     type: 'string'
+    # a.afiProvincia:
+    #     label: 'Afiprovincia'
+    #     name: 'Afiprovincia'
+    #     type: 'string'
+    # a.afiZona:
+    #     label: 'Afizona'
+    #     name: 'Afizona'
+    #     type: 'string'
+    # a.afiCodpos:
+    #     label: 'Aficodpos'
+    #     name: 'Aficodpos'
+    #     type: 'integer'
+    # a.afiTelefono1:
+    #     label: 'Afitelefono1'
+    #     name: 'Afitelefono1'
+    #     type: 'string'
+    # a.afiCelular:
+    #     label: 'AfiCelular'
+    #     name: 'AfiCelular'
+    #     type: 'string'
+    # a.afiMail:
+    #     label: 'Afimail'
+    #     name: 'Afimail'
+    #     type: 'string'
+    a.afiMailAlternativo:
+        label: 'Afimailalternativo'
+        name: 'Afimailalternativo'
+        type: 'string'
+    # a.afiCivil:
+    #     label: 'Aficivil'
+    #     name: 'Aficivil'
+    #     type: 'string'
+    # a.afiTipoiva:
+    #     label: 'Afitipoiva'
+    #     name: 'Afitipoiva'
+    #     type: 'string'
+    # a.afiCuit:
+    #     label: 'Aficuit'
+    #     name: 'Aficuit'
+    #     type: 'string'
+    a.afiDgr:
+        label: 'Afidgr'
+        name: 'Afidgr'
+        type: 'string'
+    # a.afiCategoria:
+    #     label: 'Aficategoria'
+    #     name: 'Aficategoria'
+    #     type: 'string'
+    a.afiFicha:
+        label: 'Afificha'
+        name: 'Afificha'
+        type: 'string'
+    a.afiEjprof:
+        label: 'Afiejprof'
+        name: 'Afiejprof'
+        type: 'float'
+    a.afiAsoc:
+        label: 'Afiasoc'
+        name: 'Afiasoc'
+        type: 'float'
+    a.afiMonto:
+        label: 'Afimonto'
+        name: 'Afimonto'
+        type: 'float'
+    # a.afiSexo:
+    #     label: 'Afisexo'
+    #     name: 'Afisexo'
+    #     type: 'string'
+    a.afiGarante:
+        label: 'Afigarante'
+        name: 'Afigarante'
+        type: 'string'
+    a.afiDoc1:
+        label: 'Afidoc1'
+        name: 'Afidoc1'
+        type: 'string'
+    a.afiAut1:
+        label: 'Afiaut1'
+        name: 'Afiaut1'
+        type: 'string'
+    a.afiNac1:
+        label: 'Afinac1'
+        name: 'Afinac1'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiSex1:
+        label: 'Afisex1'
+        name: 'Afisex1'
+        type: 'string'
+    a.afiFil1:
+        label: 'Afifil1'
+        name: 'Afifil1'
+        type: 'string'
+    a.afiDoc2:
+        label: 'Afidoc2'
+        name: 'Afidoc2'
+        type: 'string'
+    a.afiAut2:
+        label: 'Afiaut2'
+        name: 'Afiaut2'
+        type: 'string'
+    a.afiNac2:
+        label: 'Afinac2'
+        name: 'Afinac2'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiSex2:
+        label: 'Afisex2'
+        name: 'Afisex2'
+        type: 'string'
+    a.afiFil2:
+        label: 'Afifil2'
+        name: 'Afifil2'
+        type: 'string'
+    a.afiDoc3:
+        label: 'Afidoc3'
+        name: 'Afidoc3'
+        type: 'string'
+    a.afiAut3:
+        label: 'Afiaut3'
+        name: 'Afiaut3'
+        type: 'string'
+    a.afiNac3:
+        label: 'Afinac3'
+        name: 'Afinac3'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiSex3:
+        label: 'Afisex3'
+        name: 'Afisex3'
+        type: 'string'
+    a.afiFil3:
+        label: 'Afifil3'
+        name: 'Afifil3'
+        type: 'string'
+    a.afiDoc4:
+        label: 'Afidoc4'
+        name: 'Afidoc4'
+        type: 'string'
+    a.afiAut4:
+        label: 'Afiaut4'
+        name: 'Afiaut4'
+        type: 'string'
+    a.afiNac4:
+        label: 'Afinac4'
+        name: 'Afinac4'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiSex4:
+        label: 'Afisex4'
+        name: 'Afisex4'
+        type: 'string'
+    a.afiFil4:
+        label: 'Afifil4'
+        name: 'Afifil4'
+        type: 'string'
+    a.afiDoc5:
+        label: 'Afidoc5'
+        name: 'Afidoc5'
+        type: 'string'
+    a.afiAut5:
+        label: 'Afiaut5'
+        name: 'Afiaut5'
+        type: 'string'
+    a.afiNac5:
+        label: 'Afinac5'
+        name: 'Afinac5'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiSex5:
+        label: 'Afisex5'
+        name: 'Afisex5'
+        type: 'string'
+    a.afiFil5:
+        label: 'Afifil5'
+        name: 'Afifil5'
+        type: 'string'
+    a.afiDoc6:
+        label: 'Afidoc6'
+        name: 'Afidoc6'
+        type: 'string'
+    a.afiAut6:
+        label: 'Afiaut6'
+        name: 'Afiaut6'
+        type: 'string'
+    a.afiNac6:
+        label: 'Afinac6'
+        name: 'Afinac6'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiSex6:
+        label: 'Afisex6'
+        name: 'Afisex6'
+        type: 'string'
+    a.afiFil6:
+        label: 'Afifil6'
+        name: 'Afifil6'
+        type: 'string'
+    a.afiDgralic:
+        label: 'Afidgralic'
+        name: 'Afidgralic'
+        type: 'float'
+    a.afiCuota:
+        label: 'Aficuota'
+        name: 'Aficuota'
+        type: 'integer'
+    a.afiDebitos:
+        label: 'Afidebitos'
+        name: 'Afidebitos'
+        type: 'float'
+    a.afiCreditos:
+        label: 'Aficreditos'
+        name: 'Aficreditos'
+        type: 'float'
+    a.afiGanancias:
+        label: 'Afiganancias'
+        name: 'Afiganancias'
+        type: 'string'
+    a.afiIva:
+        label: 'Afiiva'
+        name: 'Afiiva'
+        type: 'string'
+    a.afiDgrexcep:
+        label: 'Afidgrexcep'
+        name: 'Afidgrexcep'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiDgiexcep:
+        label: 'Afidgiexcep'
+        name: 'Afidgiexcep'
+        type: 'date'
+        date: 'Y-m-d'
+    a.afiCbu:
+        label: 'Aficbu'
+        name: 'Aficbu'
+        type: 'string'
+    a.afiCbuCredito:
+        label: 'Aficbucredito'
+        name: 'Aficbucredito'
+        type: 'string'
+    a.afiLote:
+        label: 'Afilote'
+        name: 'Afilote'
+        type: 'float'
+    a.afiTipdoc:
+        label: 'Afitipdoc'
+        name: 'Afitipdoc'
+        type: 'string'
+    a.afiNrodoc:
+        label: 'Afinrodoc'
+        name: 'Afinrodoc'
+        type: 'integer'
+    a.afiGarantedeTipdoc:
+        label: 'Afigarantedetipdoc'
+        name: 'Afigarantedetipdoc'
+        type: 'MANY_TO_ONE'
+    a.afiGaranteTipdoc:
+        label: 'Afigarantetipdoc'
+        name: 'Afigarantetipdoc'
+        type: 'MANY_TO_ONE'

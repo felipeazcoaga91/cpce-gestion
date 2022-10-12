@@ -1,0 +1,15 @@
+{% block form_row %}
+    <div class="form_row">
+        <div class="form-group">
+
+            <div class="col-lg-4">
+                {{ form_label(form) }}
+                {{ form_widget(form) }}
+                <div class="label label-primary col-lg-12">
+                    <span>Dejar en Blanco para mantener su contraseña </span>
+                </div>
+            </div>
+           {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}

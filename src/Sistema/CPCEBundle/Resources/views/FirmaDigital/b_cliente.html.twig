@@ -1,0 +1,125 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Firma
+{% endblock %}
+
+{% block paneltitle %}
+    
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        body {
+            background:#e9ecef;
+        }
+        .content {
+            background: inherit;
+            box-shadow: none;
+        }
+        .footer {
+            display: none;
+        }
+        .panel-footer {
+           
+            height: 4em;
+        }
+        #ocultar{
+            display: none;
+        }
+        .izquierda{
+              position: relative;
+              left: -10px;
+        }
+      
+    </style>
+{% endblock %}
+
+{% block fos_user_content %}
+    {{ form_start(form) }}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Firma Digital - Datos del Cliente</h3>
+        </div>
+        <div class="panel-body">   
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-2 control-label">
+                        {{ form_label(form.cuit) }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ form_widget(form.cuit) }}
+                        {{ form_errors(form.cuit) }}
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="btn btn-warning" onclick="getClientInfo()"><i class="glyphicon glyphicon-user"></i><span> Validar</span></a>
+                    </div>
+                </div><br>
+                <div id="ocultar">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            {{ form_row(form.comitente) }}
+                        </div>
+                        <div class="col-sm-4">
+                            {{ form_row(form.domicilio) }}
+                        </div>
+                        <div class="col-sm-3">
+                            {{ form_row(form.ciudad) }}
+                        </div>
+                        <div class="col-sm-2">
+                            {{ form_row(form.provincia) }}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>      
+        <div class="panel-footer">
+            {{ form_row(form.siguiente) }}
+        </div>
+        {{ form_rest(form) }}
+    </div>      
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script type="text/javascript">
+
+        $("#form_siguiente").prop('disabled', true);
+
+        function getClientInfo() {
+
+            let cuit = $("#form_cuit").val();
+            let route = Routing.generate('ajax_get_cliente');
+
+            $.ajax({
+                type: 'POST',
+                url: route,
+                data: ({ cuit: cuit }),
+                async: true,
+                dataType: "json",
+                success: function (data) {
+                    if(cuit == ""){
+                        $("#form_siguiente").prop('disabled', true);
+                    }else{
+                        document.getElementById("ocultar").style.display = "block"
+                    }
+                    
+                    $("#form_domicilio").val(data.clientDIR);
+                    $("#form_ciudad").val(data.clientCiudad);
+                    $("#form_comitente").val(data.clientNombre)
+                    $("#form_provincia").val(data.clientProvincia);
+
+                    $("#form_siguiente").prop('disabled', false);
+                }
+                
+            });
+        }
+        {# $(document).ready(function(){
+            $('#inputCuit').mask('##.###.###');
+        }); #}
+    </script>
+{% endblock %}

@@ -1,0 +1,30 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3>Instructivo de Registro</h3>
+            <p>El proceso de registro es por &uacute;nica vez y luego Ud. podr&aacute; interactuar con nuestro Consejo con su nombre de usuario y contrase&ntilde;a.</p>
+            <p>Con el objeto de facilitar el proceso de registro y validaci&oacute;n de sus datos personales a continuaci&oacute;n se describen los pasos necesarios.</p>
+        </div>
+        <div class="panel-body panel-alto">
+            <div class="list-group">
+                <div class="list-group-item">
+                    1. Para iniciar el proceso de registro debe hacer click en el bot&oacute;n <a href="{{ path('fos_user_registration_register') }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-user"></span> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}me</a> y completar el formulario con su documento, un email v&aacute;lido, el usuario y la contrase&ntilde;a que desea.
+                </div>
+                <div class="list-group-item">
+                    2. Luego recibir&aacute; un mail para validar su correo que ser&aacute; un medio de comunicaci&oacute;n con el CPCE. Click en el enlace para confirmar su cuenta.
+                </div>
+                <div class="list-group-item">
+                    3. Finalizado el proceso de validaci&oacute;n de correo, debe habilitar su usuario, favor de leer las intrucciones y mensajes durante todo el proceso de registro.
+                </div>
+                <div class="list-group-item">
+                    4. Se dar&aacute; aviso v&iacute;a correo una vez habilitado en el Sistema. Recuerde controlar su carpeta de correo spam o no deseados.
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            {% if descargar == true %}
+                <a href="{{ path('formulario_instructivo') }}" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-download"></span> Descargar Instructivo</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

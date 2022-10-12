@@ -1,0 +1,77 @@
+entityName: 'Congreso'
+entity: 'Sistema\InscripcionBundle\Entity\InscCongreso'
+repository: 'SistemaInscripcionBundle:InscCongreso'
+index: 'admin_congreso'
+new: 'admin_congreso_new'
+edit: 'admin_congreso_edit'
+show: 'admin_congreso_show'
+create: 'admin_congreso_create'
+update: 'admin_congreso_update'
+delete: 'admin_congreso_delete'
+export: 'admin_congreso_export'
+sessionFilter: 'InscCongresoControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.matricula:
+        label: 'Nro. Matricula'
+        name: 'matricula'
+        type: 'integer'
+        export: true
+    a.nombre:
+        label: 'Apellido, Nombre'
+        name: 'nombre'
+        type: 'string'
+        export: true
+    a.dni:       
+        label: 'Dni'
+        name: 'dni'
+        type: 'integer'
+        export: true
+    a.fecha:
+        label: 'Fecha Generado'
+        name: 'fecha'
+        type: 'date'
+        date: 'd-m-Y'
+        export: true
+    a.importe:
+        label: 'Importe'
+        name: 'importe'
+        type: 'float'
+        export: true
+    a.saldo:
+        label: 'Saldo'
+        name: 'saldo'
+        type: 'float'
+        export: true
+    a.getEstadoString:
+        label: 'Estado'
+        name: 'estado'
+        type: 'string'
+        export: true
+fieldsshow:
+    a.id:
+        label: 'Id'
+        name: 'Id'
+        type: 'integer'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.fecha:
+        label: 'Fecha'
+        name: 'Fecha'
+        type: 'date'
+        date: 'Y-m-d'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.estado:
+        label: 'Estado'
+        name: 'Estado'
+        type: 'integer'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.importe:
+        label: 'Importe'
+        name: 'Importe'
+        type: 'float'
+        #class: 'col-lg-12'
+        #closerow: true

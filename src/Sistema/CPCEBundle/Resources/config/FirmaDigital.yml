@@ -1,0 +1,4 @@
+entityName: 'Afiliado'
+entity: 'Sistema\CPCEBundle\Entity\Afiliado'
+repository: 'SistemaCPCEBundle:Afiliado'
+index: 'front_firma'

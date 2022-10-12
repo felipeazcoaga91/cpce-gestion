@@ -1,0 +1,50 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Liquidaciones
+{% endblock %}
+
+{% block paneltitle %}
+    {{ parent() }} - Liquidaciones
+{% endblock %}
+
+{% block page %}
+    <strong>{{ afiliado is empty ? "" : afiliado.afiliado }}</strong>
+    <div class="pull-right">{{ (afiliado is empty ? "" : "Categoría: <strong>" ~ afiliado.catDescripcion ~ "</strong>")|raw }}</div>
+    <h4>Trabajo: {{ trabajo.id }} - {{ trabajo.getServicio().getTarDescrip() }}</h4>
+    <table class="table table-striped table-bordered table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>Comprobantes</th>
+                <th>Fecha</th>
+                <th>Legalización</th>
+                <th>Importe</th>
+                <th>{{ 'views.index.actions'|trans({}, 'MWSimpleAdminCrudBundle') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for key, comprobante in comprobantes %}
+            <tr>
+                <td>{{ comprobante.comNrocom }}</td>
+                <td>{{ comprobante.comFecha|date("d/m/Y") }}</td>
+                <td>{{ comprobante.comNrotrabajo }}</td>
+                <td>{{ comprobante.comTotal }}</td>
+                <td>
+                    {% block actions %}
+                        <a class="glyphicon glyphicon-search tooltips"  href="{{ path('front_liquidacion_detalle', { 'id': comprobante.comNrocom }) }}" title="" rel="tooltip" data-original-title="Ver detalle"></a>
+                    {% endblock %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $('.tooltips').tooltip();
+        $( "#reset_index_filters" ).click(function() {
+            $(".reset_submit_filters").trigger("click");
+        });
+    </script>
+{% endblock %}

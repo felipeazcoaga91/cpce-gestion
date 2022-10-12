@@ -1,0 +1,86 @@
+{% extends 'SistemaCPCEBundle::layout.html.twig' %}
+
+{% block title %}
+{{ parent() }} - Oferta Laboral
+{% endblock %}
+
+{% block fos_user_content %}
+    {% block paneltitle %}{% endblock %}
+    <div class="panel panel-primary center-block">
+        <div class="panel-heading">
+            <i class="glyphicon glyphicon-ok"></i> Oferta Laboral Nro: {{ entity.id }}
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <span class="input-xlarge uneditable-input">{{ entity.titulo }} <strong>{{ entity.requiere }}</strong> para el puesto de <strong>{{ entity.puesto }}</strong></span>
+                    <br>
+                    <span class="input-xlarge uneditable-input"><strong>Delegacion:</strong> {{ entity.getOfertaLaboralString }}</span>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                {% if date(entity.fechaFin) >= date('today') %}
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <span class="input-xlarge uneditable-input"><strong>La Oferta finaliza el {{ entity.fechaFin|localizeddate('long', 'none') }}</strong></span>
+                    </div>
+                    <br>
+                    {% if is_granted('ROLE_MATRICULADO') %}
+                        {% if postulado is null %}
+                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                <a class="btn btn-info col-lg-8" href="{{ path('oferta_laboral_postular', { 'idOferta': entity.id }) }}">Postularme</a>
+                            </div>
+                        {% elseif postulado == false %}
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <span class="input-xlarge uneditable-input" style="color: red;"><strong>Debe cargar un Curriculum Vitae para poder Postularse</strong></span>
+                            </div>
+                        {% else %}
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <span class="input-xlarge uneditable-input" style="color: green;"><strong>Usted se encuentra Postulado</strong></span>
+                            </div>
+                        {% endif %}        
+                    {% endif %}
+                {% else %}
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <span class="input-xlarge uneditable-input" style="color: red;"><strong>Oferta Finalizada</strong></span>
+                    </div>
+                {% endif %}
+            </div>
+            <br>
+            <div class="row">    
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <label class="control-label">Requisitos</label>
+                    <div class="well">
+                        <span class="input-xlarge uneditable-input">{{ entity.requisito|raw }}</span>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">    
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <label class="control-label">Tareas</label>
+                    <div class="well">
+                        <span class="input-xlarge uneditable-input">{{ entity.tarea|raw }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block buttonsbelow %}
+        {#
+        <div class="col-lg-9 col-md-9 col-sm-9">
+            <div class="float-left col-lg-3 col-md-3 col-sm-3">
+                <a class="btn btn-info col-lg-11" href="{{ path(config.index) }}">
+                    {{ 'views.recordactions.backtothelist'|trans({}, 'MWSimpleAdminCrudBundle') }}
+                </a>
+            </div>
+            <div class="float-left col-lg-3 col-md-3 col-sm-3">
+                <a class="btn btn-primary col-lg-11" href="{{ path(config.edit, { 'id': entity.id }) }}">
+                    {{ 'views.recordactions.edit'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}
+                </a>
+            </div>
+            <div class="float-left col-lg-3 col-md-3 col-sm-3">{{ form(delete_form) }}</div>
+        </div>
+        #}
+    {% endblock %}
+{% endblock %}

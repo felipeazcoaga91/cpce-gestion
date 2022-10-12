@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <style type="text/css">
+        table, thead, tr, th, h4 {
+          margin: 0px;
+        }
+        th, td {
+          padding: 3px;
+          text-align: left;    
+        }
+        .content {
+          background-color: #fff;
+          margin: 0 1em;
+          padding-left: 1em;
+        }
+        .right {
+          float: right;
+        }
+        .text-center {
+          text-align: center;
+        }
+        .text-right {
+          text-align: right;
+        }
+      </style>
+    </head>
+    <body class="focusedform">
+        <div class="content">
+          {% if entity.id is not null %}
+            <img src="{{ asset('bundles/sistemacpce/images/header_logo_agua.png', absolute=true) }}" alt="" />
+            <div class="right">{{ fecha }}</div>
+          {% endif %}
+            <div class="text-center">
+                <div>FORMULARIO DE USO INTERNO CPCE CHACO</div>
+                <small>NO VALIDO COMO FACTURA / RECIBO / NO FISCAL</small>
+              <hr>
+                <div style="width: 12em; margin: 0 auto;">
+                  {% if entity.id is null %}
+                    <h2>VISTA PREVIA NO VALIDO PARA PRESENTAR</h2>
+                  {% else %}
+                    {{ barcode({code: '' ~ entity.id, type: 'c128', format: 'html'}) }}
+                  {% endif %}
+                </div>
+                <strong>{{ entity.id }}</strong>
+                <hr>
+            </div>
+            <div>
+              <table style="width:100%" border="0">
+                <thead>
+                  <tr>
+                    <th colspan="4" class="text-center"><h4>DATOS DEL TRABAJO</h4></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Tipo de Reintegro:</th>
+                    <th>{{ entity.tipoReintegro }}</th>
+                    <th>Ejemplares:</th>
+                    <td>{{ entity.cantidad }}</td>
+                  </tr>
+                  <tr>
+                    <th>Fecha de Certificación:</th>
+                    <td>{{ entity.fechaInforme|date('d/m/Y') }}</td>
+                    <th>Fecha de Cierre:</th>
+                    <td>{{ entity.fechaCierre|date('d/m/Y') }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr>
+              <table style="width:100%" border="0">
+                <thead>
+                  <tr>
+                    <th colspan="6" class="text-center"><h4>DATOS DEL CLIENTE</h4></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Comitente:</th>
+                    <td>{{ entity.clienteComitente }}</td>
+                    <th>CUIT:</th>
+                    <td>{{ entity.comitenteCuit }}</td>
+                    <th>Domicilio:</th>
+                    <td>{{ entity.comitenteDomicilio }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr>
+              <table style="width:100%" border="0">
+                <thead>
+                  <tr>
+                    <th colspan="4" class="text-center"><h4>DATOS DEL PROFESIONAL</h4></th>
+                  </tr>
+                </thead>
+                <tbody>  
+                  <tr>                  
+                    <th>Profesional:</th>
+                    <th>{{ entity.profesional }} {{ (entity.esAuditor == "SI") ? ' (Auditor)' : '' }}</th>
+                    <th>Matr&iacute;cula:</th>
+                    <th>{{ entity.matricula }}</th>
+                  </tr>
+                  <tr>                  
+                    <th>Domicilio:</th>
+                    <td>{{ entity.domicilio }}</td>
+                    <th>Tel&eacute;fono:</th>
+                    <td>{{ entity.telefono }}</td>
+                  </tr>
+                  <tr>                  
+                    <th>Correo:</th>
+                    <td>{{ entity.correo }}</td>
+                    <th>Celular:</th>
+                    <td>{{ entity.celular }}</td>
+                  </tr>
+                  <tr>                  
+                    {% if entity.cbu %}
+                      <th>CBU:</th>
+                      <td>{{ entity.cbu }}</td>
+                    {% endif %}
+                    <th>CUIT:</th>
+                    <td>{{ entity.cuit }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr>
+              <table style="width:100%" border="0">
+                <caption><h3>{{ entity.servicio }}<h3></caption>
+                <thead>
+                  <tr>
+                    <th colspan="2" class="text-center"><h4>BASE DE CALCULO SEGUN LEY 3.111</h4></th>
+                  </tr>
+                </thead>
+                <tbody>  
+                  <tr>                  
+                    <th></th>
+                    <td class="text-right">ARANCELES</td>
+                  </tr>
+                  <tr>                  
+                    <th>ACTIVOS:</th>
+                    <td class="text-right">${{ entity.activo|abs|number_format(2, ',', '.') }}</td>
+                  </tr>
+                  <tr>                  
+                    <th>PASIVOS HACIA TERCEROS:</th>
+                    <td class="text-right">${{ entity.pasivo|abs|number_format(2, ',', '.') }}</td>
+                  </tr>
+                  <tr>                  
+                    <th>TOTAL (activos + pasivos):</th>
+                    <td class="text-right">${{ entity.importe1|abs|number_format(2, ',', '.') }}</td>
+                  </tr>
+                  <tr>                  
+                    <th>INGRESOS POR VENTAS Y/O SERVICIOS:</th>
+                    <td class="text-right">${{ entity.importe2|abs|number_format(2, ',', '.') }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <th><hr></th>
+                  </tr>
+                  {% set montoTotal      = entity.monto %}
+                  {% set montoTotalLabel = "Monto total (Honorarios" %}
+                  <tr>                  
+                    <th>MONTO HONORARIOS:</th>
+                    <td class="text-right">${{ entity.monto|abs|number_format(2, ',', '.') }}</td>
+                  </tr>
+                  {% if entity.montoIva > 0 %}
+                    {% set montoTotal      = montoTotal + entity.montoIva %}
+                    {% set montoTotalLabel = montoTotalLabel ~ " + IVA" %}
+                    <tr>                  
+                      <th>MONTO IVA:</th>
+                      <td class="text-right">${{ entity.montoIva|abs|number_format(2, ',', '.') }}</td>
+                    </tr>
+                  {% endif %}
+                  {% if entity.montoAporte > 0 %}
+                    {% set montoTotal      = montoTotal + entity.montoAporte %}
+                    {% set montoTotalLabel = montoTotalLabel ~ " + Aporte" %}
+                    <tr>                  
+                      <th>MONTO APORTE 8%:</th>
+                      <td class="text-right">${{ entity.montoAporte|abs|number_format(2, ',', '.') }}</td>
+                    </tr>
+                  {% endif %}
+                  <tr>
+                    <td></td>
+                    <th><hr></th>
+                  </tr>
+                  {% set montoTotalLabel = montoTotalLabel ~ "):" %}
+                  <tr>                  
+                    <th>{{ montoTotalLabel }}</th>
+                    <td class="text-right">${{ montoTotal|abs|number_format(2, ',', '.') }}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <th><hr></th>
+                  </tr>
+                  <tr>                  
+                    <th>MONTO A DEPOSITAR:</th>
+                    <td class="text-right">${{ entity.montoDeposito|abs|number_format(2, ',', '.') }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table style="width:100%" border="0">                  
+                <tr>
+                  <th colspan="24"><hr></th>
+                </tr>
+                <tr>
+                  <td colspan="24">
+                    <div class="text-center"><small>
+                        Autorizo se me descuente la presente liquidaci&oacute;n,
+                        los importes correspondientes a Derecho de Ejercicio Profesional, Aportes por aplicaci&oacute;n
+                        de Ley N° 3978 y otros conceptos que adeudare.
+                            {% if entity.acreditar == 1 %}
+                             <br><strong> Solicito Acreditación a saldo deudores</strong>
+                            {% endif %}
+                    </small></div>
+                  </td>
+                </tr>
+              </table>
+              <hr>
+              <table style="width:100%" border="0">
+                <tbody>  
+                  <tr>                  
+                    <th>Condici&oacute;n:</th>
+                    <td>{{ entity.condicionIvaString }}</td>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <tr>                  
+                    <th>CUIT:</th>
+                    <td>{{ entity.cuit }}</td>
+                    <th></th>
+                    <td class="text-right">----------------------------------------</td>
+                  </tr>
+                  <tr>                  
+                    <th></th>
+                    <td></td>
+                    <th></th>
+                    <th class="text-right">Aclaraci&oacute;n de firma del Profesional</th>
+                  </tr>
+                </tbody>
+              </table>
+              <table style="width:100%" border="0">
+                <tbody>  
+                  <tr>                  
+                    <th>Formas de Pago:</th>
+                    <td></td>
+                  </tr>
+                  <tr>                  
+                    <th></th>
+                    <td>Transferencia: CPCE Chaco Cuit Nº 30-55352699-6</td>
+                  </tr>
+                  <tr>                  
+                    <th></th>
+                    <td>NBCH. Suc. 30 c/c 250/10 CBU 3110030201000000250109</td>
+                  </tr>
+                  <tr>                  
+                    <th></th>
+                    <td>Cheques a la orden de CPCE Chaco en sede central y delegaciones.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </body>
+</html>

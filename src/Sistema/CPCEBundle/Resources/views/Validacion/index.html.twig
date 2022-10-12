@@ -1,0 +1,119 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+		body {
+    		padding-top: 0 !important;
+		}
+		.label {
+			font-size: 100%;
+			display: block;
+			white-space: normal
+		}
+    </style>
+	
+{% endblock %}
+
+{% block body %}
+	{% block wrapper %}
+	<div id="page-wrapper" style="margin: 0px;">
+		<div class="content">
+
+			{% if matriculados %}
+			<div>
+		
+					{% for key, matriculado in matriculados %}
+
+						<div class="row">
+
+							<div class="col-lg-12">
+
+								<div class="col-lg-6 col-md-6 col-sm-12">
+									<div class="card">
+										<div class="card-body">
+											<div class="col-lg-12 col-md-12 col-sm-12">		
+												<div>
+													<a class="list-group-item">
+														<h4 class="list-group-item-heading"><strong>Nro. Matrícula</strong></h4>
+														<p class="list-group-item-text">{{ matriculado.afiTitulo}}{{matriculado.afiMatricula }}</p>
+													</a>
+												</div>
+											</div>
+											<div class="col-lg-12 col-md-12 col-sm-12">	
+												<div>
+													<a class="list-group-item">
+														<h4 class="list-group-item-heading"><strong>DNI</strong></h4>
+														<p class="list-group-item-text">{{ matriculado.afiNrodoc }}</p>
+													</a>
+												</div>
+											</div>
+											<div class="col-lg-12 col-md-12 col-sm-12">	
+												<div>
+													<a class="list-group-item">
+														<h4 class="list-group-item-heading"><strong>Apellido y Nombre</strong></h4>
+														<p class="list-group-item-text">{{ matriculado.afiNombre }}</p>
+													</a>
+												</div>
+											</div>	
+											<div class="col-lg-12 col-md-12 col-sm-12">	
+												<div class="list-group">
+													<a class="list-group-item">
+														<h4 class="list-group-item-heading"><strong>Estado</strong></h4>
+														{{
+															matriculado.afiCategoria in categorias ? '<span class="label label-success">Matriculado Activo (Habilitado para ejercicio profesional independiente)</span>' :
+															matriculado.afiCategoria in categoriasasociados ? '<span class="label label-warning">Matriculado Asociado (NO habilitado para ejercicio profesional independiente)</span>' :
+															'<span class="label label-danger">NO Activo</span>'
+														}}
+													</a>
+												</div>
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				
+			</div>
+			{% endif %}
+
+			{% block messages_error %}
+			    {% for type, messages in app.session.flashbag.all() %}
+			        {% for message in messages %}
+			            <div class="alert {% if type == "success" %} alert-success {% else %} alert-danger {% endif %}">
+			                {{ message|trans({}, 'FOSUserBundle') }}
+			            </div>
+			        {% endfor %}
+			    {% endfor %}
+			{% endblock messages_error %}
+			{{ form_start(form) }}
+			<div class="panel panel-primary center-block">
+		        <div class="panel-heading">Consulte si el <b>Profesional</b> que lo asesora est&aacute; <b>Matriculado</b></div>
+		        <div class="panel-body">
+						<div class="row">
+							<div class="col-lg-2 col-md-6 col-sm-12">
+								{{ form_row(form.afiTitulo) }}
+							</div>
+							<div class="col-lg-2 col-md-6 col-sm-12">
+								{{ form_row(form.afiMatricula) }}
+							</div>
+							<div class="col-lg-2 col-md-6 col-sm-12">	
+								{{ form_row(form.afiNroDoc) }}
+							</div>
+							<div class="col-lg-3 col-md-6 col-sm-12">	
+								{{ form_row(form.afiNombre) }}
+							</div>
+							<div class="col-lg-3 col-md-12 col-sm-12" style="margin-top: 23px;">
+								{{ form_row(form.validar) }}
+							</div>
+						</div>
+		        </div>
+		    </div>
+		    {{ form_end(form) }}		
+		</div>
+	</div>
+	
+	{% endblock wrapper %}
+	{% block footer %}
+	{% endblock footer %}
+{% endblock body %}	

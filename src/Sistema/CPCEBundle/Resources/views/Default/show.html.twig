@@ -1,0 +1,293 @@
+{% extends 'SistemaCPCEBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ 'views.show.show'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}
+{% endblock %}
+
+{% block fos_user_content %}
+    <div class="panel panel-primary center-block">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <i class="glyphicon glyphicon-ok"></i> {{ 'views.show.show'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}
+                </div>
+                <a class="btn btn-success likepaginatorprint glyphicon glyphicon-print tooltips" href="{{ path(config.pdf, { 'id': entity.id }) }}" title="Imprimir PDF" rel="tooltip" data-original-title="PDF"><strong> Imprimir PDF</strong></a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form class="bv-form">
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
+                        <hr>
+                        <div style="width: 12em; margin: 0 auto;">
+                            {{ barcode({code: '' ~ entity.id, type: 'c128', format: 'html'}) }}
+                        </div>
+                        <div style="width: auto; margin: 0 auto;">
+                            {{ entity.id }}
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
+                        <h4>DATOS DEL TRABAJO</h4>
+                    </div>
+                    <div class="form-group col-lg-offset-6 col-md-6 col-sm-offset-6">
+                        <label class="control-label">Tipo de Reintegro</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.tipoReintegro }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                        <label class="control-label">Fecha de Certificación</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.fechaInforme|date('d/m/Y') }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                        <label class="control-label">Fecha de Cierre</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.fechaCierre|date('d/m/Y') }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                        <label class="control-label">Cant. de Ejemplares</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.cantidad }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
+                        <h4>DATOS DEL CLIENTE</h4>
+                    </div>
+                    <div class="form-group col-lg-9 col-md-6 col-sm-12">
+                        <label class="control-label">Comitente</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.clienteComitente }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                        <label class="control-label">CUIT</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.comitenteCuit }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-9 col-md-6 col-sm-12">
+                        <label class="control-label">Domicilio real/social</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.comitenteDomicilio }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
+                        <h4>DATOS DEL PROFESIONAL</h4>
+                    </div>
+                    <div class="form-group col-lg-9 col-md-6 col-sm-12">
+                        <label class="control-label">Profesional</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ (entity.esAuditor == "SI") ? entity.profesional ~ ' (Auditor)' : entity.profesional }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                        <label class="control-label">Matricula</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.matricula }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <label class="control-label">Domicilio</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.domicilio }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                        <label class="control-label">Telefono</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.telefono }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                        <label class="control-label">Celular</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.celular }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                        <label class="control-label">Correo</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.correo }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                        <label class="control-label">Condición IVA</label>
+                        <div class="form-control" {{ entity.condicionIva == "SI" ? 'style="height: 50px;' }}>
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.condicionIvaString }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                        <label class="control-label">CUIT</label>
+                        <div class="form-control">
+                            <span class="input-xlarge uneditable-input">
+                                {{ entity.cuit }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
+                        <h4>BASE DE CALCULO SEGUN LEY 3.111</h4>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label class="control-label required">Servicio</label>
+                        <div class="col-lg-9 col-md-6 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">{{ entity.servicio }}</span>
+                        </div>
+                    </div>
+                    {% if entity.servicio.tarCodigo == 3 or entity.servicio.tarCodigo == 6 or entity.servicio.tarCodigo == 9 or entity.servicio.tarCodigo == 11 %}
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label class="control-label required">Es el auditor</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                                <span class="pull-right" style="margin: 5px 0;">{{ entity.esAuditor }}</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label class="control-label required">Porcentaje según síndico</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                                <span class="pull-right" style="margin: 5px 0;">{{ entity.porcentajeSindico }}%</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if entity.servicio.tarCodigo == 6 or entity.servicio.tarCodigo == 7 or entity.servicio.tarCodigo == 9 or entity.servicio.tarCodigo == 10 or entity.servicio.tarCodigo == 11 %}
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label class="control-label required">Meses del periodo</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                                <span class="pull-right" style="margin: 5px 0;">{{ entity.meses }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label class="control-label required">ACTIVOS</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">${{ entity.activo|abs|number_format(2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label class="control-label required">PASIVOS HACIA TERCEROS</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">${{ entity.pasivo|abs|number_format(2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label class="control-label required">TOTAL (activos + pasivos)</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">${{ entity.importe1|abs|number_format(2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label class="control-label required">INGRESOS POR VENTAS Y/O SERVICIOS</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">${{ entity.importe2|abs|number_format(2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    {% if entity.servicio.tarCodigo == 6 or entity.servicio.tarCodigo == 9 or entity.servicio.tarCodigo == 11 %}
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label class="control-label required">Monto depositado periodos anteriores</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                                <span class="pull-right" style="margin: 5px 0;">${{ entity.importePeriodo }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <hr>
+                        <label class="control-label required">Honorarios monto mínimo</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">${{ entity.honorarioMinimo|abs|number_format(2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    {% set montoTotal      = entity.monto %}
+                    {% set montoTotalLabel = "Monto total (Honorarios" %}
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <label class="control-label required">Monto Honorarios</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">${{ entity.monto|abs|number_format(2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    {% if entity.montoIva > 0 %}
+                        {% set montoTotal      = montoTotal + entity.montoIva %}
+                        {% set montoTotalLabel = montoTotalLabel ~ " + IVA" %}
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label class="control-label required">Monto IVA</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                                <span class="pull-right" style="margin: 5px 0;">${{ entity.montoIva|abs|number_format(2, ',', '.') }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if entity.montoAporte > 0 %}
+                        {% set montoTotal      = montoTotal + entity.montoAporte %}
+                        {% set montoTotalLabel = montoTotalLabel ~ " + Aporte" %}
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label class="control-label required">Monto Aporte 8%</label>
+                            <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                                <span class="pull-right" style="margin: 5px 0;">${{ entity.montoAporte|abs|number_format(2, ',', '.') }}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% set montoTotalLabel = montoTotalLabel ~ ")" %}
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <hr>
+                        <label class="control-label required">{{ montoTotalLabel }}</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;">${{ montoTotal|abs|number_format(2, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <hr>
+                        <label class="control-label required">Monto a depositar</label>
+                        <div class="col-lg-3 col-md-3 col-sm-12 pull-right">
+                            <span class="pull-right" style="margin: 5px 0;"><strong>${{ entity.montoDeposito|abs|number_format(2, ',', '.') }}</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="float-left col-lg-3 col-md-3 col-sm-3">
+        <a class="btn btn-info col-lg-11" href="{{ path(config.index) }}">
+            {{ 'views.recordactions.backtothelist'|trans({}, 'MWSimpleAdminCrudBundle') }}
+        </a>
+    </div>
+    {#<div class="float-left col-lg-3 col-md-3 col-sm-3">
+        <a class="btn btn-primary col-lg-11" href="{{ path(config.edit, { 'id': entity.id }) }}">
+            {{ 'views.recordactions.edit'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}
+        </a>
+    </div>
+    <div class="float-left col-lg-3 col-md-3 col-sm-3">{{ form(delete_form) }}</div>#}
+{% endblock %}

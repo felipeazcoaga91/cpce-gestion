@@ -1,0 +1,53 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="panel-heading">
+    <div class="panel-title">Servicios al Matriculado</div>
+	</div>
+	<div style="padding-top:30px" class="panel-body">
+	    <ul class="list-group">
+	    	<li class="list-group-item">
+	            <div class="row toggle" id="dropdown-detail-1" data-toggle="detail-1">
+	                <div class="col-xs-10">
+	                	<span class="label label-warning">Validación de Datos Personales</span><br>
+	                    <strong>QR Profesional</strong>
+	                </div>
+	                <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+	            </div>
+	            <div>
+	            	Haga Click para descargar Archivo Adjunto.
+	            	<div class="row">
+	                	<div class="form-group">
+                            <div class="col-lg-6">
+								<a class="btn btn-default btn-lg glyphicon glyphicon-qrcode" href="{{ path('front_dato_pdf') }}" download></a>
+                            </div>
+                        </div>
+	                </div>
+	            </div>
+	        </li>
+	        {% if archivos %}
+	    		{% for archivo in archivos %}
+			        <li class="list-group-item">
+			            <div class="row toggle" id="dropdown-detail-1" data-toggle="detail-1">
+			                <div class="col-xs-10">
+			                	<span class="label label-info">{{ archivo.seccion }}</span><br>
+			                    <strong>{{ archivo.titulo }}</strong>
+			                </div>
+			                <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+			            </div>
+			            <div>
+			            	Haga Click para descargar Archivo Adjunto.
+			            	<div class="row">
+			                	<div class="form-group">
+		                            <div class="col-lg-6">
+										<a class="btn btn-default btn-lg glyphicon glyphicon-save" href="{{ path('getArchivo', { 'archivoId': archivo.id }) }}" download></a>
+		                            </div>
+		                        </div>
+			                </div>
+			            </div>
+			        </li>
+			    {% endfor %}
+			{% endif %}
+	    </ul>
+	</div>
+{% endblock fos_user_content %}

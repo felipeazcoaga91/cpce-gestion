@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">			
+			.cuadro {
+			    border: 1px solid #c8d1e2;
+			    border-radius: 3px;
+			    padding: 3px;
+			}
+			* {
+			    margin: 0;
+			    padding: 0;
+			}
+			* {
+			    margin: 0;
+			    padding: 0;
+			}
+			.titulo-seccion {
+			    background-color: #e7ebf2;
+			    color: #3b5998;
+			    display: inherit;
+			    font-size: 12px;
+			    font-weight: bold;
+			    margin-left: -5px;
+			    margin-right: -5px;
+			    padding: 5px;
+			}
+			.lista2 {
+			    color: #4d4d4d;
+			    font-size: 11px;
+			    line-height: 14px;
+			    list-style-type: none;
+			    padding: 7px 5px;
+			}
+			.subtitulo-seccion, .subtitulo-seccion a {
+			    color: #3b5998;
+			    font-weight: bold;
+			}
+			.cierre {
+			    background-color: #f7f7f7;
+			    color: #3b5998;
+			    font-size: 12px;
+			    padding: 5px;
+			    text-align: right;
+			}
+			.well {
+			    background-color: #f5f5f5;
+			    border: 1px solid #e3e3e3;
+			    border-radius: 4px;
+			    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+			    margin-bottom: 1px;
+			    min-height: 1px;
+			    padding: 5px 5px 5px 20px;
+			}
+			.requisito {
+				padding-left: 10px;
+			}
+        </style>
+    </head>
+
+    <body>
+    	<div class="cuadro">
+	    	<ul>
+		    	{% for entity in entities %}
+		    		<li class="lista2">
+		    			<p class="titulo-seccion">{{ entity.titulo }}<br><a href="{{ path('oferta_laboral_show', { 'id': entity.id }) }}">{{ entity.requiere }} > {{ entity.puesto }}:&nbsp;POSTULARME</a></p>
+						<br>
+						<h3>Requisitos:</h3>
+						<div class="requisito">
+							{{ (entity.requisito[:140] ~ '...')|raw }}
+	                    </div>
+	                    <br></br>
+						<h3>Tarea:</h3>
+						<div class="requisito">
+							{{ (entity.tarea[:140] ~ '...')|raw }}
+	                    </div>
+	                    <h4 style="text-align: right;">Finaliza - {{ entity.fechaFin|date('d/m/Y') }}</h4>
+					</li>
+				{% else %}
+					<li class="lista2">
+						<div class="well requisito">
+							ACTUALMENTE NO EXISTEN OFERTAS
+	                    </div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</body>
+</html>
+

@@ -1,0 +1,48 @@
+{% block form_row %}
+    <div class="form_row">
+        <div class="form-group">
+
+            <div class="col-lg-3">
+                {{ form_label(form) }}
+                {{ form_widget(form) }}
+            </div>
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block _sistema_userbundle_user_user_roles_row %}
+    <div class="col-lg-12" style="height: 20px;"></div>
+    <div class="form_row">
+        <div class="form-group">
+
+            <div class="col-lg-12">
+                {{ form_label(form) }}
+                {{ form_widget(form) }}
+            </div>
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' mws_checkbox')|trim}) %}
+    {{ block('mws_error') }}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    <br /><br />
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block _sistema_userbundle_user_save_row %}
+    <div class="col-lg-12" style="height: 20px;"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            {{ form_widget(form) }}
+            <div class="col-lg-1"></div>
+{% endblock %}
+{% block _sistema_userbundle_user_saveAndAdd_row %}
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{% endblock %}

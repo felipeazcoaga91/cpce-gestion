@@ -1,0 +1,98 @@
+{% block subject %}
+{% autoescape false %}
+    CPCE Profesional Actualizacion de Datos Familiares
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}{% autoescape false %}{% endautoescape %}{% endblock %}
+{% block body_html %}
+<img src="{{ cpce_logo }}" alt="CPCE Chaco">
+<br>
+<p>Estimada Empresa</p>
+<p>Estos son los familiares: </p>
+
+ <table class="table table-striped">
+	                <thead>
+	                    <tr>
+	                        <th>#</th>
+	                        <th>Apellido y Nombre</th>
+	                        <th>Parentesco</th>
+	                        <th>Fecha de Nacimiento</th>
+	                        <th>Sexo</th>
+	                        <th>Nro. Doc.</th>
+							<th>Fondo solidario</th>
+							<th>Seguro de vida</th>
+							<th>Capitalización</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+                      <tr>
+	                        <th scope="row">1</th>
+							<td>{{ contenido.afiAut1  }}</td>
+							<td>{{ contenido.afiFil1 }}</td>
+	                        <td>{{ contenido.afiNac1|date("d/m/Y") }}</td>
+	                        <td>{{ contenido.afiSex1 }}</td>
+							<td>{{ contenido.afiDoc1 }}</td>
+							<td>{{ contenido.afiBenefFs1 }}</td>
+							<td>{{ contenido.afiBenefSv1 }}</td>
+							<td>{{ contenido.afiBenefCap1 }}</td>
+	                    </tr>
+                          <tr>
+	                        <th scope="row">2</th>
+	                        <td>{{ contenido.afiAut2  }}</td>
+							<td>{{ contenido.afiFil2 }}</td>
+	                        <td>{{ contenido.afiNac2|date("d/m/Y") }}</td>
+	                        <td>{{ contenido.afiSex2 }}</td>
+							<td>{{ contenido.afiDoc2 }}</td>
+							<td>{{ contenido.afiBenefFs2 }}</td>
+							<td>{{ contenido.afiBenefSv2 }}</td>
+							<td>{{ contenido.afiBenefCap2 }}</td>
+	                    </tr>
+                          <tr>
+	                        <th scope="row">3</th>
+	                        <td>{{ contenido.afiAut3  }}</td>
+							<td>{{ contenido.afiFil3 }}</td>
+	                        <td>{{ contenido.afiNac3|date("d/m/Y") }}</td>
+	                        <td>{{ contenido.afiSex3 }}</td>
+							<td>{{ contenido.afiDoc3 }}</td>
+							<td>{{ contenido.afiBenefFs3 }}</td>
+							<td>{{ contenido.afiBenefSv3 }}</td>
+							<td>{{ contenido.afiBenefCap3 }}</td>
+	                    </tr>
+                          <tr>
+	                        <th scope="row">4</th>
+	                        <td>{{ contenido.afiAut4  }}</td>
+							<td>{{ contenido.afiFil4 }}</td>
+	                        <td>{{ contenido.afiNac4|date("d/m/Y") }}</td>
+	                        <td>{{ contenido.afiSex4 }}</td>
+							<td>{{ contenido.afiDoc4 }}</td>
+							<td>{{ contenido.afiBenefFs4 }}</td>
+							<td>{{ contenido.afiBenefSv4 }}</td>
+							<td>{{ contenido.afiBenefCap4 }}</td>
+	                    </tr>
+                          <tr>
+	                        <th scope="row">5</th>
+	                        <td>{{ contenido.afiAut5  }}</td>
+							<td>{{ contenido.afiFil5 }}</td>
+	                        <td>{{ contenido.afiNac5|date("d/m/Y") }}</td>
+	                        <td>{{ contenido.afiSex5 }}</td>
+							<td>{{ contenido.afiDoc5 }}</td>
+							<td>{{ contenido.afiBenefFs5 }}</td>
+							<td>{{ contenido.afiBenefSv5 }}</td>
+							<td>{{ contenido.afiBenefCap5 }}</td>
+	                    </tr>
+	                    <tr>
+	                        <th scope="row">6</th>
+	                        <td>{{ contenido.afiAut6  }}</td>
+							<td>{{ contenido.afiFil6 }}</td>
+	                        <td>{{ contenido.afiNac6|date("d/m/Y") }}</td>
+	                        <td>{{ contenido.afiSex6 }}</td>
+							<td>{{ contenido.afiDoc6 }}</td>
+							<td>{{ contenido.afiBenefFs6 }}</td>
+							<td>{{ contenido.afiBenefSv6 }}</td>
+							<td>{{ contenido.afiBenefCap6 }}</td>
+	                    </tr>
+	                </tbody>
+	            </table>
+<p>Atentamente,</p>
+<p>CPCE Chaco.</p>
+{% endblock %}

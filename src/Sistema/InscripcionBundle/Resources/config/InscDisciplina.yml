@@ -1,0 +1,38 @@
+entityName: 'Disciplina'
+entity: 'Sistema\InscripcionBundle\Entity\InscDisciplina'
+repository: 'SistemaInscripcionBundle:InscDisciplina'
+index: 'admin_inscripciones_disciplinas'
+new: 'admin_inscripciones_disciplinas_new'
+edit: 'admin_inscripciones_disciplinas_edit'
+show: 'admin_inscripciones_disciplinas_show'
+create: 'admin_inscripciones_disciplinas_create'
+update: 'admin_inscripciones_disciplinas_update'
+delete: 'admin_inscripciones_disciplinas_delete'
+export: 'admin_inscripciones_disciplinas_export'
+sessionFilter: 'InscDisciplinaControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+fieldsshow:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        class: 'col-lg-4'
+        #closerow: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        class: 'col-lg-4'
+        #closerow: true

@@ -1,0 +1,60 @@
+entityName: 'Extra'
+entity: 'Sistema\InscripcionBundle\Entity\InscExtra'
+repository: 'SistemaInscripcionBundle:InscExtra'
+index: 'admin_inscripciones_extras'
+new: 'admin_inscripciones_extras_new'
+edit: 'admin_inscripciones_extras_edit'
+show: 'admin_inscripciones_extras_show'
+create: 'admin_inscripciones_extras_create'
+update: 'admin_inscripciones_extras_update'
+delete: 'admin_inscripciones_extras_delete'
+export: 'admin_inscripciones_extras_export'
+sessionFilter: 'InscExtraControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        export: true
+    a.importe:
+        label: 'Importe'
+        name: 'Importe'
+        type: 'float'
+        export: true
+    a.stock:
+        label: 'Stock'
+        name: 'Stock'
+        type: 'integer'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+fieldsshow:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        class: 'col-lg-4'
+        #closerow: true
+    a.importe:
+        label: 'Importe'
+        name: 'Importe'
+        type: 'float'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.stock:
+        label: 'Stock'
+        name: 'Stock'
+        type: 'integer'
+        #class: 'col-lg-12'
+        #closerow: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        class: 'col-lg-4'
+        #closerow: true

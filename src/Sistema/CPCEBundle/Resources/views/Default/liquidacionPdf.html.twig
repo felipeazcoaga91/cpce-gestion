@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <style type="text/css">
+        p {
+          height: 0;
+        }
+        th p {
+          float: left;
+        }
+        td {
+          vertical-align: bottom;
+        }
+        .content {
+          background-color: #fff;
+          margin: 0 1em;
+          padding-left: 1em;
+        }
+        .right {
+          float: right;
+        }
+        .centrar {
+          text-align: center;
+          float: none !important;
+        }
+        .text-right {
+          text-align: right;
+        }
+      </style>
+    </head>
+    <body class="focusedform">
+        <div class="content">
+            <img src="{{ asset('bundles/sistemacpce/images/header_logo.png', absolute=true) }}" alt="" />
+            <div class="right">{{ fecha }}</div>
+            <hr>
+            <div>
+                <h4><strong>Liquidación Reintegro de Honorarios: </strong> {{ comprobante.comNrocom }}</h4>
+                <strong>Fecha:</strong> {{ comprobante.comFecha|date("d/m/Y") }}<br>
+                <strong>Trabajo:</strong> {{ comprobante.comNrotrabajo }}<br>
+                <strong>Profesional:</strong> {{ afiliado is empty ? "" : afiliado.afiliado }}<br>
+                {% if comitente %}
+                  <strong>Comitente:</strong> {{ comitente.afiNombre }}
+                {% endif %}
+                <hr>
+                <h5>Honorarios recibidos por: <strong>{{ trabajo.getServicio().getTarDescrip() }}</strong></h5>
+            </div>
+            <div>
+                <table style="width:100%; border-collapse: collapse;" border="1">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Porcentaje</th>
+                            <th>Sobre</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, asiento in totales %}
+                            <tr>
+                                <td>
+                                  {% if loop.last %}
+                                    <strong>{{ asiento.getTotNropla().getPlaNombre() }}</strong>
+                                  {% else %}
+                                    {{ asiento.getTotNropla().getPlaNombre() }}
+                                  {% endif %}
+                                </td>
+                                <td align="center">{% if asiento.totPorcentaje %} {{ asiento.totPorcentaje }}% {% endif %}</td>
+                                <td align="right">{% if asiento.totSobre %} $ {{ asiento.totSobre }} {% endif %}</td>
+                                <td align="right">
+                                    {% if key == 0 %} 
+                                        $ {{ asiento.totDebe }} 
+                                    {% elseif loop.last %}
+                                        <strong>$ {{ asiento.totHaber }}</strong>
+                                    {% else %}
+                                        $ {{ asiento.totHaber }} 
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p>*Saldos sujetos a revisión.</p>
+                <p>Ante cualquier duda o consulta, comuníquese con vuestro Consejo.</p>
+            </div>
+        </div>
+    </body>
+</html>

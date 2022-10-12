@@ -1,0 +1,81 @@
+{% extends 'MWSimpleAdminCrudBundle:Default:show.html.twig' %}
+
+{% block page %}
+    <span class="label label-default">Fecha: {{ entity.fecha|date("d/m/Y") }}</span>
+    <hr>
+    <div class="panel panel-primary center-block">
+        <div class="panel-heading">
+            <i class="glyphicon glyphicon-ok"></i> Vista Previa de Inscripción a Peritos
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                {% for key, field in config.fieldsshow %}
+                    <div class="{% if field.class is defined %}{{ field.class }}{% else %}col-lg-12 col-md-12 col-sm-12{% endif %}">
+                        <label class="control-label">{{ field.label }}</label>
+                        {% if field.type in ['datetime', 'datetimetz', 'date', 'time'] %}
+                            <div class="form-control">
+                                <span class="input-xlarge uneditable-input">
+                                    {{ attribute(entity, field.name)|date(field.date) }}
+                                </span>
+                            </div>
+                        {% elseif field.type in ['boolean'] %}
+                            <div class="form-control">
+                                <span class="input-xlarge uneditable-input">
+                                    {{ isActive(attribute(entity, field.name)) }}
+                                </span>
+                            </div>
+                        {% elseif field.type in ['ONE_TO_MANY', 'MANY_TO_MANY'] %}
+                            {% set many_entity = attribute(entity, field.name) %}
+                            <div class="well">
+                                <span class="input-xlarge uneditable-input">
+                                    {% for key, field_many in many_entity %}
+                                        {{ field_many|raw }}
+                                        {% if field.separator is defined %}
+                                            {{ field.separator|raw }}
+                                        {% else %}
+                                            |
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        {% elseif field.type == 'text' %}
+                            <div class="well">{{ attribute(entity, field.name)|raw }}</div>
+                        {% else %}
+                            <div class="form-control">
+                                <span class="input-xlarge uneditable-input">
+                                    {{ attribute(entity, field.name)|raw }}
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if field.closerow is defined %}
+                        </div>
+                        <br>
+                        <div class="row">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% block buttonsbelow %}
+    <div class="col-lg-9 col-md-9 col-sm-9">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="float-right col-lg-3 col-md-3 col-sm-3">
+                <a class="btn btn-primary col-lg-11" href="{{ path(config.edit, { 'id': entity.id }) }}">
+                    {{ 'views.recordactions.edit'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}
+                </a>
+            </div>
+        {% endif %}
+        <div class="float-right col-lg-3 col-md-3 col-sm-3">
+            <a class="btn btn-primary col-lg-12" href="{{ path('inscripciones_peritos_new') }}">
+                Realizar otra Inscripción 
+            </a>
+        </div>
+        <div class="float-right col-lg-3 col-md-3 col-sm-3">
+            <a class="btn btn-danger col-lg-11" href="{{ path('inscripciones_peritos_pdf', { 'id': entity.id }) }}">
+                Imprimir Inscripción
+            </a>
+        </div>
+    </div>
+    {% endblock %}
+{% endblock %}

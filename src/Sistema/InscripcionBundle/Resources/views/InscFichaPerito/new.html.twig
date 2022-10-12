@@ -1,0 +1,78 @@
+{% extends "SistemaCPCEBundle::longLayout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - 
+{% endblock %}
+
+{% block fos_user_panel %}
+    {% form_theme form 'MWSimpleAdminCrudBundle:widget:fields.html.twig' %}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="panel panel-primary center-block">
+                <div class="panel-heading">
+                    <i class="glyphicon glyphicon-plus"></i> Nueva pre-inscripcion
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <h4>pre-inscripción: <strong>"{{ molde.nombre }}".</strong></h4>
+                            <h5><u>Breve Descripcion:</u><br></br>"{{ molde.descripcion }}".</h5>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <h4><span class="label label-info pull-right">{{ entity.fecha|localizeddate('full','none') }}</h4></span>
+                        </div>
+                    </div>
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                            {% include 'SistemaInscripcionBundle:Form:form-circunscripciones.html.twig' with {'form': form, 'entity':entity } %}<br>
+                            {% include 'SistemaInscripcionBundle:Form:form-fueros.html.twig' with {'form': form, 'entity':entity } %}
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    {{ form_row(form.observaciones) }}
+                                </div>
+                            </div>
+                            <input type="hidden" id="importe_ficha" name="importe_ficha" value="{{ molde.importeTotal }}">
+                            <input type="hidden" id="molde_id" name="molde_id" value="{{ molde.id }}">
+                        {{ form_rest(form) }}
+                    {{ form_end(form) }}
+                    <div class="row">
+                        {% if molde.nota %}
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h4><u>Nota informe:</u></h4>
+                                <h4><span class="label label-danger">{{ molde.nota }}</span></h4>
+                            </div>
+                        {% endif %}
+                    </div><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% block buttonsbelow %}
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <a class="form-control btn btn-info" href="{{ path('front_inscripcion') }}">
+                    Volver a Inscripciones
+                </a>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/sistemainscripcion/js/addForm.js') }}"></script>
+    <script src="{{ asset('bundles/mwsimpleadmincrud/js/widget.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/sistemainscripcion/js/bootstrap-confirmation.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('#sistema_inscripcionbundle_inscficha_save').click(function(){
+                var confirm1 = confirm('Confirmar la pre-inscripción?.');
+                if (confirm1) {
+                } else {
+                    alert('false');
+                }  
+            });
+        });
+    </script>
+{% endblock %}

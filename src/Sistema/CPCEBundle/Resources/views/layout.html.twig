@@ -1,0 +1,25 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% block title %}{{ 'views.layout.bannersadmin'|trans({}, 'MWSimpleAdminCrudBundle') }}{% endblock %}
+
+{% block messages_error %}
+    {% for type, flashMessages in app.session.flashbag.all() %}
+        {% for flashMessage in flashMessages %}
+            <div class="alert alert-{{ type }}">
+                {{ flashMessage|trans({}, 'MWSimpleAdminCrudBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock messages_error %}
+
+{% block fos_user_panel %}
+    <div class="panel-heading">
+        <div class="panel-title">
+            {% block paneltitle %}Sistema Web de Gesti&oacute;n para Matriculados.{% endblock %}
+        </div>
+    </div>
+    <div class="panel-body">
+        {% block fos_user_content %}{% endblock %}
+        {% block page %}{% endblock %}
+    </div>
+{% endblock fos_user_panel %}

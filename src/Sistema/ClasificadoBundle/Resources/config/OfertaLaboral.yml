@@ -1,0 +1,147 @@
+entityName: 'Oferta Laboral'
+entity: 'Sistema\ClasificadoBundle\Entity\OfertaLaboral'
+repository: 'SistemaClasificadoBundle:OfertaLaboral'
+index: 'admin_ofertalaboral'
+new: 'admin_ofertalaboral_new'
+edit: 'admin_ofertalaboral_edit'
+show: 'admin_ofertalaboral_show'
+create: 'admin_ofertalaboral_create'
+update: 'admin_ofertalaboral_update'
+delete: 'admin_ofertalaboral_delete'
+export: 'admin_ofertalaboral_export'
+sessionFilter: 'OfertaLaboralControllerFilter'
+saveAndAdd: true
+fieldsindex:
+    a.id:
+        label: 'Numero'
+        name: 'Id'
+        type: 'integer'
+        export: true
+    a.titulo:
+        label: 'Titulo'
+        name: 'Titulo'
+        type: 'string'
+        export: true
+    a.solicitante:
+        label: 'Solicitante'
+        name: 'Solicitante'
+        type: 'string'
+        export: true
+    a.requiere:
+        label: 'Requiere'
+        name: 'Requiere'
+        type: 'string'
+        export: true
+    a.puesto:
+        label: 'Puesto'
+        name: 'Puesto'
+        type: 'string'
+        export: true
+    # a.requisito:
+    #     label: 'Requisito'
+    #     name: 'Requisito'
+    #     type: 'text_html'
+    #     export: true
+    # a.tarea:
+    #     label: 'Tarea'
+    #     name: 'Tarea'
+    #     type: 'text_html'
+    #     export: true
+    a.created:
+        label: 'Creada'
+        name: 'Created'
+        type: 'date'
+        date: 'd/m/Y'
+        export: true
+    a.fechaFin:
+        label: 'Finaliza'
+        name: 'Fechafin'
+        type: 'date'
+        date: 'd/m/Y'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+    a.delegacion:
+        label: 'Delegacion'
+        name: getOfertaLaboralString
+        type: 'integer'
+        export: true
+fieldsshow:
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        class: 'col-lg-2 col-md-6 col-sm-12'
+    a.id:
+        label: 'Numero'
+        name: 'Id'
+        type: 'integer'
+        class: 'col-lg-2 col-md-6 col-sm-12'
+    a.delegacion:
+        label: 'Delegacion'
+        name: getOfertaLaboralString
+        type: 'integer'
+        class: 'col-lg-4 col-md-4 col-sm-4'
+        closerow: true
+    a.titulo:
+        label: 'Titulo'
+        name: 'Titulo'
+        type: 'string'
+        class: 'col-lg-12 col-md-12 col-sm-12'
+        closerow: true
+    a.requiere:
+        label: 'Requiere'
+        name: 'Requiere'
+        type: 'string'
+        class: 'col-lg-4 col-md-4 col-sm-4'
+    a.puesto:
+        label: 'Puesto'
+        name: 'Puesto'
+        type: 'string'
+        class: 'col-lg-4 col-md-4 col-sm-4'
+        closerow: true
+    a.requisito:
+        label: 'Requisitos'
+        name: 'Requisito'
+        type: 'text_html'
+    a.tarea:
+        label: 'Tareas'
+        name: 'Tarea'
+        type: 'text_html'
+    a.created:
+        label: 'Creada'
+        name: 'Created'
+        type: 'date'
+        date: 'd/m/Y'
+        class: 'col-lg-4 col-md-4 col-sm-4'
+        export: true
+    a.fechaFin:
+        label: 'Finaliza'
+        name: 'Fechafin'
+        type: 'date'
+        class: 'col-lg-4 col-md-4 col-sm-4'
+        date: 'd/m/Y'
+        closerow: true
+    a.cvPostulantes:
+        label: 'Postulantes'
+        name: 'Cvpostulantes'
+        type: 'MANY_TO_MANY'
+        separator: '<br></br>'
+    a.solicitante:
+        label: 'Solicitante'
+        name: 'Solicitante'
+        type: 'string'
+        class: 'col-lg-4 col-md-4 col-sm-4'
+    a.email:
+        label: 'Email'
+        name: 'Email'
+        type: 'string'
+        class: 'col-lg-4 col-md-4 col-sm-4'
+    a.telefono:
+        label: 'Telefono'
+        name: 'Telefono'
+        type: 'string'
+        class: 'col-lg-4 col-md-4 col-sm-4'

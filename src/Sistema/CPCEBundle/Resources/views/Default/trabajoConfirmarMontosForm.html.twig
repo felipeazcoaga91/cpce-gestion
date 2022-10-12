@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        {{ form_row(form.acreditar) }}
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        {{ form_row(form.tipoReintegro) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        {{ form_row(form.fechaInforme) }}
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        {{ form_row(form.fechaCierre) }}
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        {{ form_row(form.cantidad) }}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><h4>DATOS DEL CLIENTE</h4></div>
+    {{ form_row(form.comitenteCuit) }}
+    {{ form_row(form.clienteComitente) }}
+    {{ form_row(form.comitenteDomicilio) }}
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><h4>DATOS DEL PROFESIONAL</h4></div>
+    {{ form_row(form.profesional) }}
+    {{ form_row(form.matricula) }}
+    {{ form_row(form.domicilio) }}
+    {{ form_row(form.telefono) }}
+    {{ form_row(form.celular) }}
+    {{ form_row(form.correo) }}
+    {{ form_row(form.condicionIva) }}
+    {{ form_row(form.cuit) }}
+    {{ form_row(form.cbu) }}
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><h4>BASE DE CALCULO SEGUN LEY 3.111</h4></div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.servicio) }}
+        {{ form_errors(form.servicio) }}
+        <div class="col-lg-8 col-md-8 col-sm-12 pull-right">
+            {{ form_widget(form.servicio) }}
+        </div>
+    </div>
+    {% if tareaCodigo == 1 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.auditoriaTipo) }}
+            {{ form_errors(form.auditoriaTipo) }}
+            <div class="col-lg-7 col-md-7 col-sm-12 pull-right">
+                {{ form_widget(form.auditoriaTipo) }}
+            </div>
+        </div>
+    {% endif %}
+    {% if tareaCodigo == 3 or tareaCodigo == 6 or tareaCodigo == 9 or tareaCodigo == 11 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.esAuditor) }}
+            {{ form_errors(form.esAuditor) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.esAuditor) }}
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.porcentajeSindico) }}
+            {{ form_errors(form.porcentajeSindico) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.porcentajeSindico) }}
+            </div>
+        </div>
+    {% endif %}
+    {% if tareaCodigo == 6 or tareaCodigo == 7 or tareaCodigo == 9 or tareaCodigo == 10 or tareaCodigo == 11 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.meses) }}
+            {{ form_errors(form.meses) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.meses) }}
+            </div>
+        </div>
+    {% endif %}
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.activo) }}
+        {{ form_errors(form.activo) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.activo) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.pasivo) }}
+        {{ form_errors(form.pasivo) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.pasivo) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.importe1) }}
+        {{ form_errors(form.importe1) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.importe1) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.importe2) }}
+        {{ form_errors(form.importe2) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.importe2) }}
+        </div>
+    </div>
+    {% if tareaCodigo == 6 or tareaCodigo == 9 or tareaCodigo == 11 %}
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ form_label(form.importePeriodo) }}
+            {{ form_errors(form.importePeriodo) }}
+            <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+                {{ form_widget(form.importePeriodo) }}
+            </div>
+        </div>
+    {% endif %}
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.honorarioMinimo) }}
+        {{ form_errors(form.honorarioMinimo) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.honorarioMinimo) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.monto) }}
+        {{ form_errors(form.monto) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.monto) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.montoIva) }}
+        {{ form_errors(form.montoIva) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.montoIva) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.montoAporte) }}
+        {{ form_errors(form.montoAporte) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.montoAporte) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.montoTotal) }}
+        {{ form_errors(form.montoTotal) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.montoTotal) }}
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.montoDeposito) }}
+        {{ form_errors(form.montoDeposito) }}
+        <div class="col-lg-4 col-md-4 col-sm-12 pull-right">
+            {{ form_widget(form.montoDeposito) }}
+        </div>
+    </div>
+</div>
+<br>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    {{ form_row(form.save) }}
+</div>
+
+<script type="text/javascript" src="{{ asset('bundles/sistemacpce/js/calculos.js') }}"></script>

@@ -1,0 +1,133 @@
+{% extends "SistemaCPCEBundle::longLayout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Datos
+{% endblock %}
+
+{% block fos_user_panel %}
+    <div class="panel panel-info center-block">
+        <div class="panel-heading"><h4>Detalles:</h4></div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <h4>pre-inscripción: <strong>"{{ molde.nombre }}".</strong></h4>
+                    <h5><u>Breve Descripcion:</u><br></br>"{{ molde.descripcion }}".</h5>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <h4><span class="label label-info pull-right">{{ entity.fecha|localizeddate('full','none') }}</h4></span>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <div class="list-group">
+                                <span class="list-group-item list-group-item-default" style="background-color: #eee">
+                                    <b>DATOS DE MATRICULACIÓN:</b>
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Nombre:</b> {{ afiliado.afinombre }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>DNI. Nº:</b> {{ afiliado.afinrodoc }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Título Profesional:</b> "{{ afiliado.afititulo }}" | <b>Nº de Matrícula:</b> {{ afiliado.afimatricula }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Email:</b> {{ afiliado.afimail }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Localidad:</b> "{{ afiliado.afilocalidad }}" | <b>Provincia:</b> "{{ afiliado.afiprovincia }}"
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            {% if entity.circunscripcion %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4>Circunscripcion:</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-default" style="background-color: #eee">
+                                        <span class="glyphicon glyphicon-chevron-right"></span> {{ entity.circunscripcion }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+
+            {% if entity.fueros is not empty %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4>Fueros seleccionados #{{ entity.fueros|length }}</h4>
+                        <hr>
+                        <div class="row">
+                            {% for item in entity.fueros %}
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-default" style="background-color: #eee">
+                                        <span class="glyphicon glyphicon-chevron-right"></span> {{ item.nombre }}
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h4>Observaciones:</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-default" style="background-color: #eee">
+                                    {{ entity.observaciones }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h4 align="right">Total: ${{ entity.importeTotal }}</h4>
+                </div>
+            </div>
+            <div class="row">
+                {% if molde.nota %}
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4><u>Nota informe:</u></h4>
+                        <h4><span class="label label-danger">{{ molde.nota }}</span></h4>
+                    </div>
+                {% endif %}
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-offset-8 col-md-3 col-sm-3">
+                    <a class="form-control btn btn-danger" href="{{ path('front_inscripcion_perito_pdf', {'id': entity.id } ) }}">
+                        Imprimir Inscripción
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

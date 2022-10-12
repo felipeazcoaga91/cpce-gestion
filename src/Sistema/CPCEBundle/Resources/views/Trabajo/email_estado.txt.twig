@@ -1,0 +1,16 @@
+{% block subject %}
+{% autoescape false %}
+    Estado del Trabajo
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}{% autoescape false %}{% endautoescape %}{% endblock %}
+{% block body_html %}
+<img src="{{ cpce_logo }}" alt="CPCE Chaco">
+<br>
+<p>Estimado Profesional</p>
+<br>
+<p>{{ contenido }}</p>
+<br><br>
+<p>Atentamente,</p>
+<p>CPCE Chaco.</p>
+{% endblock %}

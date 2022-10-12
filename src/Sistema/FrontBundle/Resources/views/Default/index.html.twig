@@ -1,0 +1,139 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and is_granted("ROLE_MATRICULADO") %}
+    {% set usuarioEstado = "matriculado" %}
+{% else %}
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and not is_granted("ROLE_MATRICULADO") %}
+        {% set usuarioEstado = "registrado" %}
+    {% else %}
+        {% set usuarioEstado = "visitante" %}
+    {% endif %}
+{% endif %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        .panel-alto {
+            min-height: 120px;
+        }
+    </style>
+{% endblock %}
+
+{% block fos_user_content %}
+    {% form_theme form 'MWSimpleAdminCrudBundle:widget:fields.html.twig' %}
+    <div class="panel-heading">
+        <div class="panel-title">Sistema Web de Gesti&oacute;n para Matriculados.</div>
+    </div>
+    <div style="padding-top:30px" class="panel-body hidden-md hidden-lg">
+    	<a class="btn btn-info btn-inicio" href="{{ path('front_dato') }}">Datos</a>
+    	<a class="btn btn-info btn-inicio" href="{{ path('front_cuenta') }}">Estado de Cuenta</a>
+        <a class="btn btn-info btn-inicio" href="{{ path('front_trabajo') }}">Listado de trabajos</a>
+        <a class="btn btn-success btn-inicio" href="{{ path('front_trabajo_new') }}">Confeccionar trabajo</a>
+    </div>
+    <div style="padding-top:10px" class="panel-body hidden-xs hidden-sm">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Servicios actuales</div>
+                    <div class="panel-body panel-alto">
+                        <div class="list-group">
+                            <a href="{{ path('front_dato') }}" class="list-group-item">Datos</a>
+                            <a href="{{ path('front_cuenta') }}" class="list-group-item">Consulta estado de cuenta</a>
+                            {# <a href="{{ path('front_firma') }}" class="list-group-item">Confección de Formulario con Firma Digital</a> #}
+                            <a href="{{ path('front_trabajo') }}" class="list-group-item">Listado de trabajos</a>
+                            {# <a href="{{ path('front_trabajo_new') }}" class="list-group-item">Confecci&oacute;n de trabajos</a> #}
+                            <a href="{{ path('sipres_index') }}" class="list-group-item">Cartera de Inversiones Sipres</a>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        {% if usuarioEstado == "visitante" %}
+                            <a href="{{ path('afiliado') }}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-log-in"></span> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        {% if usuarioEstado != "matriculado" %}
+                            {% if usuarioEstado == "registrado" %}
+                                *Recuerde habilitar su usuario, una vez registrado puede hacerlo de las siguientes maneras:
+                            {% else %}
+                                Registro (por &uacute;nica vez)
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="panel-body panel-alto ">
+                        {% if usuarioEstado == "matriculado" %}
+                            <p class="text-success">Se encuentra registrado.</p>
+                        {% else %}
+                            {% if usuarioEstado == "registrado" %}
+                            {% else %}
+                                <p class="text-danger">*Recuerde habilitar su usuario, una vez registrado puede hacerlo de las siguientes maneras:</p>
+                            {% endif %}
+
+                            <div class="list-group">
+                                {% if usuarioEstado == "registrado" %}
+                                    <a href="{{ path('formulario_activacion') }}" class="list-group-item">
+                                        <strong>Click para descargar formulario,</strong><br>
+                                        lo completa y presenta en su delegación
+                                    </a>
+                                {% else %}
+                                    <a class="list-group-item">
+                                        <strong>Descargando el formulario,</strong><br>
+                                        lo completa y presenta en su delegación
+                                    </a>
+                                {% endif %}
+
+                                <p></p>
+
+                                {% if usuarioEstado == "registrado" %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="list-group-item list-group-item-success" data-toggle="modal" data-target="#myModal">
+                                        <strong>Click para habilitar en línea,</strong><br>
+                                        ingresando su matrícula
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Complete los datos</h4>
+                                            </div>
+                                            {{ form_start(form) }}
+                                                <div class="modal-body">
+                                                    {{ form_errors(form) }}
+                                                    {{ form_row(form.titulo) }}
+                                                    {{ form_row(form.matricula) }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                    {{ form_row(form.save) }}
+                                                </div>
+                                            {{ form_end(form) }}
+                                        </div>
+                                      </div>
+                                    </div>
+                                {% else %}
+                                    <a class="list-group-item list-group-item-success">
+                                        <strong>Habilitando en línea,</strong><br>
+                                        ingresando su matrícula
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="panel-footer">
+                        {% if usuarioEstado == "visitante" %}
+                            <a href="{{ path('fos_user_registration_register') }}" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-user"></span> {{ 'layout.register'|trans({}, 'FOSUserBundle') }}me</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if usuarioEstado == "visitante" %}
+                {% include "SistemaFrontBundle:Default:instructivo.html.twig" with {'descargar': true} %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock fos_user_content %}

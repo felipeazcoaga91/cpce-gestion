@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            p {
+                margin-top: 30px;
+                height: 0px;
+                font-size: 20px;
+                text-align: justify;
+            }
+            th p {
+                float: left;
+            }
+            .content {
+                background-color: #fff;
+                margin: 0 1em;
+                padding-left: 1em;
+            }
+            .right {
+                float: right;
+                font-size: 20px;    
+            }
+            .centrar {
+                text-align: center !important;
+                float: none !important;
+            }
+            .text-right {
+                text-align: right;
+            }
+            .text-long {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            campo {
+                font-size: 18px;
+                border-bottom-style: dashed;
+                border-bottom-width: 1.5px;
+            }
+            sangria {
+                padding-left: 5em;
+            }
+        </style>
+    </head>
+    <body class="focusedform">
+        <div class="right">{{ fecha|localizeddate('full', 'none') }}</div>
+        <br>
+        <div class="content">
+            <div class="left">
+                <img src="{{ asset('bundles/sistemacpce/images/logo_black.png', absolute=true) }}" alt="" />
+            </div>
+            <div class="centrar">
+                <h2>FORMULARIO DE INSCRIPCION</h2>
+            </div>
+            <div class="centrar">
+                <h3>INCLUSION EN LA LISTA DE CONTADORES<br>
+                PUBLICOS PARA EL SORTEO DE PERITOS</h3>
+            </div>
+            <div class="left">
+                <p><campo>{{ afiliado.afiNombre|upper }}</campo> Contador/a</p>
+                <p>Público, MP Nº <campo>{{ afiliado.afiMatricula|upper }}</campo> con domicilio real en la calle 
+                <campo>
+                    {% if afiliado.afiDireccion %}
+                        {{ afiliado.afiDireccion|upper }}
+                    {% else %}
+                        {{ afiliado.afiDireccion|upper }}
+                    {% endif %}
+                </campo> y legal</p>
+                <p>en calle <campo>{{ afiliado.afiDireccion|upper }}</campo>, en la ciudad de <campo>{{ afiliado.Afilocalidad|upper }}</campo> de esta provincia,</p>
+                <p>a V.E. DIGO:</p>
+                <p><sangria></sangria>Que deseando participar en el sorteo para la designación de Perito Contador de la</p>
+                <p>Circunscripción de <campo>{{ entity.circunscripcion|upper }}</campo> del año <strong>{{ fecha|date("Y") + 1 }}</strong> solicito mi inclusión en la lista especial con</p>
+                <p>la que se efectuará el correspondiente sorteo para los siguientes fueros:</p>
+                <table style="width:100%; margin-bottom: -35px;" border="0">
+                    <tr>
+                        <td colspan="4"><p>I CIRCUNSCRIPCIÓN: RESISTENCIA</p></td>
+                        <td colspan="4"><p>II CIRCUNSCRIPCIÓN: PCIA.R. SAENZ PEÑA</p></td>
+                    </tr>
+                </table>
+                <table style="width:100%; margin-bottom: -35px;" border="0">
+                    <tr>
+                        <td colspan="4"><p>III CIRCUNSCRIPCIÓN: VILLA ANGELA</p></td>
+                        <td colspan="4"><p>IV CIRCUNSCRIPCIÓN: CHARATA</p></td>
+                    </tr>
+                </table>
+                <table style="width:100%; margin-bottom: -35px;" border="0">
+                    <tr>
+                        <td colspan="4"><p>V CIRCUNSCRIPCIÓN: GRAL.SAN MARTÍN</p></td>
+                        <td colspan="4"><p>VI CIRCUNSCRIPCIÓN: JUAN J. CASTELLI</p></td>
+                    </tr>
+                </table>  
+            </div>
+            <br>
+            <div class="centrar">
+                <p><strong>Fuero:</strong></p>
+                {% for fu in entity.fueros %}
+                    <p>{{ fu }}</p>
+                {% endfor %}
+            </div>
+            <br>
+            <div class="left">
+                <p><strong>Observaciones:</strong></p>
+                <p>{{ entity.observaciones }}</p>
+            </div>
+            <br>
+            <div class="left">
+                <p><sangria></sangria>Declaro conocer expresamente la disposición del Artículo 16º de la Ley Provincial</p>
+                <p>Nº 2349 (de facto), y las acordadas del Superior Tribunal de Justicia de la Provincia Nº 10 del</p>
+                <p>25 de agosto de 1953 y Nº 312 del 22 de febrero de 1957</p>
+                <p><sangria></sangria>Por lo tanto Solicito mi inclusión en la lista de Contadores Públicos para el sorteo </p>
+                <p>de Peritos del año <strong>{{ fecha|date("Y") + 1 }}</strong>.</p>
+                <br>
+            </div>
+            <div class="centrar">
+                <p style="font-size: 15px;"><strong>* TELEFONO CELULAR/FIJO:</strong> {{ afiliado.afiCelular|upper }}</p> 
+                <p style="font-size: 15px;"><strong>* DIRECCION DE CORREO ELECTRÓNICO:</strong> {{ afiliado.afiMail|upper }}</p>
+            </div>
+            <br>
+            <div class="right" style="margin-top: 100px;">
+                <table style="width:100%" border="0">
+                    <tr><td colspan="4"><p></p></td></tr>
+                    <tr>
+                        <p>...............................................</p>
+                        <p style="font-size: 15px;"><strong>FIRMA Y SELLO PROFESIONAL</strong></p>
+                    </tr>
+                </table>  
+            </div>
+        </div>  
+    </body>
+</html>

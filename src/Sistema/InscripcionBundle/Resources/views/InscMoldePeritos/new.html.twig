@@ -1,0 +1,9 @@
+{% extends 'MWSimpleAdminCrudBundle:Default:new.html.twig' %}
+
+{% block page %}
+    <span class="label label-default">Fecha: {{ entity.fecha|date("d/m/Y") }}</span>
+    <hr>
+    {{ parent() }}
+{% endblock %}
+
+{% block buttonsbelow %}{% endblock %}

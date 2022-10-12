@@ -1,0 +1,94 @@
+{% extends "SistemaCPCEBundle::longLayout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - 
+{% endblock %}
+
+{% block fos_user_panel %}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="panel panel-primary center-block">
+                <div class="panel-heading">
+                    <i class="glyphicon glyphicon-plus"></i> Validacion de Datos de Usuario
+                </div>
+                <div class="panel-body">
+                    <fieldset>
+                        <legend>
+                            <h4>Bienvenido a la pre-inscripción de: <strong>"{{ molde.nombre }}"</strong></h4>
+                            <h5>"{{ molde.descripcion }}"</h5>
+                        </legend>
+                    </fieldset>
+                    {% include 'SistemaInscripcionBundle:Form:form-afiliado.html.twig' with {'afiliado': afiliado } %}
+                </div>
+                <div class="panel-footer" style="margin-bottom: 35px;">
+                    <div class="btn-group pull-right">
+                        <a class="form-control btn btn-success pull-right" href="{{ path('front_inscripcion_new', {'id': molde.id } ) }}">Siguiente</a>        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% block buttonsbelow %}
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <a class="form-control btn btn-default" href="{{ path('front_inscripcion') }}">Volver a Inscripciones</a>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/sistemainscripcion/js/addForm.js') }}"></script>
+    <script src="{{ asset('bundles/mwsimpleadmincrud/js/widget.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/sistemainscripcion/js/bootstrap-confirmation.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            
+            function deleteRow($deleteButton) { 
+                var $divContent = jQuery($deleteButton).parent().parent().parent();                                    
+                $divContent.remove();      
+            }    
+
+            collectionImagenesHolder = jQuery('.acompaniantes-inscripcion');
+
+            collectionImagenesHolder.data('index', collectionImagenesHolder.find(':input').length)
+            jQuery('.add-persona-form').click(function(e) {
+                e.preventDefault()
+                addForm(collectionImagenesHolder, jQuery('.acompaniantes-inscripcion'));
+            })
+            jQuery('.acompaniantes-inscripcion').delegate('.delete-form','click', function(e) {
+                deleteRow(this); 
+            });
+
+            
+
+            $('#sistema_inscripcionbundle_inscolimpiada_extra').click(function(e) {
+                if ($("#sistema_inscripcionbundle_inscolimpiada_extra").prop('checked')) {
+                    $("#hotel").hide();
+                } else {
+                    $("#hotel").show();
+                }
+            });
+
+            $('#sistema_inscripcionbundle_inscolimpiada_save').hide();
+            $('#sistema_inscripcionbundle_insccongreso_save').hide();
+
+            $('[data-toggle=confirmation]').confirmation({
+              rootSelector: '[data-toggle=confirmation]',
+              title: 'Al inscribirte estas aceptando todas las condiciones, seguro?',
+              btnOkLabel: 'Confirmar',
+              btnOkClass: 'btn btn-sm btn-success',
+              btnCancelLabel: 'Cancelar',
+              onConfirm: function() {
+                    var tipo = $("button[class='form-control btn-success btn']").attr('tipo');
+                    if (tipo == 1) {
+                        $('#sistema_inscripcionbundle_inscolimpiada_save').click();
+                    } else {
+                        $('#sistema_inscripcionbundle_insccongreso_save').click();
+                    }
+              },
+            });
+        });
+    </script>
+{% endblock %}

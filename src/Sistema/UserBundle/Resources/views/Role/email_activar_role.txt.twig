@@ -1,0 +1,17 @@
+{% block subject %}
+{% autoescape false %}
+    Sistema Web Activacion Usuario
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}{% autoescape false %}{% endautoescape %}{% endblock %}
+{% block body_html %}
+<img src="{{ cpce_logo }}" alt="CPCE Chaco">
+<br>
+<p>Hola {{ user.username }}</p>
+<br>
+<p>Se activo correctamente su Usuario: {{ user.username }} - ingresar a:</p>
+<a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+<br><br>
+<p>Atentamente,</p>
+<p>CPCE Chaco.</p>
+{% endblock %}

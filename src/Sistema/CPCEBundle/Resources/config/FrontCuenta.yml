@@ -1,0 +1,30 @@
+entityName: 'Cuenta'
+entity: 'Sistema\CPCEBundle\Entity\Totales'
+repository: 'SistemaCPCEBundle:Totales'
+index: 'front_cuenta'
+detalle: 'front_cuenta_detalle'
+export: 'front_cuenta_export'
+pdf: 'front_cuenta_pdf'
+sessionFilter: 'FrontCuentaControllerFilter'
+fieldsindex:
+    # cuenta:
+    #     label: 'Número de cuenta'
+    #     name: 'cuenta'
+    #     type: 'integer'
+    #     export: true
+    servicio:
+        label: 'Descripción'
+        name: 'servicio'
+        type: 'string'
+        export: true
+    saldo:
+        label: 'Saldo'
+        name: 'saldo'
+        type: 'float'
+        export: true
+fieldsshow:
+    # cuenta:
+    #     label: 'Número de cuenta'
+    #     name: 'cuenta'
+    #     type: 'integer'
+    #     export: true

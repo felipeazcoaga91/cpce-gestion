@@ -1,0 +1,140 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style type="text/css">
+            .borde {
+                border-style: solid;
+                width: 320px;
+                height: 25px;
+            }
+            .insertar {
+                border-style: solid;
+                width: 290px;
+                height: 25px;
+            }
+            .margen {
+                margin: 3px;
+            }
+        </style>
+    </head>
+    <body>
+        <br>
+        <dd>
+            <p>ANEXO II FORMULARIO CLIENTE PERSONA FÍSICA</p><br>
+            <center> <p>MEMBRETE DEL CONSEJO.<br></p>   </center>    
+            <p align="center"> FORMULARIO DE LEGALIZACIÓN DE ACTUACIÓN PROFESIONAL CON FIRMA DIGITAL <br></p> 
+            <p><b>CUIT:</b> {{ entity.cliente.afiCuit }} <br></p> 
+            <p><b>COMITENTE:</b> {{ entity.cliente.afiNombre }}<br></p> 
+            <p><b>DOMICILIO LEGAL:</b> {{ entity.cliente.afiDireccion }}. <b>CIUDAD:</b> {{ entity.cliente.afiLocalidad }}. – Provincia del Chaco.<br></pre>
+            <p><b>TRABAJO PROFESIONAL:</b> {{ entity.trabajo.tarDescrip }}.<br></p>
+            <p><b>FECHA DE CIERRE / CORTE:</b> {{ entity.fechaCierre | date('d/m/Y') }}<br></p>
+            <p><b>PERIODO: desde</b> {{ entity.periodoInicio | date('d/m/Y') }} <b>hasta</b> {{ entity.periodoFin | date('d/m/Y') }}<br></p>
+            <button class="adj_trabajo" type="button">Adjuntar Trabajo Objeto del Encargo</button>
+            <p>“En carácter de titular, declaro que <b>la manifestación de bienes, cuadro de ingresos y gastos y cantidad de personal en relación de dependencia</b>, a la fecha de corte/periodo mencionada, me pertenece y firmo digitalmente el presente formulario a efecto de su vinculación”<br></p> 
+            <button class="adj_trabajo" type="button">Adjuntar Informe / Certificación</button>
+            <p><b>FECHA DE INFORME / CERTIFICACIÓN:</b> {{ entity.fechaInforme | date('d/m/Y') }}</p>
+            <p>“Declaro que he desarrollado mi tarea profesional con el alcance expresado en el informe/certificación adjunto, y que en virtud de dicha tarea firmo digitalmente el presente formulario. En relación a los documentos adjuntados por el representante legal/apoderado del ente arriba mencionada, mi firma digital abarca a éstos sólo con propósitos de vinculación con el informe/certificación antes citado/a."<br></p>
+            <p class="borde">Registro de legalización N°: __ __________ - __</p>    
+            <p>Fecha: {{ "now" |localizeddate('full', 'none', 'es') }}.<br></p>
+        </dd>
+
+        <script>
+            var links = $('.adj_trabajo');
+            links.on('click', function() {
+                import_11();
+                if (app.viewerVersion < 11) {
+                    import_pre_11();
+                } else {
+                    import_11();
+                }
+            });
+
+            // Initialize attachment number
+            attachment_num = 1;
+
+            // Initial location of file attachment icon
+            // The x value is incremented below
+
+            var oFAP = {x_init: -72, x: -72, y: -72};  // Below lower-left corner of the page
+
+            function import_pre_11() {
+                if (app.viewerType === "Reader") {
+                    app.alert({
+                        cMsg: "You must user Reader version 11 or later to attach files to this form.",
+                        cTitle: "Attach File Error",
+                        nIcon: 3,
+                        nType: 0
+                    });
+                    return;
+                }
+
+                // Prompt user to import a file
+                app.alert({
+                    cMsg: "Click the OK/Open button after selecting the file from your system that you want to attach.",
+                    cTitle: "Attach File",
+                    nIcon: 3,
+                    nType: 0
+                });
+
+                try {
+                    var rc = this.importDataObject("Attachment" + attachment_num);
+                    if (rc) {
+                        attachment_num += 1;
+                        app.alert({
+                            cMsg: "Archivo adjuntado.\r\rAbrá el panel archivos adjuntos para ver los adjuntos.",
+                            cTitle: "Attachment Successful",
+                            nIcon: 3,
+                            nType: 0
+                        });
+                    } else {
+                        app.alert({
+                            cMsg: "Attachment cancelled.",
+                            cTitle: "Attachment Cancelled",
+                            nIcon: 3,
+                            nType: 0
+                        });
+                    }
+                } catch (e) {
+                    app.alert({
+                        cMsg: "No podemos adjuntar el archivo.",
+                        cTitle: "Could not attach file",
+                        nIcon: 3,
+                        nType: 0
+                    });
+                }
+            }
+
+            function import_11() {
+                try {
+                    var annot = addAnnot({
+                        page: event.target.page,
+                        type: "FileAttachment",
+                        author: "Form user",
+                        name: "File Attachment",
+                        point: [oFAP.x, oFAP.y],
+                        contents: "File attachment on: " + util.printd("yyyy/mm/dd HH:MM:ss", new Date()),
+                        attachIcon: "Paperclip"
+                    });
+                    annot.cAttachmentPath; // Prompt user to select a file to attach
+                    oFAP.x += 18;  // Increment the x location for the icon
+                } catch (e) {
+                    app.alert({
+                        cMsg: "No se puede adjuntar el archivo.\r\rPor favor reporta este error.",
+                        cTitle: "File attachment error",
+                        nIcon: 3,
+                        nType: 0
+                    });
+                }
+            }
+        </script>
+    </body>
+</html>
+
+           
+                                                                                                
+                                                                                                        
+                                    
+                                                                                                

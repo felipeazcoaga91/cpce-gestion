@@ -1,0 +1,13 @@
+{% extends "TwigBundle:Exception:error.html.twig" %}
+
+{% block fos_user_content %}
+    {#<div class="status">
+    	<h3>El servidor retornó el siguiente error "{{ status_code }}".</h3>
+    </div>#}
+    <br><br>
+    <h4 class="text-danger">Al Parecer no tienes los accesos para ver esta página.</h4>
+    <h4 class="text-danger">*Recuerde habilitar su usuario una vez registrado.</h4>
+    <h4 class="text-danger"><a href="{{ path('homepage') }}" class="btn btn-danger">Click aqu&iacute; para hacerlo</a></h4>
+    <br><br><br>
+    <h5>El servidor retornó el siguiente error "{{ status_code }}".</h5>
+{% endblock %}

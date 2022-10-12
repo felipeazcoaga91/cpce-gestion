@@ -1,0 +1,24 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% block fos_user_panel %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title">Sistema Web de Gesti&oacute;n para Matriculados.</div>
+    </div>
+    <div style="padding-top:25px" class="panel-body">
+    	<a class="btn btn-info btn-inicio" href="{{ path('front_dato') }}"><i class="glyphicon glyphicon-file"></i><span><br class="ignore"> Datos</span></a>
+    	<a class="btn btn-info btn-inicio" href="{{ path('front_cuenta') }}"><i class="glyphicon glyphicon-user"></i><span><br class="ignore"> Estado de Cuenta</span></a>
+        <a class="btn btn-info btn-inicio" href="{{ path('front_trabajo') }}"><i class="glyphicon glyphicon-list-alt"></i><span><br class="ignore"> Listado de trabajos</span></a>
+        <a class="btn btn-success btn-inicio" href="{{ path('front_trabajo_new') }}"><i class="glyphicon glyphicon-briefcase"></i><span><br class="ignore"> Confeccionar trabajo</span></a>
+        <a class="btn btn-warning btn-inicio" href="{{ path('sipres_index') }}"><i class="glyphicon glyphicon-usd"></i><span><br class="ignore"> Cartera de Inversiones Sipres</span></a>	
+    </div>
+    <div>
+    	<iframe scrolling="no" width="750" height="400" src="https://cpcech.org.ar/index.php/2022/02/01/accesos-de-utilidad/"></iframe>
+    </div>
+    <style> iframe { border:none; } </style>
+</div>
+{#<div class="panel panel-primary">
+    {% include 'SistemaCPCEBundle:Ayuda:novedad.html.twig' only %}
+</div>#}
+{% endblock fos_user_panel %}
+

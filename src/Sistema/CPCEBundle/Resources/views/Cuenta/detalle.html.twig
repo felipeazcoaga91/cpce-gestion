@@ -1,0 +1,38 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Detalle estado de Cuenta
+{% endblock %}
+
+{% block paneltitle %}
+    Detalle estado de Cuenta: <strong>{{ entities[0] is empty ? '' : entities[0].servicio }}</strong>
+{% endblock %}
+
+{% block page %}
+    <div class="pull-right"><a class="btn glyphicon glyphicon-print tooltips"  href="{{ path(config.pdf, { 'cuenta': cuenta }) }}" title="" rel="tooltip" data-original-title="generar PDF"></a></div>
+    <table class="table table-striped table-bordered table-condensed table-responsive">
+        <thead>
+            <tr>
+                <th>Cuota</th>
+                <th>Deuda</th>
+                <th>Vence</th>
+                <th>Pagos</th>
+                <th>Fecha</th>
+                <th>Saldo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ include('SistemaCPCEBundle:Detalle:tabla.html.twig') }}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $('.tooltips').tooltip();
+        $( "#reset_index_filters" ).click(function() {
+            $(".reset_submit_filters").trigger("click");
+        });
+    </script>
+{% endblock %}

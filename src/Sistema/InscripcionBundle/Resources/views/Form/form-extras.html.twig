@@ -1,0 +1,108 @@
+{% block form %}
+<fieldset>
+    <legend>
+        <h4>Extras:</h4>
+        <h5><span class="label label-default">incremente la cantidad que corresponda.</span></h5>
+    </legend>
+    <div class="row">
+        {% if extras is defined %}
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <table class="table table-bordered" id="table">
+                    <thead> 
+                        <tr> 
+                            <th>#</th>
+                            <th>nombre</th>
+                            <th class="text-right">importe</th>
+                            <th class="text-center">cantidad</th>
+                            <th class="text-right">Total</th>
+                        </tr> 
+                    </thead>
+                    <tbody> 
+                        {% set acum = 0 %}
+                        {% for key, extra in extras %}
+                            <tr> 
+                                <th scope="row">{{ key + 1 }}</th> 
+                                <td>{{ extra.nombre }}</td> 
+                                <td class="text-right">
+                                    <input type="hidden" value="{{ extra.importe }}" class="importe">
+                                    {{ extra.importe }}
+                                </td>
+                                {% if extra.stock != 0 %}
+                                    <td class="col-md-1">
+                                          <input type="hidden" id="stock-{{ key }}" class="form-control input-sm text-center"  value="1" min="1" max="{{ extra.stock }}" >
+                                    </td>
+                                {% else %}
+                                    <td class="text-center multiplicador">
+                                        1
+                                    </td>
+                                    {% set acum = acum + extra.importe %}
+                                {% endif %}
+                                <td class="col-md-3 text-right">
+                                    <strong id="total">
+                                        <input type="hidden" class="total" value="{{ extra.importe }}">
+                                        {{ extra.importe }}
+                                    </strong>
+                                </td> 
+                            </tr>
+                        {% endfor %}
+                        <input type="hidden" id="multip" value="1" min="1" onchange="calcularTotal(this); this.oldvalue = this.value;" onfocus="this.oldvalue = this.value;">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <th class="text-right">SubTotal:</th>
+                            <td class="col-md-3 text-right">
+                                <input type="hidden" id="subtotal" name="subtotal" value="{{ acum }}">
+                                <strong id="subtotal-text">{{ acum }}</strong>
+                            </td> 
+                        </tr>
+                </table>
+                <h5 class="pull-right"><span class="label label-warning">NOTA: El subtotal solo incluye la sumatoria de los montos extras. El importe total de la inscripción lo verá reflejado en la siguiente página.</span></h5>
+            </div>
+        {% endif %}
+    </div>
+</fieldset>
+
+<script type="text/javascript">
+
+    function calcularTotal(mult) {
+        importe = 0;
+
+        multiplicador = Number($('#multip').val());
+        
+        this.sumTotal(multiplicador);
+        
+        var table = document.getElementById("table");
+        var subtotal = 0;
+        
+        for (var i = 1; i < table.rows.length - 1; i++) {
+            subtotal += Number(table.rows[i].cells[4].innerText);
+        }
+
+        $('#subtotal-text').html(subtotal);
+        $('#subtotal').val(subtotal);
+    }
+
+    function sumTotal(multip) {
+        
+        $('tr').each(function(){
+            var totmarks = 0;
+            $(this).find('.importe').each(function(){
+                var marks = $(this).val();
+                
+                if (marks.length !== 0){
+                    totmarks += Number(marks) * multip;
+                }
+            });
+            $(this).find('#total').html(totmarks);
+        });
+
+        if (multip == 0) {
+            
+            $('.multiplicador').text(multiplicador);
+        }
+        
+    }
+
+  </script>
+  {% endblock %}

@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><h4>DATOS DEL TRABAJO</h4></div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {{ form_label(form.servicio) }}
+        {{ form_errors(form.servicio) }}
+        <div class="col-lg-8 col-md-8 col-sm-12 pull-right">
+            {{ form_widget(form.servicio) }}
+        </div>
+    </div>
+    {{ form_row(form.tipoReintegro) }}
+    {{ form_row(form.fechaInforme) }}
+    {{ form_row(form.fechaCierre) }}
+    {{ form_row(form.cantidad) }}
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><h4>DATOS DEL CLIENTE</h4></div>
+    {{ form_row(form.comitenteCuit) }}
+    {{ form_row(form.clienteComitente) }}
+    {{ form_row(form.comitenteDomicilio) }}
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center"><h4>DATOS DEL PROFESIONAL</h4></div>
+    {{ form_row(form.profesional) }}
+    {{ form_row(form.matricula) }}
+    {{ form_row(form.domicilio) }}
+    {{ form_row(form.telefono) }}
+    {{ form_row(form.celular) }}
+    {{ form_row(form.correo) }}
+    {{ form_row(form.condicionIva) }}
+    {{ form_row(form.cuit) }}
+    {{ form_row(form.cbu) }}
+</div>
+<br>
+<div class="col-lg-12 col-md-12 col-sm-12">
+    {{ form_row(form.save) }}
+</div>

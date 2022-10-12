@@ -1,0 +1,7 @@
+{% extends 'MWSimpleAdminCrudBundle:Default:index.html.twig' %}
+
+{% block actions %}
+    {{ parent() }}
+    <a class="glyphicon glyphicon-info-sign tooltips"  href="{{ path('#', {'id': entity.id, 'state': 1} ) }}" title="" rel="tooltip" data-original-title="Generar Anticipo"></a>
+    <a class="glyphicon glyphicon-ok-sign tooltips"  href="{{ path('#', {'id': entity.id, 'state': 2} ) }}" title="" rel="tooltip" data-original-title="Finalizar"></a>
+{% endblock %}

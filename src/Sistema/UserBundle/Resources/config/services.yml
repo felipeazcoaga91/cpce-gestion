@@ -1,0 +1,48 @@
+parameters:
+    fos_user.resetting.email.template: 'FOSUserBundle:Resetting:email.txt.twig'
+    fos_user.registration.confirmation.template: 'FOSUserBundle:Registration:email.txt.twig'
+    fos_user.activarole.email.template: 'FOSUserBundle:Role:email_activar_role.txt.twig'
+
+services:
+    sistema_user.registration.form.type:
+        class: Sistema\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: sistema_fos_user_registration }
+    # Service that extends the default twig mailer
+    sistema_user.custom_mailer:
+        class: Sistema\UserBundle\Mailer\CustomUserMailer
+#        public: false
+        arguments:
+            - '@mailer'
+            - '@router'
+            - '@twig'
+            - template:
+                confirmation: %fos_user.registration.confirmation.template%
+                resetting: %fos_user.resetting.email.template%
+                activarole: %fos_user.activarole.email.template%
+              from_email:
+                confirmation: %fos_user.registration.confirmation.from_email%
+                resetting: %fos_user.resetting.email.from_email%
+                activarole: %fos_user.resetting.email.from_email%
+    sistema_cpce.custom_mailer_resetpass:
+        class: Sistema\CPCEBundle\Mailer\CustomCpceMailer
+        arguments:
+            - '@swiftmailer.mailer.reset_mailer'
+            - '@twig'
+            - template:
+                confirmation: %fos_user.registration.confirmation.template%
+              from_email:
+                resetting: %swiftmailer.mailer.reset_mailer.transport.smtp.username%
+#    security_role:
+#        class: Sistema\UserBundle\Services\SecurityRole
+#        arguments:
+#            - "@service_container"
+#            - "@doctrine.orm.entity_manager"
+#post login event
+#    sistema.user.login:
+#        class: Sistema\UserBundle\EventListener\LoginListener
+#        arguments: [@security.context, @router, @doctrine.orm.entity_manager]
+#        tags:
+#            - { name: kernel.event_listener, event: security.authentication.success, method: handle }
+#            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }

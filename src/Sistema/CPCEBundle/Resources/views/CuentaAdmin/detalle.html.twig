@@ -1,0 +1,52 @@
+{% extends 'MWSimpleAdminCrudBundle:Default:index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Detalle estado de Cuenta
+{% endblock %}
+
+{% block menu %}{% endblock %}
+
+{% block page %}
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <strong>{{ afiliado is empty ? "Ingrese número de documento" : afiliado.afiliado }}</strong>
+                <div class="pull-right">Detalle estado de Cuenta: <strong>{{ entities[0] is empty ? '' : entities[0].servicio }}</strong></div>
+                <form name="input" action="{{ path(config.index) }}" method="post">
+                    <input type="hidden" name="tipdoc" value="{{ tipdoc }}"/>
+                    <input type="hidden" name="nrodoc" value="{{ nrodoc }}"/>
+                    <input class="btn btn-warning likepaginator" type="submit" name="submit" value="Volver">
+                </form>
+                <div class="btn likepaginator"><a class="glyphicon glyphicon-print tooltips"  href="{{ path(config.pdfdetalle, { 'cuenta': cuenta, 'tipdoc': tipdoc, 'nrodoc': nrodoc }) }}" title="" rel="tooltip" data-original-title="generar PDF"></a></div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-bordered table-condensed table-responsive">
+                <thead>
+                    <tr>
+                        <th>Cuota</th>
+                        <th>Deuda</th>
+                        <th>Vence</th>
+                        <th>Pagos</th>
+                        <th>Fecha</th>
+                        <th>Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ include('SistemaCPCEBundle:Detalle:tabla.html.twig') }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $('.tooltips').tooltip();
+        $( "#reset_index_filters" ).click(function() {
+            $(".reset_submit_filters").trigger("click");
+        });
+    </script>
+{% endblock %}

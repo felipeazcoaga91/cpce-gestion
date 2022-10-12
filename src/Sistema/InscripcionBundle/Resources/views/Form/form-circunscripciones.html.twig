@@ -1,0 +1,14 @@
+{% block form %}
+    <fieldset>
+        <legend>
+            <h4>Circunscripcion:</h4>
+        </legend>
+        <div class="row">
+            {% if form.circunscripcion is defined %}
+                <div class="col-lg-6 col-md-12 col-sm-12" id="circunscripcion">
+                    {{ form_row(form.circunscripcion) }}
+                </div>
+            {% endif %}
+        </div>
+    </fieldset>
+{% endblock %}

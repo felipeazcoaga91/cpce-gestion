@@ -1,0 +1,59 @@
+{% block form %} 
+{{ form_start(form) }}
+    {% form_theme form 'MWSimpleAdminCrudBundle:widget:fields.html.twig' %} {{ form_errors(form) }}
+    <fieldset>
+        <legend>Detalles:</legend>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                {{ form_row(form.nombre) }}
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                {{ form_row(form.tipo) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-6">
+                {{ form_row(form.descripcion) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-6">
+                {{ form_row(form.contenido) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-6 col-sm-6">
+                {{ form_row(form.nota) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                {{ form_row(form.importeTotal) }}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                {{ form_row(form.importeSubTotal) }}
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Elementos:</legend>
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                {{ form_row(form.controlCuentas) }}
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                {{ form_row(form.activo) }}
+            </div>
+        </div>
+    </fieldset>
+    <fieldset id="ControlCuentas">
+        <legend>Control de Cuentas y Montos:</legend>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                {% include 'SistemaInscripcionBundle:widget:addCuenta.html.twig' with { 'form' : form } %}
+            </div>
+        </div><br></br>
+    </fieldset>
+    {{ form_rest(form) }}
+{{ form_end(form) }}
+{% endblock %}

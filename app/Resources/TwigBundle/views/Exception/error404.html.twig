@@ -1,0 +1,9 @@
+{% extends "TwigBundle:Exception:error.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="status">
+    	<h3>Esto se debe a que la petición no puede ser resuelta por el servidor.</h3>
+    </div>
+    <br><br>
+    <h4 class="text-danger">El servidor retornó el siguiente error "{{ status_code }}".</h4>
+{% endblock %}

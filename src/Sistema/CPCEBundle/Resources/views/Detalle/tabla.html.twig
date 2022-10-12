@@ -1,0 +1,61 @@
+{% set saldoTotal = 0 %}
+{% set primerFila = true %}
+{% for entity in entities %}
+    {% set saldoTotal = saldoTotal + entity.saldo %}{#SUMO SALDO#}
+    {% if entity.fecha|date('Y/m/d') > '2014/07/01'|date('Y/m/d') %}
+        {% if primerFila %}
+            <tr style="background-color:#E9E9E9;">
+                {% set primerFila = false %}
+                {#LEYENDA#}
+                <td colspan="5">Saldo correspondiente al 01/07/2014</td>
+                {#SALDO#}
+                <td style={% if (saldoTotal - entity.saldo) > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>${{ (saldoTotal - entity.saldo)|abs|number_format(2, ',', '.') }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            {#DEBE#}
+            {% if entity.debe %}
+                <td><strong>{{ entity.nrocuota }}</strong></td>
+                <td style="color:red;">{{ "$" ~ entity.debe|abs|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.vence|date('d/m/Y') }}</td>
+            {% else %}
+                <td></td>
+                <td></td>
+                <td></td>
+            {% endif %}
+            {#HABER#}
+            {% if entity.haber %}
+                <td style="color:green;">{{ "$" ~ entity.haber|abs|number_format(2, ',', '.') }}</td>
+                <td>{{ entity.fecha|date('d/m/Y') }}</td>
+            {% else %}
+                <td></td>
+                <td></td>
+            {% endif %}
+            {#SALDO#}
+            <td style={% if saldoTotal > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>${{ saldoTotal|abs|number_format(2, ',', '.') }}</td>
+            <td>
+                {% if entity.haber %}
+                    {% set fechaRecibo = entity.fecha|date('Y-m-d') %}
+                    {% if permiteImprimir %}
+                        <a class="glyphicon glyphicon-print tooltips" href="{{ path('front_cuenta_imprimir', { 'asiento': entity.asiento }) }}" title="Imprimir Comprobante" rel="tooltip" data-original-title="PDF" onclick="return confirm('Imprimir Comprobante. Esta seguro?');"></a>
+                    {% endif %}
+                {% endif %}
+            </td>
+        </tr>
+    {% endif %}
+{% endfor %}
+{#SALDOS#}
+<tr>
+    {#LEYENDA#}
+    <td colspan="5" style="font-weight: bold;">Saldo al d&iacute;a de hoy</td>
+    {#SALDO#}
+    <td style={% if saldoTotal > 0 %}"color:red; font-weight: bold;"{% else %}"color:green; font-weight: bold;"{% endif %}>${{ saldoTotal|abs|number_format(2, ',', '.') }}</td>
+    <td></td>
+</tr>
+<tr>
+    {#LEYENDA#}
+    <td colspan="5" style="font-weight: bold;">Saldo total</td>
+    {#SALDO#}
+    <td style={% if saldoTotalAsientos.saldo > 0 %}"color: red; font-weight: bold;"{% else %}"color: green; font-weight: bold;"{% endif %}>${{ saldoTotalAsientos.saldo|abs|number_format(2, ',', '.') }}</td>
+    <td></td>
+</tr>

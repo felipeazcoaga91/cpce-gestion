@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style type="text/css">
+            p {
+                margin-top: 10px;
+                height: 0px;
+                font-size: 20px;
+            }
+            th p {
+                float: left;
+            }
+            .content {
+                background-color: #fff;
+                margin: 0 1em;
+                padding-left: 1em;
+            }
+            .right {
+                float: right;
+                font-size: 20px;    
+            }
+            .centrar {
+                text-align: center !important;
+                float: none !important;
+            }
+            .text-right {
+                text-align: right;
+            }
+            .text-long {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            div.page
+            {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+        </style>
+    </head>
+    <body class="focusedform">
+        <div class="right">{{ fecha|localizeddate('full', 'none') }}</div>
+        <br>
+        <div class="content">
+            <div class="centrar">
+                <h1 style="color: #4285F4; font-size: 35px">Inscripción II Juegos Deportivos Nacionales de Profesionales en Ciencias Económicas Puerto Iguazu 2018</h1>
+                <img src="{{ asset('bundles/sistemacpce/images/logo_grande.png', absolute=true) }}" alt="" width="400px;" />
+                <div style="width: 12em; margin: 0 auto;">
+                    {{ barcode({code: 'OLIM18_' ~ entity.id, type: 'c128', format: 'html'}) }}
+                    <strong>{{ 'OLIM18_' ~ entity.id }}</strong>
+                </div>
+            </div>
+            <div>
+                <h3>PROFESIONAL INSCRIPTO:</h3>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr>
+                        <td colspan="4"><p><strong>Apellido y Nombre:</strong> {{ afiliado.afiNombre }}</p></td>
+                        <td colspan="4"><p><strong>Nro. Documento:</strong> {{ afiliado.afiNroDoc }}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><p><strong>Titulo y Matricula:</strong> {{ afiliado.afiTitulo }}-{{ afiliado.afiMatricula }}</p></td>
+                        <td colspan="4"><p><strong>Delegación:</strong> {{ afiliado.afiZonaDelegacion }}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><p><strong>Domicilio</strong> {{ afiliado.afiDireccion }}</p></td>
+                        <td colspan="4"><p><strong>Localidad</strong> {{ afiliado.Afilocalidad ~ ', ' ~ afiliado.Afiprovincia ~ ' (' ~ afiliado.Aficodpos ~ ')' }}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><p><strong>Telefono:</strong> {{ afiliado.afiCelular }}</p></td>
+                        <td colspan="4"><p><strong>Correo:</strong> {{ afiliado.afiMail }}</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><p><strong>Fecha de Nacimiento:</strong> {{ afiliado.afiFecnac|date('d-m-Y') }}</p></td>
+                        <td colspan="4"><p><strong></strong></p></td>
+                    </tr>
+                </table>  
+            </div>
+            <br></br>
+            <div>
+                <h3>DISCIPLINAS SELECCIONADAS:</h3>
+                <hr>
+                <table style="width:100%" border="0">
+                    {% for disciplina in entity.disciplinas %}
+                        <tr>
+                            <td colspan="4"><p><strong>*</strong> {{ disciplina.nombre }}</p></td>
+                        </tr>
+                    {% endfor %}
+                </table>  
+            </div>
+            <br></br>
+            {% if entity.extra is not empty %}
+            <div>
+                <h4>EXTRAS:</h4>
+                <hr>
+                <table style="width:100%" border="0">
+                    <tr><th align="left">Cocktail Delegación 23/08 $500</th></tr>
+                </table>  
+            </div>
+            <br></br>
+            {% endif %}
+            <div>
+                <h3>ESTADIA DEL PARTICIPANTE:</h3>
+                <hr>
+                {% if entity.transporte or entity.hotel %}
+                    <table style="width:100%" border="1">
+                        <tr>
+                            {% if entity.hotel %}
+                                <td colspan="4"><p><strong>Hotel:</strong> {{ entity.Hotel }}</p></td>
+                            {% else %}
+                                <td colspan="4"><p><strong>Hotel:</strong> No contrata servicio</p></td>
+                            {% endif %}
+                        </tr>
+                    </table>
+                {% endif %}
+            </div>
+            <br></br>
+            <div>
+                <h3>ACOMPAÑANTES:</h3>
+                <hr>
+                {% if entity.personas|length > 0 %}
+                    {% for key, persona in entity.personas %}
+                        <table style="width:100%" border="1">
+                            <tr>  
+                                <td colspan="4"><p><strong>#{{ key+1 }}.- {{ persona.apellido }}, {{ persona.nombre }}</strong></p>
+                                <hr>
+                                <table style="width:100%" border="0">
+                                    <tr>
+                                        <td colspan="4"><p><strong>Nro. Documento:</strong> {{ persona.dni }}</p></td>
+                                        <td colspan="4"><p><strong>Fecha de Nacimiento:</strong> {{ persona.fechaNac|localizeddate('medium','none', null, null, "d LLLL yyyy") }}</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><p><strong>Edad:</strong> {{ persona.edad }} a&ntilde;os</p></td>
+                                        <td colspan="4"><p><strong>Nacionalidad:</strong> {{ persona.nacionalidad }}</p></td>
+                                    </tr>
+                                    {% if persona.hotel %}
+                                        <table style="width:100%" border="1">
+                                            <tr>
+                                                {% if persona.hotel %}
+                                                    <td colspan="4"><p><strong>Hotel:</strong> {{ persona.Hotel }}</p></td>
+                                                {% else %}
+                                                    <td colspan="4"><p><strong>Hotel:</strong> No contrata servicio</p></td>
+                                                {% endif %}
+                                            </tr>
+                                        </table>
+                                    {% endif %}
+                                </table> 
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <h4> - No tiene acompañantes registrados.</h4>
+                {% endif %}
+            </div>
+            <div class="right">
+                <table style="width:100%" border="0">
+                    <tr>
+                        <td colspan="4"><p><strong>IMPORTE TOTAL:</strong> ${{ entity.importe }}</p></td>
+                    </tr>
+                </table>  
+            </div>
+            <br></br>
+            <div class="page">
+                <div>
+                    <h2>Clausula Especial de Responsabilidad Personal:</h2>
+                    <hr>
+                    <p>Al inscribirse para participar en el acontecimiento, el participante, en su nombre, libera al <strong>CPCE-CHACO</strong> y a la <strong>FACPCE</strong> de toda responsabilidad respecto de reclamaciones y/o demandas que intente hacer por perjuicios materiales y/o físicos sufridos por tomar parte en el evento, renunciando a todo tipo de indemnización por daños, dando fe expresa de su participación voluntaria y asumiendo responsabilidad personal por consecuencias sobrevinientes. El <strong>CPCE CHACO</strong>, en particular solo cumple el rol administrativo que permita la participación de los matriculados en las Olimpíadas de Contadores, no posee capacidad de control ni decisión sobre los medios de traslado, las modalidades sobre las cuales se participa de las mismas, la dispensa de responsabilidad por ende no hace más que reconocer que se encuentra absolutamente fuera del ámbito de custodia y/o de responsabilidad del CPCE CHACO.</p>
+                </div>
+                <div>
+                    <br></br><br></br><br></br><br></br><br></br><br></br>
+                    <h3 class="centrar">Recuerde que la inscripción se hará efectiva una vez abonada la seña de los $2500 por persona, y este formulario irá acompañado con el respectivo recibo.</h3>
+                </div>  
+                <div class="right">
+                    <table style="width:100%" border="0">
+                        <tr><td colspan="4"><p></p></td></tr>
+                        <tr>
+                            <td colspan="4"><p>.................................</p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><p><strong>Firma y Aclaración</strong></p></td>
+                        </tr>
+                    </table>  
+                </div>
+            </div>
+        </div>  
+    </body>
+</html>

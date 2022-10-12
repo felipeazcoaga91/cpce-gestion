@@ -1,0 +1,60 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Firma
+{% endblock %}
+
+{% block paneltitle %}
+    
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style type="text/css">
+        body {
+            background:#e9ecef;
+        }
+        .content {
+            background: inherit;
+            box-shadow: none;
+        }
+        .footer {
+            display: none;
+        }
+        .panel-footer {
+            height: 4em;
+        }
+    </style>
+{% endblock %}
+
+{% block fos_user_content %}
+    {{ form_start(form) }}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Firma Digital - Resolución</h3>
+        </div>
+        <div class="panel-body">   
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-2 control-label">
+                        {{ form_label(form.resolucion) }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ form_widget(form.resolucion) }}
+                        {{ form_errors(form.resolucion) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" style="padding-top: 12px;">
+                        <div class="alert alert-warning" role="alert">ATENCION: En caso de auditoria de EECC con sindicatura societaria de abogado o sin sindicatura elegir la opción "Cliente Persona Jurídica"</div>
+                    </div>    
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            {{ form_row(form.siguiente) }}
+        </div>
+        {{ form_rest(form) }}
+    </div>      
+    {{ form_end(form) }}
+{% endblock %}

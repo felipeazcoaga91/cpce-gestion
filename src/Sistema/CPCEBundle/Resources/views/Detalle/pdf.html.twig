@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <style type="text/css">
+        p {
+          height: 0;
+        }
+        th p {
+          float: left;
+        }
+        td {
+          vertical-align: bottom;
+        }
+        .content {
+          background-color: #fff;
+          margin: 0 1em;
+          padding-left: 1em;
+        }
+        .right {
+          float: right;
+        }
+        .centrar {
+          text-align: center;
+          float: none !important;
+        }
+        .text-right {
+          text-align: right;
+        }
+      </style>
+    </head>
+    <body class="focusedform">
+        <div class="content">
+            <img src="{{ asset('bundles/sistemacpce/images/header_logo.png', absolute=true) }}" alt="" />
+            <div class="right">{{ fecha }}</div>
+            <hr>
+            <div>
+                <strong>{{ afiliado is empty ? "" : afiliado.afiliado }}</strong>
+                <br>
+                Categoría: <strong>{{ afiliado is empty ? "" : afiliado.catDescripcion }}</strong>
+                <br>
+                Detalle estado de Cuenta: <strong>{{ entities[0] is empty ? '' : entities[0].servicio }}</strong>
+            </div>
+            <hr>
+            <div>
+                <table style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Cuota</th>
+                            <th>Deuda</th>
+                            <th>Vence</th>
+                            <th>Pagos</th>
+                            <th>Fecha</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ include('SistemaCPCEBundle:Detalle:tabla.html.twig') }}
+                    </tbody>
+                </table>
+                <p>*Saldos sujetos a revisión.</p>
+                <p>Ante cualquier duda o consulta, comuníquese con vuestro Consejo.</p>
+            </div>
+        </div>
+    </body>
+</html>

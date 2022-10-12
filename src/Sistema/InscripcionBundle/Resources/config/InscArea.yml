@@ -1,0 +1,49 @@
+entityName: 'Area'
+entity: 'Sistema\InscripcionBundle\Entity\InscArea'
+repository: 'SistemaInscripcionBundle:InscArea'
+index: 'admin_inscripciones_areas'
+new: 'admin_inscripciones_areas_new'
+edit: 'admin_inscripciones_areas_edit'
+show: 'admin_inscripciones_areas_show'
+create: 'admin_inscripciones_areas_create'
+update: 'admin_inscripciones_areas_update'
+delete: 'admin_inscripciones_areas_delete'
+export: 'admin_inscripciones_areas_export'
+sessionFilter: 'InscAreaControllerFilter'
+saveAndAdd: true
+validator: true
+fieldsindex:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        export: true
+    a.descripcion:
+        label: 'Descripcion'
+        name: 'Descripcion'
+        type: 'string'
+        export: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        export: true
+fieldsshow:
+    a.nombre:
+        label: 'Nombre'
+        name: 'Nombre'
+        type: 'string'
+        class: 'col-lg-4'
+        #closerow: true
+    a.descripcion:
+        label: 'Descripcion'
+        name: 'Descripcion'
+        type: 'string'
+        class: 'col-lg-4'
+        #closerow: true
+    a.activo:
+        label: 'Activo'
+        name: 'Activo'
+        type: 'boolean'
+        class: 'col-lg-4'
+        #closerow: true

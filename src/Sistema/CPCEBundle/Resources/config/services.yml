@@ -1,0 +1,42 @@
+parameters:
+    cpce.trabajo.estado.template: 'SistemaCPCEBundle:Trabajo:email_estado.txt.twig'
+    clasificado.ofertalaboral.estado.template: 'SistemaClasificadoBundle:OfertaLaboral:email_estado.txt.twig'
+    # cpce.bcc_email.secretariatecnica: 'secretariatecnica@cpcechaco.org.ar'
+
+services:
+    # Service that extends the default twig mailer
+    sistema_cpce.custom_mailer:
+        class: Sistema\CPCEBundle\Mailer\CustomCpceMailer
+        arguments:
+            - '@mailer'
+            - '@twig'
+            - template:
+                trabajo_estado: %cpce.trabajo.estado.template%
+              from_email:
+                trabajo_estado: %fos_user.resetting.email.from_email%
+    sistema_cpce.custom_mailer_oferta:
+        class: Sistema\CPCEBundle\Mailer\CustomCpceMailer
+        arguments:
+            - '@swiftmailer.mailer.second_mailer'
+            - '@twig'
+            - template:
+                postulante_cv: %clasificado.ofertalaboral.estado.template%
+              from_email:
+                postulante_cv: %swiftmailer.mailer.second_mailer.transport.smtp.username%
+              cc_email:
+                cc_to: %swiftmailer.mailer.cc_mailer.transport.smtp.username%
+    sistema_cpce.custom_mailer_familiares:
+        class: Sistema\CPCEBundle\Mailer\CustomCpceMailer
+        arguments:
+            - '@swiftmailer.mailer.second_mailer'
+            - '@twig'
+            - template:
+                familiares: 'SistemaCPCEBundle:Dato:mail_familiares.html.twig'
+              from_email:
+                webmaster: %swiftmailer.mailer.second_mailer.transport.smtp.username%
+              cc_email:
+                cc_to: %swiftmailer.mailer.cc_mailer.transport.smtp.username%
+    sistema_cpce.twig.extension:
+        class: Sistema\CPCEBundle\Services\TwigCustom
+        tags:
+            - { name: twig.extension }

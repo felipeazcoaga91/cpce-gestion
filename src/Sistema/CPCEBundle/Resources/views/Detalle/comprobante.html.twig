@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <style type="text/css">
+        p {
+          height: 0;
+        }
+        th p {
+          float: left;
+        }
+        td {
+          vertical-align: bottom;
+        }
+        .content {
+          background-color: #fff;
+          margin: 0 1em;
+          padding-left: 1em;
+        }
+        .right {
+          float: right;
+        }
+        .centrar {
+          text-align: center;
+          float: none !important;
+        }
+        .text-right {
+          text-align: right;
+        }
+      </style>
+    </head>
+    <body class="focusedform">
+        <div class="content">
+            <img src="{{ asset('bundles/sistemacpce/images/header_logo.png', absolute=true) }}" alt="" />
+            <div class="right"><strong>FECHA: </strong>{{ comproba.comFecha|date('d/m/Y H:i:s') }}</div>
+			<hr>
+			<div>
+				<strong>RECIBO Nº: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ comproba.comNrocom }}
+			</div>
+			<hr>
+      <div>
+				<strong>RECIBIMOS DE: </strong>{{ afiliado is empty ? "" : afiliado.afiliado }}
+				<br>
+				<strong>DELEGACIÓN: </strong>&nbsp;&nbsp;&nbsp;SEDE CENTRAL
+      </div>
+      <hr>
+			<div>
+				<strong>LA SUMA DE: </strong>&nbsp;&nbsp;&nbsp; $ {{ total|number_format(2, ',', '.') }}
+				<br>
+				<strong>EN CONCEPTO: </strong> {{ proceso.proCpto1 }}
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ comproba.comConcepto2 }}
+				<br>
+				<br>
+				<strong>FORMA DE PAGOS: </strong>
+				<br>
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ tipo }}: .................................................................................. $ {{ total|number_format(2, ',', '.') }}
+				<br>
+			</div>
+			<hr>
+			<div>
+				<center><pre>LOS CHEQUES RECIBIDOS SERAN ACREDITADO A V/CUENTA PERSONAL UNA VEZ HECHOS EFECTIVOS</pre></center>
+				<center><strong>EL PRESENTE PAGO NO IMPLICA LA CANCELACION DE CUOTAS IMPAGAS ANTERIORES</strong></center>
+			</div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+{% extends "SistemaUserBundle::layout.html.twig" %}
+
+{% block fos_user_panel %}
+	<div class="panel panel-warning">
+		{% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
+	</div>
+{% endblock fos_user_panel %}

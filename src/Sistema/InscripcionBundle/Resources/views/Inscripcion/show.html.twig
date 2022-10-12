@@ -1,0 +1,254 @@
+{% extends "SistemaCPCEBundle::longLayout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Datos
+{% endblock %}
+
+{% block fos_user_panel %}
+    <br>
+    <div class="panel panel-info center-block">
+        <div class="panel-heading"><h4>Detalles:</h4></div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <h4>pre-inscripción: <strong>"{{ molde.nombre }}".</strong></h4>
+                    <h5><u>Breve Descripcion:</u><br></br>"{{ molde.descripcion }}".</h5>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <h4><span class="label label-info pull-right">{{ entity.fecha|localizeddate('full','none') }}</h4></span>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <div class="list-group">
+                                <span class="list-group-item list-group-item-default" style="background-color: #eee">
+                                    <b>DATOS DE MATRICULACIÓN:</b>
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Nombre:</b> {{ afiliado.afinombre }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>DNI. Nº:</b> {{ afiliado.afinrodoc }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Título Profesional:</b> "{{ afiliado.afititulo }}" | <b>Nº de Matrícula:</b> {{ afiliado.afimatricula }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Email:</b> {{ afiliado.afimail }}
+                                </span>
+                                <span class="list-group-item list-group-item-default">
+                                    <b>Localidad:</b> "{{ afiliado.afilocalidad }}" | <b>Provincia:</b> "{{ afiliado.afiprovincia }}"
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            {% if entity.hotel %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4>Alojamiento:</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="control-label">
+                                    <span class="glyphicon glyphicon-bed" aria-hidden="true"></span> HOTEL:
+                                </label>
+                                {{ entity.hotel }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+
+            {% if entity.areas is not empty %}
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h4>Areas seleccionadas a Debatir:</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-success">
+                                    {{ entity.areas[0] }} <b>(Preferencial)</b>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-info">
+                                    {{ entity.areas[1] }} <b>(Optativa)</b>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if entity.disciplinas is not empty %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4>Disciplinas seleccionadas a participar #{{ entity.disciplinas|length }}</h4>
+                        <hr>
+                        <div class="row">
+                            {% for item in entity.disciplinas %}
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-default" style="background-color: #eee">
+                                        <span class="glyphicon glyphicon-chevron-right"></span> {{ item.nombre }}
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+            
+            {% if entity.personas is not empty %}
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h4>Acompa&ntilde;antes #{{ entity.personas|length }}:</h4>
+                    <hr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="warning">
+                                <th style="text-align: center">#</th>
+                                <th style="text-align: center">Apellido y Nombres</th>
+                                <th style="text-align: center">Edad</th>
+                                <th style="text-align: center">Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, persona in entity.personas %}
+                                <tr align="center">
+                                    <td>{{ key+1 }}</td>
+                                    <td>{{ persona.apellido }}, {{ persona.nombre }}</td>
+                                    <td>{{ persona.edad }}</td>
+                                    <td>{{ persona.dni }}</td>
+                                </tr>
+                                {% if persona.hotel %}
+                                    <tr align="center">
+                                        <td>-</td>
+                                        <td colspan="3"><strong>Hotel:</strong> {{ persona.Hotel }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if entity.circunscripcion %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4>Circunscripcion:</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-default" style="background-color: #eee">
+                                        <span class="glyphicon glyphicon-chevron-right"></span> {{ entity.circunscripcion }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+
+            {% if entity.fueros is not empty %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4>Fueros seleccionados #{{ entity.fueros|length }}</h4>
+                        <hr>
+                        <div class="row">
+                            {% for item in entity.fueros %}
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-default" style="background-color: #eee">
+                                        <span class="glyphicon glyphicon-chevron-right"></span> {{ item.nombre }}
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+
+            {% if molde.extras %}
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h4>Extras:</h4>
+                    <hr>
+                    <table class="table table-bordered">
+                        <thead> 
+                            <tr> 
+                                <th>#</th>
+                                <th>nombre</th>
+                                <th class="text-right">importe</th>
+                            </tr> 
+                        </thead>
+                        <tbody> 
+                            {% for key, extra in extras %}
+                                <tr> 
+                                    <th scope="row">{{ key + 1 }}</th> 
+                                    <td>{{ extra.nombre }}</td> 
+                                    <td class="text-right">
+                                        {% if entity.personas is not empty %}
+                                            x {{ entity.personas|length + 1 }}
+                                        {% endif %}
+                                        ${{ extra.importe }} 
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr> 
+                                <th scope="row">-</th> 
+                                <td>Costo de Inscripción</td> 
+                                <td class="text-right">
+                                    ${{ molde.importeTotal }}
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h4 align="right">Total: ${{ entity.importeTotal }}</h4>
+                </div>
+            </div>
+            <div class="row">
+                {% if molde.nota %}
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <h4><u>Nota informe:</u></h4>
+                        <h4><span class="label label-danger">{{ molde.nota }}</span></h4>
+                    </div>
+                {% endif %}
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-offset-8 col-md-3 col-sm-3">
+                    <a class="form-control btn btn-danger" href="{{ path('front_inscripcion_pdf', {'id': entity.id } ) }}">
+                        Imprimir Inscripción
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

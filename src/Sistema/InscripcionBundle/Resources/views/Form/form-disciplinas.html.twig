@@ -1,0 +1,15 @@
+{% block form %}
+    <fieldset>
+        <legend>
+            <h4>Disciplinas:</h4>
+            <h5><span class="label label-default">seleccione una o varias.</span></h5>
+        </legend>
+        <div class="row">
+            {% if form.disciplinas is defined %}
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{ form_row(form.disciplinas) }}
+                </div>
+            {% endif %}
+        </div>
+    </fieldset>
+{% endblock %}

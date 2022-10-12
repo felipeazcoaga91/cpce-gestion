@@ -1,0 +1,129 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block title %}
+	{{ parent() }} - Editando Datos Familiares
+{% endblock %}
+
+{% block fos_user_content %}
+	{% form_theme form 'MWSimpleAdminCrudBundle:widget:fields.html.twig' %}
+	
+			
+	{{ form_start(form) }}
+	    <div class="panel panel-primary">
+	        <div class="panel-heading">Datos Familiares</div>
+	        <div class="panel-body">
+	            <table class="table table-striped">
+	                <thead>
+	                    <tr>
+	                        <th>#</th>
+	                        <th>Apellido y Nombre</th>
+	                        <th>Parentesco</th>
+	                        <th>Fecha de Nacimiento</th>
+	                        <th>Sexo</th>
+	                        <th>Nro. Doc.</th>
+							<th>Fondo solidario</th>
+							<th>Seguro de vida</th>
+							<th>Capitalización</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                    <tr>
+	                        <th scope="row">1</th>
+	                        <td>{{ form_widget(form.afiAut1) }}</td>
+	                        <td>{{ form_widget(form.afiFil1) }}</td>
+	                        <td>{{ form_widget(form.afiNac1) }}</td>
+	                        <td>{{ form_widget(form.afiSex1) }}</td>
+	                        <td>{{ form_widget(form.afiDoc1) }}</td>
+							<td>{{ form_widget(form.afi_benef_fs1) }}</td>
+							<td>{{ form_widget(form.afi_benef_sv1) }}</td>
+							<td>{{ form_widget(form.afi_benef_cap1) }}</td>
+	                    </tr>
+	                    <tr>
+	                        <th scope="row">2</th>
+	                        <td>{{ form_widget(form.afiAut2) }}</td>
+	                        <td>{{ form_widget(form.afiFil2) }}</td>
+	                        <td>{{ form_widget(form.afiNac2) }}</td>
+	                        <td>{{ form_widget(form.afiSex2) }}</td>
+	                        <td>{{ form_widget(form.afiDoc2) }}</td>
+							<td>{{ form_widget(form.afi_benef_fs2) }}</td>
+							<td>{{ form_widget(form.afi_benef_sv2) }}</td>
+							<td>{{ form_widget(form.afi_benef_cap2) }}</td>
+	                    </tr>
+	                    <tr>
+	                        <th scope="row">3</th>
+	                        <td>{{ form_widget(form.afiAut3) }}</td>
+	                        <td>{{ form_widget(form.afiFil3) }}</td>
+	                        <td>{{ form_widget(form.afiNac3) }}</td>
+	                        <td>{{ form_widget(form.afiSex3) }}</td>
+	                        <td>{{ form_widget(form.afiDoc3) }}</td>
+							<td>{{ form_widget(form.afi_benef_fs3) }}</td>
+							<td>{{ form_widget(form.afi_benef_sv3) }}</td>
+							<td>{{ form_widget(form.afi_benef_cap3) }}</td>
+	                    </tr>
+	                    <tr>
+	                        <th scope="row">4</th>
+	                        <td>{{ form_widget(form.afiAut4) }}</td>
+	                        <td>{{ form_widget(form.afiFil4) }}</td>
+	                        <td>{{ form_widget(form.afiNac4) }}</td>
+	                        <td>{{ form_widget(form.afiSex4) }}</td>
+	                        <td>{{ form_widget(form.afiDoc4) }}</td>
+							<td>{{ form_widget(form.afi_benef_fs4) }}</td>
+							<td>{{ form_widget(form.afi_benef_sv4) }}</td>
+							<td>{{ form_widget(form.afi_benef_cap4) }}</td>
+	                    </tr>
+	                    <tr>
+	                        <th scope="row">5</th>
+	                        <td>{{ form_widget(form.afiAut5) }}</td>
+	                        <td>{{ form_widget(form.afiFil5) }}</td>
+	                        <td>{{ form_widget(form.afiNac5) }}</td>
+	                        <td>{{ form_widget(form.afiSex5) }}</td>
+	                        <td>{{ form_widget(form.afiDoc5) }}</td>
+							<td>{{ form_widget(form.afi_benef_fs5) }}</td>
+							<td>{{ form_widget(form.afi_benef_sv5) }}</td>
+							<td>{{ form_widget(form.afi_benef_cap5) }}</td>
+	                    </tr>
+	                    <tr>
+	                        <th scope="row">6</th>
+	                        <td>{{ form_widget(form.afiAut6) }}</td>
+	                        <td>{{ form_widget(form.afiFil6) }}</td>
+	                        <td>{{ form_widget(form.afiNac6) }}</td>
+	                        <td>{{ form_widget(form.afiSex6) }}</td>
+	                        <td>{{ form_widget(form.afiDoc6) }}</td>
+						    <td>{{ form_widget(form.afi_benef_fs6) }}</td>
+							<td>{{ form_widget(form.afi_benef_sv6) }}</td>
+							<td>{{ form_widget(form.afi_benef_cap6) }}</td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	    </div>
+
+        	{{ form_widget(form) }}
+	{{ form_end(form) }}
+       
+    <div class="row">
+        {% block buttonsbelow %}
+            <div class="row">
+		        <div class="col-lg-12 col-md-12 col-sm-12">
+		            <div class="float-left col-lg-3 col-md-3 col-sm-3">
+		                <a class="btn btn-primary col-lg-12" href="{{ path('front_dato_benef') }}">
+		                    Volver
+		                </a>
+		            </div>
+		        </div>
+		    </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/sistemacpce/jasny-bootstrap/css/jasny-bootstrap.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/mwsimpleadmincrud/js/widget.js') }}"></script>
+    <script src="{{ asset('bundles/mwsimpleadmincrud/js/validator/bootstrapValidator.min.js') }}"></script>
+    <script src="{{ asset('bundles/sistemacpce/jasny-bootstrap/js/jasny-bootstrap.min.js') }}"></script>
+{% endblock %}

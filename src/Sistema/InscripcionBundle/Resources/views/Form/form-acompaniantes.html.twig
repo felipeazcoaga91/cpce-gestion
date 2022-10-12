@@ -1,0 +1,14 @@
+{% block form %}
+    <fieldset>
+        <legend>
+            <h4>Acompañantes:</h4>
+        </legend>
+        <div class="row">
+            {% if form.personas is defined %}
+                <div class="col-lg-12 col-md-12 col-sm-12" id="hotel">
+                    {% include 'SistemaInscripcionBundle:widget:add-acompaniantes.field.html.twig' with { 'form' : form } %}
+                </div>
+            {% endif %}
+        </div>
+    </fieldset>
+{% endblock %}

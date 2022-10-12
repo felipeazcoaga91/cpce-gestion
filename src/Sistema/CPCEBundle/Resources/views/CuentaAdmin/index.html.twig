@@ -1,0 +1,107 @@
+{% extends 'MWSimpleAdminCrudBundle:Default:index.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Estado de Cuenta
+{% endblock %}
+
+{% block menu %}{% endblock %}
+
+{% block page %}
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="filters-right">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div id="filters" class="well">
+            <form name="input" action="{{ path(config.index) }}" method="post">
+                Tipo
+                <select name="tipdoc">
+                    <option value="DNI">DNI</option>
+                    <option value="LE">LE</option>
+                    <option value="LC">LC</option>
+                    <option value="CI">CI</option>
+                </select>
+                N&uacute;mero:
+                <input type="number" name="nrodoc" value="{{ nrodoc }}" required/>
+                <input class="btn btn-success" type="submit" name="submit" value="Consultar">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                {% if afiliado is empty %}
+                    <strong>Ingrese número de documento</strong>
+                {% else %}
+                    <strong>{{ afiliado.afiliado }}</strong>
+                    {% if afiliado.categoria[0:2] == 22 %}
+                        {% set color = "darkred" %}
+                    {% else %}
+                        {% set color = "white" %}
+                    {% endif %}
+                    <div class="pull-right">Categoría: <strong style="color: {{ color }}">{{ afiliado.catDescripcion|raw }}</strong></div>
+                    {% if color == "white" %}
+                        <form name="input" action="{{ path(config.pdflistado) }}" method="post">
+                            <input type="hidden" name="tipdoc" value="{{ tipdoc }}"/>
+                            <input type="hidden" name="nrodoc" value="{{ nrodoc }}"/>
+                            <input class="btn btn-success likepaginator" type="submit" name="submit" value="Imprimir">
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-bordered table-condensed table-responsive">
+                <thead>
+                    <tr>
+                        {% for key, field in config.fieldsindex %}
+                            <th>{{ field.label }}</th>
+                        {% endfor %}
+                        <th>Saldo total</th>
+                        <th>{{ 'views.index.actions'|trans({}, 'MWSimpleAdminCrudBundle') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for key, entity in entities %}
+                    <tr>
+                        <td>{{ entity.servicio }}</td>
+                        <td style={% if entity.saldo > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>
+                            ${{ entity.saldo|abs|number_format(2, ',', '.') }}
+                        </td>
+                        <td style={% if saldosTotales[key].saldo > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>
+                            ${{ saldosTotales[key].saldo|abs|number_format(2, ',', '.') }}
+                        </td>
+                        <td>
+                            {% block actions %}
+                                <a class="glyphicon glyphicon-search tooltips"  href="{{ path(config.detalle, { 'cuenta': entity.cuenta, 'tipdoc': tipdoc, 'nrodoc': nrodoc }) }}" title="" rel="tooltip" data-original-title="Detalle"></a>
+                                {#<a class="glyphicon glyphicon-edit tooltips"  href="{{ path(config.edit, { 'id': entity.id }) }}" title="" rel="tooltip" data-original-title="{{ 'views.actions.edit'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}"></a>#}
+                            {% endblock %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 navigation">
+        {#{ knp_pagination_render(entities) }#}
+    </div>
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            {#<a class="btn btn-success likepaginator" href="{{ path(config.new) }}">
+                {{ 'views.index.createnew'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}
+            </a>#}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $('.tooltips').tooltip();
+        $( "#reset_index_filters" ).click(function() {
+            $(".reset_submit_filters").trigger("click");
+        });
+    </script>
+{% endblock %}

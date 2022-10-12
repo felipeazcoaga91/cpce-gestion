@@ -1,0 +1,53 @@
+{% extends 'SistemaCPCEBundle::longLayout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Estado de Cuenta
+{% endblock %}
+
+{% block paneltitle %}
+    Estado de Cuenta
+{% endblock %}
+
+{% block page %}
+    <strong>{{ afiliado is empty ? "" : afiliado.afiliado }}</strong>
+    <div class="pull-right">{{ (afiliado is empty ? "" : "Categoría: <strong>" ~ afiliado.catDescripcion ~ "</strong>")|raw }}</div>
+    <table class="table table-striped table-bordered table-condensed table-responsive">
+        <thead>
+            <tr>
+                {% for key, field in config.fieldsindex %}
+                    <th>{{ field.label }}</th>
+                {% endfor %}
+                <th>Saldo total</th>
+                <th>{{ 'views.index.actions'|trans({}, 'MWSimpleAdminCrudBundle') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for key, entity in entities %}
+            <tr>
+                <td>{{ entity.servicio }}</td>
+                <td style={% if entity.saldo > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>
+                    ${{ entity.saldo|abs|number_format(2, ',', '.') }}
+                </td>
+                <td style={% if saldosTotales[key].saldo > 0 %}"color:red;"{% else %}"color:green;"{% endif %}>
+                    ${{ saldosTotales[key].saldo|abs|number_format(2, ',', '.') }}
+                </td>
+                <td>
+                    {% block actions %}
+                        <a class="glyphicon glyphicon-search tooltips"  href="{{ path(config.detalle, { 'cuenta': entity.cuenta }) }}" title="" rel="tooltip" data-original-title="Detalle"></a>
+                        {#<a class="glyphicon glyphicon-edit tooltips"  href="{{ path(config.edit, { 'id': entity.id }) }}" title="" rel="tooltip" data-original-title="{{ 'views.actions.edit'|trans({'%entity%': config.entityName}, 'MWSimpleAdminCrudBundle') }}"></a>#}
+                    {% endblock %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $('.tooltips').tooltip();
+        $( "#reset_index_filters" ).click(function() {
+            $(".reset_submit_filters").trigger("click");
+        });
+    </script>
+{% endblock %}
